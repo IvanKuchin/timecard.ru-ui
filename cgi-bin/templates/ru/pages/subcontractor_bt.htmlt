@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <<template:templates/ru/pages/header.htmlt>>
+
+    <title><<vars:title_head>></title>
+
+    <script src="/js/pages/subcontractor_bt.js"></script>
+    <link href="/css/pages/subcontractor_bt.css" rel="stylesheet">
+
+    <script src="/js/pages/tooltip.js"></script>
+    <link href="/css/pages/animate.min.css" rel="stylesheet">
+
+    <link href="/css/pages/switcher.css" rel="stylesheet">
+
+    <script>
+      $(document).ready(function() {
+        subcontractor_bt.Init();
+      });
+    </script>
+
+  </head>
+
+  <body>
+    <<template:templates/ru/pages/subcontractor_navigation_menu.htmlt>>
+
+    <!-- phantom button for getting image upload dialog only -->
+    <input type="file" id="AddGeneralImageButton" accept="application/pdf, image/*" class="visibility_hidden width_0_height_0">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+            <i id="bt_remove_btn" class="fa fa-times-circle float_right cursor_pointer __remove_button aria-hidden="true"></i>
+            <h3>
+            <center id="bt_title">
+              Командировка
+              <span id="bt_status"></span>
+            </center>
+          </h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="container" id="bt">
+
+      <div class="row">
+        <div class="col-xs-12 col-md-4 form-group">
+          <select id="sowSelector" class="form-control">
+          </select>
+        </div>
+        <div class="col-xs-12 col-md-4 form-group">
+          <input id="bt_destination" class="form-control" placeholder="Пункт назначения">
+        </div>
+        <div class="col-xs-12 col-md-4 form-group">
+          <input id="bt_purpose" class="form-control" placeholder="Цель поездки">
+        </div>
+      </div> <!-- /row -->
+
+      <div class="row">
+        <div class="col-xs-2 col-md-4">
+          <select id="customerSelector" class="form-control">
+          </select>
+        </div>
+        <div class="col-xs-5 col-md-4">
+          <input id="bt_start_date" class="form-group form-control" placeholder="День убытия" autocomplete="off">
+        </div>
+        <div class="col-xs-5 col-md-4">
+          <input id="bt_end_date" class="form-group form-control" placeholder="День возврата" autocomplete="off">
+        </div>
+      </div> <!-- /row -->
+
+    </div> <!-- /container -->
+
+    <div class="container">
+      <div class="row" id="control_buttons">
+        <div class="col-xs-12 col-md-4 col-md-push-8 form-group">
+          <button class="btn btn-primary form-control float_right __loading_indicator" data-target="#collapsible_new_item" data-toggle="collapse">Добавить расход</button>
+        </div>
+        <div class="col-xs-6 col-md-2 col-md-pull-4 form-group">
+          <button class="btn btn-primary form-control __loading_indicator" id="bt_save_btn" data-loading-text="<span class='fa fa-refresh fa-spin fa-fw animateClass'></span>">Сохранить</button>
+        </div>
+        <div class="col-xs-6 col-md-2 col-md-pull-4 form-group">
+          <button class="btn btn-primary form-control __loading_indicator" id="bt_submit_btn" data-loading-text="<span class='fa fa-refresh fa-spin fa-fw animateClass'></span>">Отправить</button>
+        </div>
+      </div>
+      <div class="row collapse" id="collapsible_new_item">
+        <div class="col-xs-12 collapse-top-shadow margin_bottom_20"><p></p></div>
+        <div id="expense_item_new"> </div>
+        <div class="col-xs-12 collapse-bottom-shadow margin_top_20"><p></p></div>
+      </div>
+      <!-- container for all expense items -->
+      <div class="row" id="expense_items"> </div>
+    </div>
+
+    <div id="scrollerToShow"></div>
+
+    <div class="modal fade" id="ResultModal" tabindex="-1" role="dialog" aria-labelledby="ResultModal">
+      <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-xs-12 description">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- "Are you sure change SoW?" modal  -->
+    <div class="modal fade" id="AreYouSureChangeSoW" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Вы уверены ?</h4>
+        Все несохраненные данные потеряются
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-danger submit">Уверен</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- "Are you sure remove expense item?" modal  -->
+    <div class="modal fade" id="AreYouSureRemoveExpenseItem" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Вы уверены, что хотите удалить этот расход?</h4>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-danger submit">Уверен</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- "Are you sure remove BT?" modal  -->
+    <div class="modal fade" id="AreYouSureRemoveBT" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Вы уверены, что хотите удалить командировку?</h4>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-danger submit">Уверен</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+   <<template:templates/ru/pages/preview_modal.htmlt>>
+
+   <<template:templates/ru/pages/footer.htmlt>>
+
+  </body>
+</html>

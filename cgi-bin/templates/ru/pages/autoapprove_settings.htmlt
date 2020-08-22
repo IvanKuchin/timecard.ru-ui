@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+	<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+	<<template:templates/ru/pages/header.htmlt>>
+
+	<link href="/css/pages/switcher.css" rel="stylesheet">
+
+	<script src="/js/pages/autoapprove_settings.js"></script>
+
+	<title><<vars:title_head>></title>
+
+	<!-- Custom styles for this template -->
+	<link href="/css/pages/autoapprove_settings.css" rel="stylesheet">
+	<script>
+	  $(document).ready(function() {
+		autoapprove_settings.Init();
+	  });
+	</script>
+
+  </head>
+
+  <body>
+  <<template:templates/ru/pages/<<vars:user_type>>_navigation_menu.htmlt>>
+
+	<div class="container single_block box-shadow--6dp">
+		<div class="row">
+			<div class="col-md-9 col-xs-8 col-md-offset-3 form-group">
+			  <span class="h3">Автоподтверждения таймкарт:</span>
+			</div>
+		</div>
+		<div id="auto_approve_timecard">
+		</div>
+	</div>
+	<div class="container single_block box-shadow--6dp">
+		<div class="row">
+			<div class="col-md-9 col-xs-8 col-md-offset-3 form-group">
+			  <span class="h3">Автоподтверждения командировок:</span>
+			</div>
+		</div>
+		<div id="auto_approve_bt">
+		</div>
+	</div>
+
+  <<template:templates/ru/pages/footer.htmlt>>
+
+  </body>
+</html>

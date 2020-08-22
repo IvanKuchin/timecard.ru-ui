@@ -1,0 +1,199 @@
+<!-- 
+  <div class="row">
+    <div class="col-md-2 col-md-offset-2 col-xs-12">Номер телефона:</div>
+    <div class="col-xs-4 col-md-1 form-group">
+      <select id="country_code" class="form-control">
+        <option value="7">+7 (Россия)</option>
+        <option value="1">+1 (USA)</option>
+      </select>
+    </div>
+    <div class="col-xs-8 col-md-5 form-group">
+    <input type="input" class="form-control" id="phone_number" placeholder="(xxx) xxx-xx-xx">
+    </div>
+    <div class="col-xs-12 col-md-2 form-group">
+    <button class="btn btn-md btn-primary form-control" id="submitConfirmPhoneNumber" type="button" data-loading-text="<span class='fa fa-refresh fa-spin fa-fw animateClass'></span> Отправление ...">Подтвердить</button>
+    </div>
+  </div>
+	<div class="container single_block box-shadow--6dp">
+		<div class="row form-group">
+		  <div class="col-xs-12">
+			  <center><h4>Данные для бронирования поездок.</h4></center>
+		  </div>
+		</div>
+    <div class="row form-group">
+      <div class="col-xs-12 col-md-offset-8 col-md-4 form-group">
+          <button class="btn btn-primary form-control float_right __loading_indicator" id="SmartwayEnrollModal_Button" data-target="#SmartwayEnrollModal" style="display: none;">Согласие на on-line бронирование</button>
+        </div>
+    </div>
+		<div class="row">
+			<div class="col-md-4 col-xs-6">Гражданство:</div>
+			<div class="col-md-2 col-xs-6">
+				<select  id="citizenship_code" class="transparent" data-id="fake" data-script="account.cgi" data-action="AJAX_updateCitizenshipCountry">
+					<option value="RU">Россия</option>
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4 col-xs-12">Заграничный паспорт:</div>
+			<div class="col-md-2 col-xs-4">
+				<input  id="foreign_passport_number" class="transparent" placeholder="номер" data-id="fake" data-script="account.cgi" data-action="AJAX_updateForeignPassportNumber">
+				<label></label>
+			</div>
+			<div class="col-md-2 col-xs-4">
+				<input class="transparent foreign_passport_expiration_date" placeholder="дата окончания" data-id="fake" data-script="account.cgi" data-action="AJAX_updateForeignPassportExpirationDate">
+				<label></label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4 col-xs-12">ФИО как написано в заграничном паспорте:</div>
+			<div class="col-md-2 col-xs-4">
+				<input  id="last_name_en" class="transparent" placeholder="Фамилия" data-id="fake" data-script="account.cgi" data-action="AJAX_updateLastName_En">
+				<label></label>
+			</div>
+			<div class="col-md-2 col-xs-4">
+				<input  id="first_name_en" class="transparent" placeholder="Имя" data-id="fake" data-script="account.cgi" data-action="AJAX_updateFirstName_En">
+				<label></label>
+			</div>
+			<div class="col-md-2 col-xs-4">
+				<input  id="middle_name_en" class="transparent" placeholder="Отчество" data-id="fake" data-script="account.cgi" data-action="AJAX_updateMiddleName_En">
+				<label></label>
+			</div>
+		</div>
+	</div>
+
+    <div class="container single_block  box-shadow--6dp">
+      <div class="row">
+        <div class="col-xs-12"> <h4> <center>Бонусные карты авиалиний</center> </h4> </div>
+        <div class="col-xs-12 col-md-offset-10 col-md-2 form-group">
+          <button class="btn btn-primary form-control float_right __loading_indicator" data-target="#collapsible_new_avia_bonus_program" data-toggle="collapse">Добавить номер</button>
+        </div>
+      </div>
+
+      <div class="row collapse" id="collapsible_new_avia_bonus_program">
+        <div class="col-xs-12 collapse-top-shadow margin_bottom_20"><p></p></div>
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-12 form-group"><h5><center>Новый номер участника бонусной программы</center></h5></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-3">
+              <input class="transparent new_program" placeholder="Авиалиния"><label></label>
+            </div>
+            <div class="col-xs-12 col-md-4">
+              <input class="transparent new_bonus_number" placeholder="Номер бонусной карты"><label></label>
+            </div>
+            <div class="col-xs-12 col-md-2 col-md-offset-3 form-group">
+              <button id="new_avia_user_bonus_submit" class="btn btn-primary form-control" data-loading-text="<span class='fa fa-refresh fa-spin fa-fw animateClass'></span>" data-action="AJAX_addAviaBonusNumber">Сохранить</button>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-xs-12 collapse-bottom-shadow margin_top_20"><p></p></div>
+      </div>
+
+      <div id="avia_bonus_list"></div>
+    </div>
+
+    <div class="container single_block  box-shadow--6dp">
+      <div class="row">
+        <div class="col-xs-12"> <h4> <center>Бонусная карта РЖД</center> </h4> </div>
+        <div class="col-xs-12 col-md-offset-10 col-md-2 form-group">
+          <button class="btn btn-primary form-control float_right __loading_indicator" data-target="#collapsible_new_railroad_bonus_program" data-toggle="collapse">Добавить номер</button>
+        </div>
+      </div>
+
+      <div class="row collapse" id="collapsible_new_railroad_bonus_program">
+        <div class="col-xs-12 collapse-top-shadow margin_bottom_20"><p></p></div>
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-12 form-group"><h5><center>Новый номер участника бонусной программы</center></h5></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-3">
+              <input class="transparent new_program" placeholder="РЖД" value="РЖД" data-id="1" disabled><label></label>
+            </div>
+            <div class="col-xs-12 col-md-4">
+              <input class="transparent new_bonus_number" placeholder="Номер бонусной карты"><label></label>
+            </div>
+            <div class="col-xs-12 col-md-2 col-md-offset-3 form-group">
+              <button id="new_railroad_user_bonus_submit" class="btn btn-primary form-control" data-loading-text="<span class='fa fa-refresh fa-spin fa-fw animateClass'></span>" data-action="AJAX_addRailroadBonusNumber">Сохранить</button>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-xs-12 collapse-bottom-shadow margin_top_20"><p></p></div>
+      </div>
+
+      <div id="railroad_bonus_list"></div>
+    </div>
+
+
+    <div class="container single_block hidden">
+      <div class="row">
+        <div class="col-xs-12"> <h4> <center>Бонусные карты отелей</center> </h4> </div>
+        <div class="col-xs-12 col-md-offset-10 col-md-2 form-group">
+          <button class="btn btn-primary form-control float_right __loading_indicator" data-target="#collapsible_new_hotelchain_bonus_program" data-toggle="collapse">Добавить номер</button>
+        </div>
+      </div>
+
+      <div class="row collapse" id="collapsible_new_hotelchain_bonus_program">
+        <div class="col-xs-12 collapse-top-shadow margin_bottom_20"><p></p></div>
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-12 form-group"><h5><center>Новый номер участника бонусной программы</center></h5></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-3">
+              <input class="transparent new_program" placeholder="Сеть отелей"><label></label>
+            </div>
+            <div class="col-xs-12 col-md-4">
+              <input class="transparent new_bonus_number" placeholder="Номер бонусной карты"><label></label>
+            </div>
+            <div class="col-xs-12 col-md-2 col-md-offset-3 form-group">
+              <button id="new_railroad_user_bonus_submit" class="btn btn-primary form-control" data-loading-text="<span class='fa fa-refresh fa-spin fa-fw animateClass'></span>" data-action="AJAX_addHotelchainBonusNumber">Сохранить</button>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-xs-12 collapse-bottom-shadow margin_top_20"><p></p></div>
+      </div>
+
+      <div id="hotelchain_bonus_list"></div>
+    </div>
+
+<div class="modal fade" id="SmartwayEnrollModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">Согласие на передачу данных</h4>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-xs-12" id="ErrorModal_ResultText">
+          <span class="color_red">Ваши персональные данные, а именно 
+                <ul>
+                  <li>ФИО (на русском языке)</li>
+                  <li>ФИО (на английском языке)</li>
+                  <li>данные российского паспорта</li>
+                  <li>данные заграничного паспорта</li>
+                  <li>страна гражданства</li>
+                  <li>ИНН компании</li>
+                  <li>e-mail указанный при регистрации</li>
+                  <li>телефон</li>
+                  <li>пол</li>
+                  <li>дата рождения</li>
+                  <li>номера бонусных аккаунтов</li>
+                </ul>
+                будут переданы компании Smartway, которая фактически будет исполнять ваши заказы по бронированию отелей и билетов.</span>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-primary submit" data-loading-text="<span class='fa fa-refresh fa-spin fa-fw animateClass'></span> отправка ...">Согласен</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+    </div>
+  </div>
+  </div>
+</div>
+-->

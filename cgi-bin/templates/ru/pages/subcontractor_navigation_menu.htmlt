@@ -1,0 +1,83 @@
+<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#NavigationMenu">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="/subcontractor_dashboard?rand=<<vars:rand>>"><img id="imageLogo" width=40px class="logo-transform logo-shift-up animateClass box-shadow--3dp" src="/images/pages/logo/logo_site.jpg"></a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="NavigationMenu">
+			<ul class="nav navbar-nav">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Профиль <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="/cgi-bin/subcontractor.cgi?action=edit_profile_template&rand=<<vars:rand>>">Мой</a></li>
+						<li><a href="/cgi-bin/subcontractor.cgi?action=subcontractor_company_edit_template&rand=<<vars:rand>>">Компании</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Док-ты <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="/cgi-bin/subcontractor.cgi?action=subcontractor_sow_list_template&rand=<<vars:rand>>">SoW</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Таймкарты <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="/cgi-bin/subcontractor.cgi?action=subcontractor_timecard_template&rand=<<vars:rand>>">Отчитаться</a></li>
+						<li><a href="/cgi-bin/subcontractor.cgi?action=timecard_list_template&rand=<<vars:rand>>">Список</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Командировки <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="/cgi-bin/subcontractor.cgi?action=subcontractor_bt_template&rand=<<vars:rand>>">Отчитаться</a></li>
+						<li><a href="/cgi-bin/subcontractor.cgi?action=bt_list_template&rand=<<vars:rand>>">Список</a></li>
+					</ul>
+				</li>
+				<li class="dropdown smartway" style="display: none;">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Бронирования <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="/cgi-bin/subcontractor.cgi?action=subcontractor_travel_search_template&rand=<<vars:rand>>">Забронировать</a></li>
+						<li><a href="/cgi-bin/subcontractor.cgi?action=subcontractor_travel_list_template&rand=<<vars:rand>>">Список</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Отсутствие <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="/cgi-bin/subcontractor.cgi?action=subcontractor_absence_list_template&rand=<<vars:rand>>">Список</a></li>
+					</ul>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown" id="navbar-notification">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" id="user-notification-ahref">
+						<!-- <span class="glyphicon glyphicon-pencil"></span> -->
+						<img src="/images/pages/common/notification_v2.png" class="width_20">
+						<div class="display_inline hidden-lg hidden-md">Мои извещения</div>
+					</a>
+					<ul class="dropdown-menu dropdown-menu-long" role="menu" id="user-notification-ul">
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span id="myFirstName"><<vars:myFirstName>></span> <span id="myLastName"><<vars:myLastName>></span> <span class="caret"></span><span id="myUserID" data-myUserID="<<vars:loginUserID>>" data-myUserAvatar="<<vars:myUserAvatar>>" data-myLogin="<<vars:myLogin>>" data-smartway_enrolled="<<vars:smartway_enrolled>>"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="/user_account_properties?rand=<<vars:rand>>">Свойства аккаунта</a></li>
+						<li class="divider"></li>
+						<li><a href="/cgi-bin/account.cgi?action=faq_template&rand=<<vars:rand>>">F.A.Q.</a></li>
+						<li><a href="/cgi-bin/helpdesk.cgi?action=cases_list_template&rand=<<vars:rand>>">Мои кейсы</a></li>
+						<li class="divider"></li>
+						<li><a href="/logout?rand=<<vars:rand>>">Выйти</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
+</nav>
+

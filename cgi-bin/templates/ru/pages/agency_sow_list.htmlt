@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <<template:templates/ru/pages/header.htmlt>>
+
+    <title><<vars:title_head>></title>
+
+    <script src="/js/pages/agency_sow_list.js"></script>
+    <link href="/css/pages/agency_sow_list.css" rel="stylesheet">
+
+    <script src="/js/pages/tooltip.js"></script>
+    <link href="/css/pages/animate.min.css" rel="stylesheet">
+
+    <script src="/js/chartjs/2.7.2/Chart.bundle.js"></script>
+
+    <script>
+      $(document).ready(function() {
+        agency_sow_list.Init();
+      });
+    </script>
+
+  </head>
+
+  <body>
+  <<template:templates/ru/pages/agency_navigation_menu.htmlt>>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-md-12">
+          <h4> <center id="sow_list_title"> Список SoW </center> </h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6 col-md-2">
+          <div class="btn-group" role="group">
+            <button type="button" class="__list_filters btn btn-default btn-primary" data-filter="">Все</button>
+            <button type="button" class="__list_filters btn btn-default" data-filter="__filter_will_expire_in_30_days" title="Закончатся в течение 30 дней" data-toggle="tooltip" data-placement="top">30</button>
+            <button type="button" class="__list_filters btn btn-default" data-filter="__filter_will_expire_in_60_days" title="Закончатся от 30 до 60 дней" data-toggle="tooltip" data-placement="top">60</button>
+          </div>
+        </div>
+        <div class="col-md-8">
+        </div>
+        <div class="col-xs-6 col-md-2 form-group">
+          <button class="btn btn-primary form-control" data-target="#collapsible_sow_new_item" data-toggle="collapse">Добавить</button>
+        </div>
+      </div>
+      <div class="row collapse" id="collapsible_sow_new_item">
+        <div class="col-xs-12 collapse-top-shadow margin_bottom_20"><p></p></div>
+        <div class="col-xs-12">
+<!--           <div class="row">
+            <div class="col-xs-12 form-group"><h5><center>Новый SoW</center></h5></div>
+          </div>
+ -->
+           <div class="row">
+            <div class="col-xs-12 col-md-4">
+              Компания с которой заключается SoW:
+            </div>
+            <div class="col-xs-12 col-md-8">
+              <input class="transparent" id="subcontractor_companies_search" data-action="AJAX_addSoW">
+              <label></label>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 collapse-bottom-shadow margin_top_20"><p></p></div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div id="sow_list">
+      </div>
+    </div>
+
+    <div id="scrollerToShow"></div>
+
+    <div class="modal fade" id="ResultModal" tabindex="-1" role="dialog" aria-labelledby="ResultModal">
+      <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-xs-12 description">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+  <<template:templates/ru/pages/footer.htmlt>>
+
+  </body>
+</html>

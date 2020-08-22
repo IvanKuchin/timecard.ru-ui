@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+	<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+	<<template:templates/ru/pages/header.htmlt>>
+
+	<link href="/css/pages/switcher.css" rel="stylesheet">
+
+	<script src="/js/pages/subcontractor_travel_search.js"></script>
+
+	<title><<vars:title_head>></title>
+
+	<!-- Custom styles for this template -->
+	<link href="/css/pages/subcontractor_travel_search.css" rel="stylesheet">
+	<script>
+	  $(document).ready(function() {
+		subcontractor_travel_search.Init();
+	  });
+	</script>
+
+  </head>
+
+  <body>
+  <<template:templates/ru/pages/<<vars:user_type>>_navigation_menu.htmlt>>
+  
+	<div class="container single_block box-shadow--6dp">
+		<div class="row">
+		  <div class="col-xs-12">
+		  	<center><h3>Поиск авиабилета</h3></center>
+		   </div>
+		</div>
+		<div class="row form-group">
+		  <div class="col-xs-4 col-md-3">
+			<select id="sowSelector" class="form-control"></select>
+		  </div>
+		  <div class="col-xs-4 col-md-3">
+		  	<select id="flight_direction" class="form-control">
+		  		<option value="two-ways">Туда-обратно</option>
+		  		<option value="one-way">В одну сторону</option>
+		  	</select>
+		  </div>
+		</div>
+		<div class="row form-group">
+		  <div class="col-xs-6 col-md-3">
+		  	<input id="from_0" class="transparent" placeholder="Откуда (например Sheremetevo)">
+	  		<label></label>
+		  </div>
+		  <div class="hidden-xs hidden-sm col-md-1">
+		  	<center>
+			  	<i id="swap_directions" class="fa fa-arrows-h cursor_pointer" aria-hidden="true"></i>
+		  	</center>
+		  </div>
+		  <div class="col-xs-6 col-md-3">
+		  	<input id="to_0" class="transparent" placeholder="Куда (например Dubai)">
+	  		<label></label>
+		  </div>
+
+		  <div class="col-xs-6 col-md-2">
+		  	<div class="input-group">
+				<span style="display:table-cell;padding-right: 3px;"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+				<input class="transparent date_takeoff_0" placeholder="Вылет">
+				<label></label>
+            </div>
+		  </div>
+		  <div class="col-xs-6 col-md-2">
+		  	<div class="input-group">
+				<span style="display:table-cell;padding-right: 3px;"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+				<input class="transparent date_return_0" placeholder="Возврат">
+				<label></label>
+            </div>
+		  </div>
+
+		</div>
+		<div class="row form-group">
+			<div class="col-xs-4 col-md-2">
+				<button class="btn btn-default btn-xs" id="price_filter" data-trigger_dialog="#price_dialog">Цена</button>
+			</div>
+			<div class="col-xs-4 col-md-2">
+				<button class="btn btn-default btn-xs" id="layover_filter" data-trigger_dialog="#layover_dialog">Пересадки</button>
+			</div>
+			<div class="col-xs-4 col-md-2">
+				<button class="btn btn-default btn-xs" id="duration_filter" data-trigger_dialog="#duration_dialog">Длительность</button>
+			</div>
+			<div class="col-xs-4 col-md-2">
+				<button class="btn btn-default btn-xs" id="times_flight1_filter" data-trigger_dialog="#times_flight1_dialog">Время туда</button>
+			</div>
+			<div class="col-xs-4 col-md-2">
+				<button class="btn btn-default btn-xs" id="times_flight2_filter" data-trigger_dialog="#times_flight2_dialog">Время обратно</button>
+			</div>
+			<div class="col-xs-4 col-md-2">
+				<button class="btn btn-default btn-xs" id="luggage_filter" data-trigger_dialog="#luggage_dialog">Багаж</button>
+			</div>
+		</div>
+		<div class="row form-group">
+			<div class="col-xs-4 col-md-2 number_of_flights">
+			</div>
+			<div class="col-xs-4 col-md-8">
+			</div>
+			<div class="col-xs-4 col-md-2 convenient_flight">
+				<button class="btn btn-default btn-xs" style="display: none;">Удобные перелеты (<span></span>)</button>
+			</div>
+		</div>
+	</div>
+
+	<div class="container" id="loading_splash" style="display: none;">
+		<div class="row">
+			<div class="col-xs-12 text_align_center">
+				<span class='fa fa-refresh fa-spin fa-fw animateClass'></span>
+			</div>
+		</div>
+	</div>
+
+	<div id="flights">
+	</div>
+
+	<div id="price_dialog" title="Цена" class="dialog">
+		<span> от </span><span class="label_1">0</span>
+		<span> до </span><span class="label_2">500</span>
+		<div class="slider"></div>
+	</div>
+
+	<div id="layover_dialog" title="Пересадки" class="dialog">
+		<div class="radio">
+		  <label>
+		    <input type="radio" name="layover_radios" id="layover_radios1" value="0" checked>
+		    Не важно
+		  </label>
+		</div>
+		<div class="radio">
+		  <label>
+		    <input type="radio" name="layover_radios" id="layover_radios2" value="1">
+		    Прямой
+		  </label>
+		</div>
+		<div class="radio">
+		  <label>
+		    <input type="radio" name="layover_radios" id="layover_radios3" value="2">
+		    Не больше одной
+		  </label>
+		</div>
+	</div>
+
+	<div id="luggage_dialog" title="Багаж" class="dialog">
+		<div class="radio">
+		  <label>
+		    <input type="radio" name="luggage_radios" id="luggage_radios1" value=0 checked>
+		    Не важно
+		  </label>
+		</div>
+		<div class="radio">
+		  <label>
+		    <input type="radio" name="luggage_radios" id="luggage_radios2" value=1>
+		    Включен
+		  </label>
+		  &nbsp;(ручная кладь + одно багажное место)
+		</div>
+	</div>
+
+	<div id="duration_dialog" title="Длительность" class="dialog">
+		<span> до </span><span class="label_1">500</span>
+		<div class="slider"></div>
+	</div>
+
+	<div id="times_flight1_dialog" title="Время" class="dialog">
+		<div class="form-group">
+			<span>Взлет</span>
+			<span> с </span><span class="label_1">0</span>
+			<span> ч. до </span><span class="label_2">24</span>
+			<span> ч.</span>
+			<div class="slider_1"></div>
+		</div>
+		<div class="form-group">
+			<span>Посадка</span>
+			<span> с </span><span class="label_3">0</span>
+			<span> ч. до </span><span class="label_4">24</span>
+			<span> ч.</span>
+			<div class="slider_2"></div>
+		</div>
+	</div>
+
+	<div id="times_flight2_dialog" title="Время" class="dialog">
+		<div class="form-group">
+			<span>Взлет</span>
+			<span> с </span><span class="label_1">0</span>
+			<span> ч. до </span><span class="label_2">24</span>
+			<span> ч.</span>
+			<div class="slider_1"></div>
+		</div>
+		<div class="form-group">
+			<span>Посадка</span>
+			<span> с </span><span class="label_3">0</span>
+			<span> ч. до </span><span class="label_4">24</span>
+			<span> ч.</span>
+			<div class="slider_2"></div>
+		</div>
+	</div>
+
+    <!-- "Are you sure remove template agreement?" modal  -->
+    <div class="modal fade" id="AreYouSureBuyTicket" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">Подтверждаете покупку билета ?</h4>
+        </div>
+        <div class="modal-body">
+        	Полётный документ: 
+        		<select id="passport_type">
+        			<option value="foreign_passport">Загран. паспорт</option>
+        			<option value="domestic_passport">Российский паспорт</option>
+        		</select><br>
+        	Taриф: <span class="fare"></span><br>
+        	Стоимость билета: <span class="cost"></span> руб.
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-danger submit"  data-loading-text="<span class='fa fa-refresh fa-spin fa-fw animateClass'></span>">Купить</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+
+  <<template:templates/ru/pages/footer.htmlt>>
+
+  </body>
+</html>

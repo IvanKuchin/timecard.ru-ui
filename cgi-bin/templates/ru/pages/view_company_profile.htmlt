@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <<template:templates/ru/pages/header.htmlt>>
+
+    <title><<vars:title_head>></title>
+
+    <script src="/js/pages/view_company_profile.js"></script>
+    <link href="/css/pages/view_company_profile.css" rel="stylesheet">
+
+    <script src="/js/pages/tooltip.js"></script>
+    <link href="/css/pages/animate.min.css" rel="stylesheet">
+
+    <script src="/js/chartjs/2.7.2/Chart.bundle.js"></script>
+
+    <script>
+      $(document).ready(function() {
+        view_company_profile.Init();
+      });
+    </script>
+
+  </head>
+
+  <body>
+  <<template:templates/ru/pages/<<vars:user_type>>_navigation_menu.htmlt>>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h4>
+            <center>Информация о компании</center>
+          </h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="container single_block">
+      <div id="view_company_profile">
+      </div>
+    </div> <!-- /container -->
+
+    <div id="scrollerToShow"></div>
+
+  <<template:templates/ru/pages/footer.htmlt>>
+
+  </body>
+</html>

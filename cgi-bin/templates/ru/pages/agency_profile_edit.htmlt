@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <<template:templates/ru/pages/header.htmlt>>
+
+    <title><<vars:title_head>></title>
+
+    <script src="/js/pages/template_agreement_files.js"></script>
+    <script src="/js/pages/timecard_autocomplete.js"></script>
+
+    <!-- next three come together  -->
+    <script src="/js/pages/geo_zip_edit.js"></script>
+    <script src="/js/pages/bank_edit.js"></script>
+    <script src="/js/pages/company_info_edit.js"></script>
+
+    <script src="/js/pages/bt_expense_template.js"></script>
+    <script src="/js/pages/bt_expense_template_line.js"></script>
+
+    <script src="/js/pages/agency_bt_allowance_obj.js"></script>
+
+    <script src="/js/pages/agency_holiday_calendar_obj.js"></script>
+
+    <script src="/js/pages/agency_cost_center.js"></script>
+    
+    <script src="/js/pages/airfare_limitation_by_direction.js"></script>
+
+    <script src="/js/pages/agency_profile_edit.js"></script>
+    <link href="/css/pages/agency_profile_edit.css" rel="stylesheet">
+
+    <script src="/js/pages/tooltip.js"></script>
+    <link href="/css/pages/animate.min.css" rel="stylesheet">
+
+    <link href="/css/pages/switcher.css" rel="stylesheet">
+
+    <script>
+      $(document).ready(function() {
+        agency_profile_edit.Init();
+      });
+    </script>
+
+  </head>
+
+  <body>
+  <<template:templates/ru/pages/agency_navigation_menu.htmlt>>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h3>
+            <center>Данные агенства</center>
+          </h3>
+        </div>
+      </div>
+    </div>
+
+    <div id="agency_container" class="container single_block">
+    </div>
+
+    <div class="container single_block">
+      <div class="row">
+        <div class="col-xs-12">
+          <h4> <center>Задачи</center> </h4>
+        </div>
+        <div class="col-xs-12 col-md-10 form-group">
+          Список задач на которые будут назначены субконтракторы
+        </div>
+        <div class="col-xs-12 col-md-2 form-group">
+          <button class="btn btn-primary form-control float_right __loading_indicator" data-target="#collapsible_timecard_task_new_item" data-toggle="collapse">Новая задача</button>
+        </div>
+      </div>
+
+      <div class="row collapse" id="collapsible_timecard_task_new_item">
+        <div class="col-xs-12 collapse-top-shadow margin_bottom_20"><p></p></div>
+        <div id="timecard_task_new_item" class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-12 form-group"><h5><center>Создание новой задачи</center></h5></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4 col-md-2">
+              <input class="transparent new_customer" placeholder="Заказчик"><label></label>
+            </div>
+            <div class="col-xs-4 col-md-2">
+              <input class="transparent new_project" placeholder="Проект"><label></label>
+            </div>
+            <div class="col-xs-4 col-md-8">
+              <input class="transparent new_task" placeholder="Задача"><label></label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-2 col-md-offset-10 form-group">
+              <button id="new_task_submit" class="btn btn-primary form-control">Сохранить</button>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-xs-12 collapse-bottom-shadow margin_top_20"><p></p></div>
+      </div>
+      <div id="task_list"></div>
+    </div>
+
+    <div class="container single_block">
+      <div class="row">
+        <div class="col-xs-12">
+          <h4> <center>Расходы в командировке</center> </h4>
+        </div>
+        <div class="col-xs-12 col-md-10 form-group">
+          Список расходов которые могут быть возмещены при нахожении в командировке
+        </div>
+        <div class="col-xs-12 col-md-2 form-group">
+          <button class="btn btn-primary form-control float_right __loading_indicator" data-target="#collapsible_bt_expense_new_item" data-toggle="collapse">Новый расход</button>
+        </div>
+      </div>
+      <div class="row collapse" id="collapsible_bt_expense_new_item">
+        <div class="col-xs-12 collapse-top-shadow margin_bottom_20"><p></p></div>
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-12 form-group"><h5><center>Создание нового расхода</center></h5></div>
+          </div>
+          <div id="new_bt_expense_template"></div>
+        </div>
+        <div class="col-xs-12 collapse-bottom-shadow margin_top_20"><p></p></div>
+      </div>
+      <div id="expense_list"></div>
+    </div>
+
+    <div class="container single_block">
+      <div class="row">
+        <div class="col-xs-12">
+          <h4> <center>Ограничения на покупку aэро-билетов (по направлениям)</center> </h4>
+        </div>
+        <div class="col-xs-12 col-md-offset-10 col-md-2 form-group">
+          <button class="btn btn-primary form-control float_right __loading_indicator" data-target="#collapsible_airfare_limitation_by_direction_new_item" data-toggle="collapse">Новое</button>
+        </div>
+      </div>
+      <div class="row collapse" id="collapsible_airfare_limitation_by_direction_new_item">
+        <div class="col-xs-12 collapse-top-shadow margin_bottom_20"><p></p></div>
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-12 form-group"><h5><center>Создание нового ограничения</center></h5></div>
+          </div>
+          <div id="new_airfare_limitation_by_direction"></div>
+        </div>
+        <div class="col-xs-12 collapse-bottom-shadow margin_top_20"><p></p></div>
+      </div>
+      <div id="airfare_limitations_by_direction"></div>
+    </div>
+
+    <div class="container single_block">
+      <div class="row">
+        <div class="col-xs-12">
+          <h4> <center>Сотрудники компании</center> </h4>
+        </div>
+        <div class="col-xs-12 col-md-offset-10 col-md-2 form-group">
+          <button class="btn btn-primary form-control float_right __loading_indicator" data-target="#collapsible_new_employee" data-toggle="collapse">Новый сотрудник</button>
+        </div>
+      </div>
+
+      <div class="row collapse" id="collapsible_new_employee">
+        <div class="col-xs-12 collapse-top-shadow margin_bottom_20"><p></p></div>
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-12 form-group"><h5><center>Новый сотрудник</center></h5></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-3">
+              <input class="transparent new_employee_name" placeholder="ФИО"><label></label>
+            </div>
+            <div class="col-xs-12 col-md-4">
+              <input class="transparent new_employee_title" placeholder="Должность"><label></label>
+            </div>
+            <div class="col-xs-12 col-md-2 col-md-offset-3 form-group">
+              <button id="new_employee_submit" class="btn btn-primary form-control" data-loading-text="<span class='fa fa-refresh fa-spin fa-fw animateClass'></span>">Сохранить</button>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-xs-12 collapse-bottom-shadow margin_top_20"><p></p></div>
+      </div>
+
+      <div id="employee_list"></div>
+    </div>
+
+    <div class="container single_block">
+      <div class="row">
+        <div class="col-xs-12">
+          <h4> <center>Надбавка по странам</center> </h4>
+        </div>
+        <div class="col-xs-12 col-md-offset-10 col-md-2 form-group">
+          <button class="btn btn-primary form-control float_right __loading_indicator" data-target="#collapsible_bt_allowance_new_item" data-toggle="collapse">Новая надбавка</button>
+        </div>
+      </div>
+
+      <div class="row collapse" id="collapsible_bt_allowance_new_item">
+        <div class="col-xs-12 collapse-top-shadow margin_bottom_20"><p></p></div>
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-12 form-group"><h5><center>Новая надбавка</center></h5></div>
+          </div>
+          <div id="new_bt_allowance_template"></div>
+
+        </div>
+        <div class="col-xs-12 collapse-bottom-shadow margin_top_20"><p></p></div>
+      </div>
+
+      <div id="bt_allowance_list"></div>
+    </div>
+
+    <div class="container single_block">
+      <div class="row">
+        <div class="col-xs-12">
+          <h4> <center>Производственный календарь</center> </h4>
+        </div>
+        <div class="col-xs-12 col-md-offset-10 col-md-2 form-group">
+          <button class="btn btn-primary form-control float_right __loading_indicator" data-target="#collapsible_holiday_calendar_new_item" data-toggle="collapse">Добавить выходной</button>
+        </div>
+      </div>
+
+      <div class="row collapse" id="collapsible_holiday_calendar_new_item">
+        <div class="col-xs-12 collapse-top-shadow margin_bottom_20"><p></p></div>
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-12 form-group"><h5><center>Добавление выходного</center></h5></div>
+          </div>
+          <div id="new_holiday_calendar_template"></div>
+
+        </div>
+        <div class="col-xs-12 collapse-bottom-shadow margin_top_20"><p></p></div>
+      </div>
+
+      <div id="holiday_calendar_list"></div>
+    </div>
+
+
+    <div class="container single_block">
+      <div class="row">
+        <div class="col-xs-12 col-md-10">
+          <h4> <center>Договора на подпись при заключении контракта</center> </h4>
+        </div>
+        <div class="col-xs-12 col-md-2 form-group">
+          <button class="btn btn-primary form-control float_right __loading_indicator" data-target="#collapsible_template_agreement_list_new_item" data-toggle="collapse">Новый документ</button>
+        </div>
+      </div>
+
+      <div class="row collapse" id="collapsible_template_agreement_list_new_item">
+        <div class="col-xs-12 collapse-top-shadow margin_bottom_20"><p></p></div>
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-12 form-group"><h5><center>Новый документ</center></h5></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-10">
+              <input class="transparent new_template_agreement" placeholder="Название документа"><label></label>
+            </div>
+            <div class="col-xs-12 col-md-2 form-group">
+              <button id="new_template_agreement_submit" class="btn btn-primary form-control">Сохранить</button>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-xs-12 collapse-bottom-shadow margin_top_20"><p></p></div>
+      </div>
+
+      <div id="template_agreement_list"></div>
+    </div>
+
+    <div id="scrollerToShow"></div>
+
+    <div class="modal fade" id="ResultModal" tabindex="-1" role="dialog" aria-labelledby="ResultModal">
+      <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-xs-12 description">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- "Cost center assignment" modal  -->
+    <div class="modal fade" id="CostCenter_ChooseDialog" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Выберите центр затрат:</h4>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-danger remove float_left" data-action="AJAX_deleteCostCenterFromCustomer">Удалиь</button>
+        <button type="button" class="btn btn-primary submit" data-action="AJAX_updateCostCenterToCustomer">Выбрать</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- "Are you sure remove task ?" modal  -->
+    <div class="modal fade" id="AreYouSureRemoveTask" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Вы уверены, что хотите удалить эту задачу ?</h4>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-danger submit">Уверен</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- "Are you sure remove expense template ?" modal  -->
+    <div class="modal fade" id="AreYouSureRemoveExpenseTemplate" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Вы уверены, что хотите удалить расход ?</h4>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-danger submit">Уверен</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- "Are you sure remove expense template ?" modal  -->
+    <div class="modal fade" id="AreYouSureRemoveExpenseTemplateLine" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Вы уверены, что хотите удалить статью расхода ?</h4>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-danger submit">Уверен</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- "Are you sure remove task ?" modal  -->
+    <div class="modal fade" id="AreYouSureRemoveEmployee" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Вы уверены, что хотите удалить сотрудника?</h4>
+        </div>
+        <div class="modal-body">
+          Сотрудник больше не будет числиться в агенстве и не сможет редактировать ни данные агенства ни договоры. 
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-danger submit">Уверен</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- "Are you sure remove cost center?" modal  -->
+    <div class="modal fade" id="AreYouSureRemoveCostCenter" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Вы уверены, что хотите удалить cost center?</h4>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-danger submit">Уверен</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- "Are you sure remove cost center?" modal  -->
+    <div class="modal fade" id="AreYouSureRemoveAirfareLimitationByDirection" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Вы уверены, что хотите удалить ограничение?</h4>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-danger submit">Уверен</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- "Are you sure remove template agreement?" modal  -->
+    <div class="modal fade" id="AreYouSureRemoveTemplateAgreement" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Вы уверены, что хотите удалить шаблон документа на подписание ?</h4>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-danger submit">Уверен</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- "Are you sure remove template agreement?" modal  -->
+    <div class="modal fade" id="AreYouSureRemoveBTAllowance" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Вы уверены, что хотите надбавку ?</h4>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-danger submit">Уверен</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="AreYouSureRemoveHolidayCalendar" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Вы уверены, что хотите выходной ?</h4>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-danger submit">Уверен</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+  <<template:templates/ru/pages/footer.htmlt>>
+
+  </body>
+</html>

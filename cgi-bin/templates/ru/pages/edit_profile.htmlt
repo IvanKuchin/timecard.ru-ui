@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+	<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+	<<template:templates/ru/pages/header.htmlt>>
+
+	 <!-- Image uploader -->
+	<script src="/js/imageuploader/js/vendor/jquery.ui.widget.js"></script>
+	<script src="/js/imageuploader/js/load-image.all.min.js"></script>
+	<script src="/js/imageuploader/js/jquery.iframe-transport.js"></script>
+	<script src="/js/imageuploader/js/jquery.fileupload.js"></script>
+	<script src="/js/imageuploader/js/jquery.fileupload-process.js"></script>
+	<script src="/js/imageuploader/js/jquery.fileupload-image.js"></script>
+	<script src="/js/imageuploader/js/jquery.fileupload-validate.js"></script>
+
+	<link href="/css/pages/switcher.css" rel="stylesheet">
+
+	<script src="/js/pages/edit_profile.js"></script>
+
+	<title><<vars:title_head>></title>
+
+	<!-- Custom styles for this template -->
+	<link href="/css/pages/edit_profile.css" rel="stylesheet">
+	<script>
+	  $(document).ready(function() {
+		edit_profile.Init();
+	  });
+	</script>
+
+  </head>
+
+  <body>
+  <<template:templates/ru/pages/<<vars:user_type>>_navigation_menu.htmlt>>
+  
+	<div class="container single_block box-shadow--6dp">
+
+		<div class="row form-group">
+			<div class="col-xs-6 col-md-2 col-md-offset-2" style="font-size: x-large;">
+				<input id="last_name_ru" class="transparent"  placeholder="Фамилия" data-id="fake" data-script="account.cgi" data-action="AJAX_updateLastName_Ru">
+				<label></label>
+			</div>
+			<div class="col-xs-6 col-md-2" style="font-size: x-large;">
+				<input id="first_name_ru" class="transparent"  placeholder="Имя" data-id="fake" data-script="account.cgi" data-action="AJAX_updateFirstName_Ru">
+				<label></label>
+			</div>
+			<div class="col-xs-12 col-md-2" style="font-size: x-large;">
+				<input id="middle_name_ru" class="transparent"  placeholder="Отчество" data-id="fake" data-script="account.cgi" data-action="AJAX_updateMiddleName_Ru">
+				<label></label>
+			</div>
+		</div>
+
+		<div class="row"> <!-- row photo block + resume -->
+		  <div class="col-md-2 col-xs-4"> <!-- columns photo block + First Name-->
+
+			<canvas id="canvasForAvatar" width="150" height="150" class="canvas-big-avatar cursor_pointer">
+			  Your browser does not support the HTML5 canvas tag.
+			</canvas>
+
+			<div hidden>
+				<input id="fileupload" type="file" name="files[]" accept="image/*" style="width: 0px;height: 0px;">
+
+				<p>
+				  <div class="previewShape">
+					<span class="overlay" id="canvasForAvatarPreview0_overlay"></span>
+					<div class="details"> 
+					  <img src="/images/pages/edit_profile/del.png" id="canvasForAvatarPreview0_del" class="del-sign">
+					</div>
+					<div class="base">
+					  <canvas id="canvasForAvatarPreview0" width="20" height="20" class="canvas-small-avatar">
+						Your browser does not support the HTML5 canvas tag.
+					  </canvas>
+					</div>
+				  </div>
+				  <div class="previewShape">
+					<span class="overlay" id="canvasForAvatarPreview1_overlay"></span>
+					<div class="details"> 
+					  <img src="/images/pages/edit_profile/del.png" id="canvasForAvatarPreview1_del" class="del-sign">
+					</div>
+					<div class="base">
+					  <canvas id="canvasForAvatarPreview1" width="20" height="20" class="canvas-small-avatar">
+						Your browser does not support the HTML5 canvas tag.
+					  </canvas>
+					</div>
+				  </div>
+				  <div class="previewShape">
+					<span class="overlay" id="canvasForAvatarPreview2_overlay"></span>
+					<div class="details"> 
+					  <img src="/images/pages/edit_profile/del.png" id="canvasForAvatarPreview2_del" class="del-sign">
+					</div>
+					<div class="base">
+					  <canvas id="canvasForAvatarPreview2" width="20" height="20" class="canvas-small-avatar">
+						Your browser does not support the HTML5 canvas tag.
+					  </canvas>
+					</div>
+				  </div>
+				  <div class="previewShape">
+					<span class="overlay" id="canvasForAvatarPreview3_overlay"></span>
+					<div class="details"> 
+					  <img src="/images/pages/edit_profile/del.png" id="canvasForAvatarPreview3_del" class="del-sign">
+					</div>
+					<div class="base">
+					  <canvas id="canvasForAvatarPreview3" width="20" height="20" class="canvas-small-avatar">
+						Your browser does not support the HTML5 canvas tag.
+					  </canvas>
+					</div>
+				  </div>
+				</p>
+
+	<!-- 
+				<div id="progress" class="progress divProgressUploadThin" width="80%">
+					<div class="progress-bar progress-bar-primary"></div>
+				</div>
+	 -->		 
+				<!-- The container for the uploaded files -->
+				<div id="files" class="files"></div> 
+			</div>
+
+		   </div> <!-- columns photo block + First Name-->
+
+			<div class="col-md-2 hidden-xs">Пол:</div>
+			<div class="col-xs-8">
+				<input type="radio" name="sex" id="sexMale" value="male">
+				<label for="sexMale" class="font_weight_normal">М</label>
+				&nbsp;
+				<input type="radio" name="sex" id="sexFemale" value="female">
+				<label for="sexFemale" class="font_weight_normal">Ж</label>
+			</div>
+
+			<div class="col-md-2 hidden-xs">Дата рождения:</div>
+			<div class="col-xs-8">
+				<input class="transparent birthday" placeholder="день рождения" data-id="fake" data-script="account.cgi" data-action="AJAX_updateBirthday">
+				<label></label>
+			</div>
+
+			<div class="col-md-2 col-xs-12">Паспорт:</div>
+			<div class="col-md-2 col-xs-4">
+				<input id="passport_series" class="transparent" placeholder="серия" data-id="fake" data-script="account.cgi" data-action="AJAX_updatePassportSeries">
+				<label></label>
+			</div>
+			<div class="col-md-2 col-xs-4">
+				<input  id="passport_number" class="transparent" placeholder="номер" data-id="fake" data-script="account.cgi" data-action="AJAX_updatePassportNumber">
+				<label></label>
+			</div>
+			<div class="col-md-2 col-xs-4">
+				<input class="transparent passport_issue_date" placeholder="дата выдачи" data-id="fake" data-script="account.cgi" data-action="AJAX_updatePassportIssueDate">
+				<label></label>
+			</div>
+			<div class="col-xs-12 col-md-6 col-md-offset-2">
+				<input id="passport_issue_authority" class="transparent" placeholder="кем выдан" data-id="fake" data-script="account.cgi" data-action="AJAX_updatePassportIssueAuthority">
+				<label></label>
+			</div>
+		</div>
+	</div>
+
+<<template:templates/ru/pages/<<vars:user_type>>_edit_profile.htmlt>>
+
+
+<!-- Dialog Modal for Avatar preview delete (powered by jQueryUI) -->
+<div id="DeleteAvatarDialogBox" class="close" title="Удаление"><p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Изображение будет удалено ?</p></div>
+
+<!-- Dialog modal for Aavatar preview delete (powered by bootstrap) -->
+<div class="modal fade" id="DeleteAvatarDialogBoxBS" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h4 class="modal-title">Удаление изображения</h4>
+	  </div>
+	  <div class="modal-body">
+		  Изображение будет удалено ?
+		<input type=hidden id="DeteledAvatarID_InBSForm">
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+		<button type="button" class="btn btn-danger" id="DeleteAvatarDialogBoxBS_Submit">Удалить</button>
+	  </div>
+	</div>
+  </div>
+</div>
+
+<!-- Dialog modal for error alerting in avatar uploading (powered by bootstrap) -->
+<div class="modal fade" id="UploadAvatarErrorBS" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h4 class="modal-title">Некорректное изображение</h4>
+	  </div>
+	  <div class="modal-body">
+		  Некорректное изображение <span id="UploadAvatarErrorBS_ImageName"></span>
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+	  </div>
+	</div>
+  </div>
+</div>
+
+
+<!-- "Are you sure ?" modal  -->
+<div class="modal fade" id="AreYouSure" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h4 class="modal-title">Вы уверены ?</h4>
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" id="Remove" class="btn btn-danger">Удалить</button>
+		<button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+	  </div>
+	</div>
+  </div>
+</div>
+
+<div class="modal fade" id="ErrorModal" tabindex="-1" role="dialog" aria-labelledby="ErrorModal">
+  <div class="modal-dialog modal-sm" role="document">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h4 class="modal-title">Ошибка</h4>
+	  </div>
+	  <div class="modal-body">
+		  <div class="row">
+			  <div class="col-xs-12" id="ErrorModal_ResultText">
+			  </div>
+		  </div>
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+	  </div>
+	</div>
+  </div>
+</div>
+
+<input type="file" id="AddGeneralCoverButton" accept="image/*" class="visibility_hidden width_0_height_0">
+<input type="file" id="AddGeneralCoverNoUploadButton" accept="image/*" class="visibility_hidden width_0_height_0">
+
+   <<template:templates/ru/pages/sms_confirmation.htmlt>>
+   <<template:templates/ru/pages/footer.htmlt>>
+
+  </body>
+</html>

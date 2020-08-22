@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <<template:templates/ru/pages/header.htmlt>>
+
+    <title><<vars:title_head>></title>
+
+    <script src="/js/pages/agency_dashboard.js"></script>
+    <script src="/js/pages/pd/agency_service_cost_prediction.js"></script>
+    <script src="/js/pages/pd/agency_bt_cost_prediction.js"></script>
+    <link href="/css/pages/agency_dashboard.css" rel="stylesheet">
+
+    <script src="/js/pages/tooltip.js"></script>
+    <link href="/css/pages/animate.min.css" rel="stylesheet">
+
+    <script src="/js/chartjs/2.7.2/Chart.bundle.js"></script>
+
+    <script>
+      $(document).ready(function() {
+        agency_dashboard.Init();
+      });
+    </script>
+
+  </head>
+
+  <body>
+  <<template:templates/ru/pages/agency_navigation_menu.htmlt>>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h3>
+            <center>
+              Обзор
+            </center>
+          </h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="margin_sides_15">
+      <div class="row" id="dashboard">
+      </div>
+    </div> <!-- /container -->
+
+    <div class="margin_sides_15">
+      <div class="row">
+        <div class="col-xs-6 col-md-2">
+          <div class="panel panel-primary">
+            <div class="panel-heading">Ожидание подтверждения:<br>&nbsp;</div>
+            <div class="panel-body text-center" id="pending_approvals_content">
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6 col-md-2">
+          <div class="panel panel-primary">
+            <div class="panel-heading">Ожидание &nbsp; оплаты:<br>&nbsp;</div>
+            <div class="panel-body text-center" id="pending_payment_content">
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6 col-md-2">
+          <div class="panel panel-primary">
+            <div class="panel-heading">Таймкарты подтвержденные в прошлом месяце:</div>
+            <div class="panel-body text-center" id="submit_timecards_last_month">
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6 col-md-2">
+          <div class="panel panel-primary">
+            <div class="panel-heading">Таймкарты подтвержденные в этом месяце:</div>
+            <div class="panel-body text-center" id="submit_timecards_this_month">
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6 col-md-2">
+          <div class="panel panel-primary">
+            <div class="panel-heading">Таймкарты подтвержденные на прошлой неделе:</div>
+            <div class="panel-body text-center" id="submit_timecards_last_week">
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6 col-md-2">
+          <div class="panel panel-primary">
+            <div class="panel-heading">Таймкарты подтвержденные на этой неделе:</div>
+            <div class="panel-body text-center" id="submit_timecards_this_week">
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6 col-md-2">
+          <div class="panel panel-primary">
+            <div class="panel-heading">SoW скоро закончатся:<br>&nbsp;</div>
+            <div class="panel-body text-center" id="sow_expiration_dash">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> <!-- /container -->
+    <div class="margin_sides_15">
+      <div class="row">
+        <div class="col-xs-12"><span class="link" data-toggle="collapse" data-target="#cost_prediction">Cost prediction</span></div>
+      </div>
+      <div id="cost_prediction" class="out collapse">
+        <div class="row collapse-top-shadow margin_bottom_20"><p></p></div>
+        <div class="row">
+          <div class="col-xs-6 col-md-2">
+            <div class="panel panel-primary">
+              <div class="panel-heading">Выплаты предыдущего / текущего месяца за сервис:</div>
+              <div class="panel-body text-center">
+                <strong class="h4 cursor_pointer" id="subcontractor_prev_month_service_payment"></strong>
+                <strong class="h4">/</strong> 
+                <strong class="h4 cursor_pointer" id="subcontractor_this_month_service_payment"></strong>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6 col-md-2">
+            <div class="panel panel-primary">
+              <div class="panel-heading">Выплаты предыдущего / текущего месяца за командировки:</div>
+              <div class="panel-body text-center">
+                <strong class="h4 cursor_pointer" id="subcontractor_prev_month_bt_payment"></strong>
+                <strong class="h4">/</strong> 
+                <strong class="h4 cursor_pointer" id="subcontractor_this_month_bt_payment"></strong>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row collapse-bottom-shadow margin_top_20"><p></p></div>
+      </div>
+    </div>
+
+
+
+    <div id="scrollerToShow"></div>
+
+    <div class="modal fade" id="ResultModal" tabindex="-1" role="dialog" aria-labelledby="ResultModal">
+      <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-xs-12 description">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+  <<template:templates/ru/pages/footer.htmlt>>
+
+  </body>
+</html>

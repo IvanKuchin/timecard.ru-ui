@@ -1,0 +1,26 @@
+From: "<<vars:SERVER_NAME>>" <noreply@timecard.ru>
+Subject: <<vars:SERVER_NAME>>: Необходимо Ваше подтверждение командировок
+Content-type: multipart/alternative; boundary="<<vars:rand>>"
+
+--<<vars:rand>>
+Content-Type: text/plain; charset=utf-8
+
+Добрый день <<vars:name>>,
+
+  Вам нужно подтвердить <<vars:number_of_pending_items>> командировок.
+
+Автоматическое сообщение
+--<<vars:rand>>
+Content-Type: text/html; charset=utf-8
+
+<html>
+<body>
+Добрый день <<vars:name>>,
+<br>
+  Вам нужно подтвердить <<vars:number_of_pending_items>> командировок.
+<br>
+<br>
+Автоматическое сообщение
+</body>
+</html>
+--<<vars:rand>>--

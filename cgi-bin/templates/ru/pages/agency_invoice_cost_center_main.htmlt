@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <<template:templates/ru/pages/header.htmlt>>
+
+    <title><<vars:title_head>></title>
+
+    <link href="/css/pages/agency_invoice_cost_center_main.css" rel="stylesheet">
+
+    <script src="/js/pages/agency_invoice_cost_center_main.js"></script>
+    <script src="/js/pages/agency_invoice_cost_center_service.js"></script>
+    <script src="/js/pages/agency_invoice_cost_center_service_list.js"></script>
+    <script src="/js/pages/agency_invoice_cost_center_bt.js"></script>
+    <script src="/js/pages/agency_invoice_cost_center_bt_list.js"></script>
+
+    <script src="/js/pages/tooltip.js"></script>
+    <link href="/css/pages/animate.min.css" rel="stylesheet">
+
+    <script>
+      $(document).ready(function() {
+        agency_invoice_cost_center_main.Init();
+      });
+    </script>
+
+  </head>
+
+  <body>
+  <<template:templates/ru/pages/agency_navigation_menu.htmlt>>
+
+    <div class="container single_block" id="invoices_container">
+      <div class="row">
+        <div class="col-xs-6 col-md-4 form-group">
+          <button id="collapsible_select_service_for_invoicing_button" class="btn btn-primary form-control" data-target="#collapsible_select_service_for_invoicing" data-toggle="collapse">Выставить счет за сервис</button>
+        </div>
+        <div class="col-xs-0 col-md-4">
+        </div>
+        <div class="col-xs-6 col-md-4 form-group">
+          <button id="collapsible_select_bt_for_invoicing_button" class="btn btn-primary form-control" data-target="#collapsible_select_bt_for_invoicing" data-toggle="collapse">Выставить счет за командировки</button>
+        </div>
+      </div>
+
+      <div class="row collapse" id="collapsible_select_service_for_invoicing">
+        <div class="col-xs-12 collapse-top-shadow margin_bottom_20"><p></p></div>
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-12 form-group"><h5><center>Выбрать подтвержденные таймкарты</center></h5></div>
+          </div>
+          <div id="select_service_for_invoicing"></div>
+        </div>
+        <div class="col-xs-12 collapse-bottom-shadow margin_top_20"><p></p></div>
+      </div>
+
+      <div class="row collapse" id="collapsible_select_bt_for_invoicing">
+        <div class="col-xs-12 collapse-top-shadow margin_bottom_20"><p></p></div>
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-12 form-group"><h5><center>Выбрать подтвержденные командировки</center></h5></div>
+          </div>
+          <div id="select_bt_for_invoicing"></div>
+        </div>
+        <div class="col-xs-12 collapse-bottom-shadow margin_top_20"><p></p></div>
+      </div>
+
+    </div>
+
+    <div class="container single_block" id="service_invoices_list_container">
+        <div class="row">
+          <div class="col-xs-12">
+            <h4> <center>Выставленные счета за сервис</center> </h4>
+          </div>
+        </div>
+
+        <div id="invoices_service_list"></div>
+    </div>
+      
+    <div class="container single_block" id="bt_invoices_list_container">
+        <div class="row">
+          <div class="col-xs-12">
+            <h4> <center>Выставленные счета за командировки</center> </h4>
+          </div>
+        </div>
+
+        <div id="invoices_bt_list"></div>
+    </div>
+      
+    <div id="scrollerToShow"></div>
+
+    <!-- "Are you sure recall invoice?" modal  -->
+    <div class="modal fade" id="AreYouSureRecallBTInvoice" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Вы уверены, что хотите отозвать выставленный счет.</h4>
+        </div>
+        <div class="modal-body">
+          <ul>
+            <li>Порядковый номер счета будет <b>утерян</b></li>
+            <li>Необходимо будет перевыставить счет по этим командировкам.</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-danger submit">Уверен</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="AreYouSureRecallServiceInvoice" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Вы уверены, что хотите отозвать выставленный счет.</h4>
+        </div>
+        <div class="modal-body">
+          <ul>
+            <li>Порядковый номер счета будет <b>утерян</b></li>
+            <li>Необходимо будет перевыставить счет по этим таймкартам.</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-danger submit">Уверен</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+  <<template:templates/ru/pages/footer.htmlt>>
+
+  </body>
+</html>

@@ -1,0 +1,22 @@
+    <div class="modal fade" id="RecallTimecardModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Вы уверены ?</h4>
+        </div>
+        <div class="modal-body">
+          Отзыв таймкарты повлияет на
+          <ul>
+            <li>Нумерацию документов у субконтрактора должна быть скорректирована</li>
+            <li>Cубконтрактор сможет прислать бумажные копии от отозванной версии</li>
+          </ul>
+          <input type="text" name="" class="form-control reason" placeholder="Объяснение">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-script="agency.cgi">Отозвать</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+        </div>
+      </div>
+      </div>
+    </div>

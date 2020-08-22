@@ -1,0 +1,139 @@
+    <script src="/js/pages/login_demo.js"></script>
+    <script src="/js/pages/login_1.js"></script>
+    <script>
+      $(document).ready(function() {
+        login_demo_page.Init();
+        login_page_1.Init();
+      });
+    </script>
+
+            <div class="hidden-xs hidden-sm"><center><h3 class="form-signin-heading">Timecard - это </h3></center></div>
+            <div class="hidden-md hidden-lg"><center><h3 class="form-signin-heading">Не знаете с чего начать ? </h3></center></div>
+            <div class="hidden-xs hidden-sm well dynamic_shadow" style="margin-bottom: 15px;" >
+              Облачный инструмент, который:
+              <ul>
+                <li>сокращает расходы на администрирование</li>
+                <li>автоматизиреут учет рабочего времени проекта</li>
+                <li>ускоряет расчет заработной платы</li>
+                <li>расчитывает стоимость проекта</li>
+                <li>выставляет счета клиентам</li>
+              </ul>
+              Преимущества для 
+              <span class="link" data-target="#agency_benefits_modal" data-toggle="modal">Агенства</span>
+              и
+              <span class="link" data-target="#subc_benefits_modal" data-toggle="modal">Субконтрактора.</span>
+
+            </div>
+            <button class="btn btn-lg btn-success btn-block dynamic_shadow" data-target="#OrderADemo" data-toggle="modal">Закажите демо</button>
+
+    <div class="modal fade" id="agency_benefits_modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Преимущества для Агентства</h4>
+        </div>
+        <div class="modal-body">
+          <ul>
+<li>Сократите ваши административные расходы</li>
+<li>Ускоряйте обработку информации</li>
+<li>Снижайте риск человеческой ошибки</li>
+<li>Автоматизируйте контроль времени на проекте</li>
+<li>Создавайте выгрузку для 1С</li>
+<li>Упрощайте соблюдение и подготовку к аудиту</li>
+<li>Подтверждайте отчеты в режиме реального времени</li>
+<li>Увеличивайте контроль над сроками оплаты за проекты</li>
+<li>Повышайте контроль над расходами сотрудников в командировках</li>
+<li>Распределяйте ресурсы и точность их нагрузки</li>
+<li>Индивидуальные настройки по выставлению счетов: почасовые, фиксированные, тарифы, а также выставление счетов на основе даты.</li>
+<li>Полная мультивалютная поддержка всех правил выставления счетов</li>
+<li>Пользовательские уведомления при достижении пороговых значений бюджета</li>
+<li>Портал для просмотра статуса проекта и предварительной информации</li>
+<li>Генерация договора с контрактным, уведомление о его окончании</li>
+<li>Отслеживания оплачиваемой работы по каждому контрагенту</li>
+<li>Настраиваемые циклы выставления счетов, шаблоны накладных и многопользовательские накладные</li>
+<li>Автоматически рассчитывает доход по времени и материалу, фиксированной цене и проценту выполненных проектов</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="subc_benefits_modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Преимущества для Cубконтрактора</h4>
+        </div>
+        <div class="modal-body">
+          <ul>
+<li>Отправляйте отчеты и выставляйте счета, из любого места, в удобное для вас время.</li>
+<li>Сокращайте время внесения информации в документы и подготовку счетов на 80%.</li>
+<li>Удобный интерфейс для отправки документов из командировок, с дальнейшей выгрузкой.</li>
+<li>Конвертация валюты в режиме реального времени</li>
+<li>Поддержка нескольких видов налогообложения</li>
+<li>Сайт адаптивен на мобильное устройство</li>
+<li>Простые настройки и удобные информационные панели</li>
+<li>Контроль за подтверждением вашего отчета/ сроков оплаты/ продления контракта</li>
+<li>Быстрое возмещения затрат</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- "Are you sure remove template agreement?" modal  -->
+    <div class="modal fade" id="OrderADemo" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Данные для связи</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row margin_bottom_10">
+            <div class="col-xs-6">
+              <input class="form-control demo_name" placeholder="Фамилия Имя">
+            </div>
+            <div class="col-xs-6">
+              <input class="form-control demo_contact" placeholder="Телефон / e-mail">
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <input type="checkbox" id="agency_confirmation"> <label for="agency_confirmation">Подтверждаю, что я представляю агенство.</label>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success submit" data-loading-text="<span class='fa fa-refresh fa-spin fa-fw animateClass'></span> Отправка">Заказать</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="DemoConfirmation" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Спасибо !</h4>
+        </div>
+        <div class="modal-body">
+          Запрос успешно отправлен. Мы с Вами свяжемся на следующий рабочий день.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+        </div>
+      </div>
+      </div>
+    </div>

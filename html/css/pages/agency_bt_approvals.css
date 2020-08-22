@@ -1,0 +1,13 @@
+.link {
+	color: darkblue;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.link:hover {
+	color: blue;
+}
+
+.highlight:hover {
+	background-color: lightgrey;
+}
