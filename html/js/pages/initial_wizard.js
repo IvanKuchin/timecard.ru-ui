@@ -359,7 +359,7 @@ var	initial_wizard = (function()
 					{
 						action: "AJAX_isCompanyExists",
 						tin: company_tin_tag.val(),
-						company_type: company_tin_tag.attr("data-company_type"),
+						// company_type: company_tin_tag.attr("data-company_type"),
 					})
 					.done(function(data)
 					{
