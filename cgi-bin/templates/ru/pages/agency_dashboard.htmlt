@@ -100,7 +100,7 @@
     </div> <!-- /container -->
     <div class="margin_sides_15">
       <div class="row">
-        <div class="col-xs-12"><span class="link" data-toggle="collapse" data-target="#cost_prediction">Cost prediction</span></div>
+        <div class="col-xs-12"><span class="link" data-toggle="collapse" data-target="#cost_prediction">Cost forecast</span></div>
       </div>
       <div id="cost_prediction" class="out collapse">
         <div class="row collapse-top-shadow margin_bottom_20"><p></p></div>
