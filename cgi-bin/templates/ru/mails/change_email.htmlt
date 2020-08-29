@@ -1,4 +1,5 @@
-From: "<<vars:SERVER_NAME>>" <noreply@connme.ru>
+To: <<vars:RECIPIENT_EMAIL>>
+From: "<<vars:SERVER_NAME>>" <noreply@<<vars:EMAIL_FROM_DOMAIN>>>
 Subject: <<vars:SERVER_NAME>>: Запрос на изменение e-mail
 Content-type: multipart/alternative; boundary="<<vars:rand>>"
 
