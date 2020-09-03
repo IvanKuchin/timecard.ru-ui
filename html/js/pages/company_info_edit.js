@@ -418,7 +418,7 @@ var	company_info_edit = function(suffix_init)
 
 		col_vat_calculation_type_title1.append("ставка НДС от Итого");
 		col_vat_calculation_type_title2.append("по сумме строк");
-		col_account_title			.append("Рассчетный счет:");
+		col_account_title			.append("Расчетный счет:");
 		col_ogrn_title				.append("ОГРН/ОГРНИП: ")	.append(ogrn_obj.button);
 		col_kpp_title				.append("КПП: ")			.append(kpp_obj.button);
 		// col_ogrn_title				.append("ОГРН/ОГРНИП: ")	.append(ogrn_info_button);
@@ -476,7 +476,7 @@ var	company_info_edit = function(suffix_init)
 		input_legal_address			.attr("placeholder", "Юр. адрес");
 		input_mailing_address		.attr("placeholder", "Адрес доставки");
 		input_tin					.attr("placeholder", "ИНН");
-		input_account				.attr("placeholder", "Рассчетный счет");
+		input_account				.attr("placeholder", "Расчетный счет");
 		input_ogrn					.attr("placeholder", "ОГРН/ОГРНИП");
 		input_kpp					.attr("placeholder", "КПП");
 
