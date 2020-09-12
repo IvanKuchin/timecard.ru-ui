@@ -243,7 +243,7 @@ chat = (function()
 	{
 		try 
 		{
-			ws = new WebSocket("ws://dev.bestbounty.ru:7681", "text-message-protocol");
+			ws = new WebSocket("ws://" + window.location.hostname + ":7681", "text-message-protocol");
 
 			ws.onopen = function() {
 				wsStatus = "connecting";

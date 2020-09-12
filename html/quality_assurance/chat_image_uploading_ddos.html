@@ -103,7 +103,7 @@
       {
         if(wsDDoSStatus == "closed")
         {
-          wsDDoS = new WebSocket("ws://dev.bestbounty.ru:7681", testProtocol);
+          wsDDoS = new WebSocket("ws://" + window.location.hostname + ":7681", testProtocol);
 
           wsDDoS.onopen = wsDDoSOnOpen;
           wsDDoS.onmessage = wsDDoSOnMessage;
