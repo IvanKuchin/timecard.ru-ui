@@ -20,6 +20,15 @@ tfoot {
   margin-left: 13px;
 }
 
+.dimmed_copy {
+  color: darkgrey;
+}
+.dimmed_copy:hover {
+  color: grey;
+  cursor: copy;
+}
+
+
 /*--- removes up/down arrows in Chrome*/
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 

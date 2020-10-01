@@ -39,7 +39,10 @@
 
     <div class="container padding_0px">
       <div class="row">
-        <div class="col-xs-6">
+        <div class="hidden-xs hidden-sm col-md-1">
+          <i id="copy_timecard_to_clipbuffer" class="fa fa-clipboard dimmed_copy" aria-hidden="true"></i>
+        </div>
+        <div class="col-xs-6 col-md-5">
           <select id="sowSelector">
           </select>
         </div>
@@ -48,8 +51,8 @@
               <button type="button" class="btn btn-primary" id="addLineToTimeCard">Добавить строку</button>
             </div>
         </div>
-      </div> <!-- /row -->
-    </div> <!-- /container -->
+      </div>
+    </div>
 
     <div class="margin_sides_15">
       <div class="row">
@@ -61,7 +64,7 @@
           </table>
         </div>
       </div>
-    </div> <!-- /container -->
+    </div>
 
     <div id="subcontractor_timecard" data-action="<<vars:action>>" data-period_length="<<vars:period_length>>" data-period_start="<<vars:period_start>>">
     </div>

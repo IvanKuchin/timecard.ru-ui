@@ -24,8 +24,9 @@ var	subcontractor_timecard = (function()
 
 		UpdateTimecardFromSOW(current_period_start_global);
 
-		$("#addLineToTimeCard").on("click", AddRowClickHandler);
-		$("#sowSelector").on("change", ChangeSOWSelectClickHandler);
+		$("#addLineToTimeCard").on("click", AddRow_ClickHandler);
+		$("#sowSelector").on("change", ChangeSOWSelect_ClickHandler);
+		$("#copy_timecard_to_clipbuffer").on("click", CopyTimecardToClipbuffer_ClickHandler);
 	};
 
 	var	SetInitialParamsFromURI = function()
@@ -563,7 +564,8 @@ var	subcontractor_timecard = (function()
 											.attr("placeholder", "")
 											.attr("value", day_hours)
 											.on("input", InputHours_InputHandler)
-											.on("change", InputHours_ChangeHandler);
+											.on("change", InputHours_ChangeHandler)
+											.on("paste", PasteTimecardFromClipbuffer_ClickHandler);
 				if(disable_flag) input_tag.attr("disabled", "");
 
 				row.append($("<td>")
@@ -888,7 +890,7 @@ var	subcontractor_timecard = (function()
 		}
 	};
 
-	var	AddRowClickHandler = function(e)
+	var	AddRow_ClickHandler = function(e)
 	{
 		var		currTag = $(this);
 		var		bodyTag = $("#timecardBody tbody");
@@ -1272,7 +1274,7 @@ var	subcontractor_timecard = (function()
 		return result;
 	};
 
-	var	ChangeSOWSelectClickHandler = function(e)
+	var	ChangeSOWSelect_ClickHandler = function(e)
 	{
 		var		currTag = $(this);
 		var		currTagID = currTag.attr("id");
@@ -1387,6 +1389,83 @@ var	subcontractor_timecard = (function()
 
 		if(dontResetInputFieldsFlag) {}
 		else ResetHourFields(random_id);
+	};
+
+
+	var	CopyTimecardToClipbuffer_ClickHandler = function(e)
+	{
+		var	curr_tag	= $(this);
+		var	table_body	= $("#timecardBody > tbody");
+		var	lines		= [];
+
+		table_body.find("tr").each(function()
+		{
+			var	tr_tag		= $(this);
+			var line		= [tr_tag.find(".customer").val(), tr_tag.find(".project").val(), tr_tag.find(".task").val()];
+
+			tr_tag.find(".day").each(function()
+			{
+				var	day_tag	= $(this).val();
+				line.push(day_tag);
+
+			});
+
+			lines.push(line.join("\t"));
+		});
+
+		navigator.clipboard.writeText(lines.join("\n")).then(function() {
+		    system_calls.PopoverInfo(curr_tag, 'copied to clipbuffer');
+		  }, function(err) {
+		    system_calls.PopoverInfo(curr_tag, 'ERROR' + err);
+		  });
+  	};
+
+	var	PasteTimecardFromClipbuffer_ClickHandler = function(e)
+	{
+		var	curr_tag	= $(this);
+
+		if(curr_tag.hasClass("day") && (curr_tag.prop("tagName").toLowerCase() == "input"))
+		{
+			// --- paste from Excel
+
+			var	reference_day_class	= curr_tag.attr("class");
+
+			var	timecard_line_tag	= curr_tag.closest("tr");
+
+			var paste				= (event.clipboardData || window.clipboardData).getData('text');
+			paste					= paste.replace(/\n$/, "");
+
+			var	lines				= paste.split(/\n/);
+
+			const selection = window.getSelection();
+			if (!selection.rangeCount) {}
+			else
+			{
+				selection.deleteFromDocument();
+			}
+
+
+			lines.forEach(function(line)
+			{
+
+				line		= line.replace(/\r$/, "");
+				var	days	= line.split(/\t/);
+				var	td_tag	= timecard_line_tag.find("[class=\"" + reference_day_class + "\"]").closest("td");
+
+				days.forEach(function(day)
+				{
+					var	input_tag = td_tag.find("input.day");
+					if(input_tag.length && parseFloat(day)) input_tag.val(day);
+					td_tag = td_tag.next();					
+				});
+
+				timecard_line_tag = timecard_line_tag.next();
+			});
+
+			InputHours_InputHandler();
+
+			event.preventDefault();
+		}
 	};
 
 	return {
