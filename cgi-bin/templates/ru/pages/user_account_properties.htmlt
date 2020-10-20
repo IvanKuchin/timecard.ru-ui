@@ -171,7 +171,10 @@
         </div>
       </div>
       <div>
-        <<vars:git_commit_id>>
+        Backend: <<vars:git_commit_id>>
+      </div>
+      <div>
+        GUI: <<template:templates/git_commit_id>>
       </div>
     </div>
 
