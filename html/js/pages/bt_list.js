@@ -28,6 +28,8 @@ var	bt_list = (function()
 			"/cgi-bin/" + user_type_global + ".cgi",
 			{
 				"action":"AJAX_getBTList",
+				// "page":"0",
+				// "filter_sow_status":"signed",
 			})
 			.done(function(data)
 			{

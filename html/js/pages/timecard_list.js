@@ -6,13 +6,16 @@ var	timecard_list = (function()
 	'use strict';
 
 	var	user_type_global = "";
-	var	data_global;
+	var	global_holiday_calendar;
+
+	var	globalPageCounter = 0; // --- used for transfer arg to function HandlerScrollToShow
+	var scrollLock = false; // --- controls consecutive pagination
 
 	var	Init = function(user_type)
 	{
 		user_type_global = user_type;
 
-		UpdateTimecardList();
+		UpdateTimecardList("clear");
 
 		$("#payed").on("click", Payed_ClickHandler);
 
@@ -21,26 +24,40 @@ var	timecard_list = (function()
 		// --- filters
 		$(".__list_filters").on("click", list_filters.ClickHandler);
 		$("[data-toggle=\"tooltip\"]").tooltip({ animation: "animated bounceIn"});
+
+		// --- scroll handler
+		$(window).on("scroll resize lookup", HandlerScrollToShow);
 	};
 
-	var	UpdateTimecardList = function(current_period_start)
+	var	UpdateTimecardList = function(clear_or_append)
 	{
 		var		currTag = $("#timecard_list_title");
 
+		scrollLock = true;
 
 		$.getJSON(
 			"/cgi-bin/" + user_type_global + ".cgi",
 			{
 				"action":"AJAX_getTimecardList",
+				"page": globalPageCounter,
 			})
 			.done(function(data)
 			{
 				if(data.result == "success")
 				{
-					data_global = data;
+					if(global_holiday_calendar) 
+					{
+						// --- no need to update holiday calendar if it is already set
+					}
+					else
+					{
+						global_holiday_calendar = data.holiday_calendar;
+					}
 
-					RenderTimecardList();
+					RenderTimecardList(data.sow, data.timecards, clear_or_append);
 					list_filters.ApplyFilterFromURL();
+
+					scrollLock = false;
 				}
 				else
 				{
@@ -56,10 +73,26 @@ var	timecard_list = (function()
 			});
 	};
 
+	var HandlerScrollToShow = function() 
+	{
+		var		windowPosition	= $(window).scrollTop();
+		var		clientHeight	= document.documentElement.clientHeight;
+		var		divPosition		= $("#scrollerToShow").position().top;
+
+		if(((windowPosition + clientHeight) > divPosition) && (!scrollLock))
+		{
+			// console.debug("HandlerScrollToShow: globalPageCounter = " + globalPageCounter);
+			// --- AJAX get news_feed from the server 
+			globalPageCounter += 1;
+
+			UpdateTimecardList("append");
+		}
+	};
+
 	// --- wrapper to add holiday_calendar 
 	var	__TimecardCollapsible_ClickHandler = function(e)
 	{
-		return common_timecard.TimecardCollapsible_ClickHandler(e, data_global.holiday_calendar);
+		return common_timecard.TimecardCollapsible_ClickHandler(e, global_holiday_calendar);
 	};
 
 	var	GetTimecardListDOM = function(timecard_list, sow)
@@ -154,7 +187,7 @@ var	timecard_list = (function()
 						var		payed_checkbox			= $();
 						var		original_docs_delivery_icon = $();
 
-						var		hours_statistics_obj	= system_calls.GetHoursStatistics(item, data_global.holiday_calendar);
+						var		hours_statistics_obj	= system_calls.GetHoursStatistics(item, global_holiday_calendar);
 						var		total_work_hours		= hours_statistics_obj.total_work_hours;
 						var		actual_work_hours		= hours_statistics_obj.actual_work_hours;
 						var		actual_work_days		= hours_statistics_obj.actual_work_days;
@@ -297,7 +330,7 @@ var	timecard_list = (function()
 						}
 
 						collapsible_nested_col_info
-							.append(system_calls.GetHoursStatistics_DOM(item, undefined, data_global.holiday_calendar))
+							.append(system_calls.GetHoursStatistics_DOM(item, undefined, global_holiday_calendar))
 							.append(system_calls.GetApprovedDate_DOM(item))
 							.append(system_calls.GetPayedDate_DOM(item));
 
@@ -336,13 +369,13 @@ var	timecard_list = (function()
 		return result;
 	};
 
-	var	RenderTimecardList = function()
+	var	RenderTimecardList = function(sow_list, timecard_list, clear_or_append)
 	{
-		if((typeof(data_global) != "undefined") && (typeof(data_global.sow) != "undefined") && (typeof(data_global.timecards) != "undefined"))
+		if(sow_list.length && timecard_list.length)
 		{
 			var		container = $();
 
-			data_global.sow.sort(function(a, b)
+			sow_list.sort(function(a, b)
 			{
 				var		arrA = a.end_date.split(/\-/);
 				var		arrB = b.end_date.split(/\-/);
@@ -359,18 +392,23 @@ var	timecard_list = (function()
 				return result;
 			});
 
-			for(var i = 0; i < data_global.sow.length; ++i)
+			for(var i = 0; i < sow_list.length; ++i)
 			{
 				container = container	
-								.add(common_timecard.GetSoWTitleRow(data_global.sow[i], false, true))
-								.add(GetTimecardListDOM(data_global.timecards, data_global.sow[i]));
+								.add(common_timecard.GetSoWTitleRow(sow_list[i], false, true))
+								.add(GetTimecardListDOM(timecard_list, sow_list[i]));
 			}
 
-			$("#timecard_list").empty().append(container);
+			if(clear_or_append == "clear")
+				$("#timecard_list").empty();
+
+			$("#timecard_list").append(container);
 		}
 		else
 		{
-			console.error("ERROR: sow list or timecard list is empty");
+			--globalPageCounter;
+
+			console.debug("reduce page# due to requests return empty result");
 		}
 	};
 
@@ -402,7 +440,7 @@ var	timecard_list = (function()
 		$.getJSON(
 			"/cgi-bin/" + user_type_global + ".cgi",
 			{
-				"action":"AJAX_payForTheList",
+				"action": "AJAX_payForTheList",
 				"entity": "timecard",
 				"list": payment_list,
 			})
@@ -410,9 +448,7 @@ var	timecard_list = (function()
 			{
 				if(data.result == "success")
 				{
-					data_global = data;
-
-					UpdateTimecardList();
+					UpdateTimecardList("clear");
 				}
 				else
 				{
