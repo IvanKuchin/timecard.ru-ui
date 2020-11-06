@@ -61,12 +61,14 @@
     </div>
 
     <div class="container">
-      <div id="timecard_list" class="form-group"></div>
+      <div id="timecard_list" class="form-group"> </div>
     </div>
 
-    <div id="scrollerToShow"></div>
-
-    <div>&nbsp;</div>
+    <!-- height_22px required to avoid permanent scroll effect, due to show/hide loading ring -->
+    <div id="scrollerToShow" class="text-center height_22px">
+      <i class="fa fa-refresh fa-spin fa-lg fa-fw"></i>
+      <span class="sr-only">Loading...</span>
+    </div>
 
   <<template:templates/ru/pages/recall_timecard_modal.htmlt>>
   <<template:templates/ru/pages/original_documents_delivery_modal.htmlt>>
