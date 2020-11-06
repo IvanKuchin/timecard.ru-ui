@@ -10,9 +10,6 @@
     <script src="/js/pages/subcontractor_bt.js"></script>
     <link href="/css/pages/subcontractor_bt.css" rel="stylesheet">
 
-    <script src="/js/pages/tooltip.js"></script>
-    <link href="/css/pages/animate.min.css" rel="stylesheet">
-
     <link href="/css/pages/switcher.css" rel="stylesheet">
 
     <script>

@@ -15,9 +15,6 @@
     <script src="/js/pages/initial_wizard.js"></script>
     <link href="/css/pages/initial_wizard.css" rel="stylesheet">
 
-    <script src="/js/pages/tooltip.js"></script>
-    <link href="/css/pages/animate.min.css" rel="stylesheet">
-
     <link href="/css/pages/switcher.css" rel="stylesheet">
 
     <script>

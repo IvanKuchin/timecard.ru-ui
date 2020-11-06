@@ -19,9 +19,6 @@
 
     <link href="/css/pages/switcher.css" rel="stylesheet">
 
-    <script src="/js/pages/tooltip.js"></script>
-    <link href="/css/pages/animate.min.css" rel="stylesheet">
-
     <script>
       $(document).ready(function() {
         agency_cost_center_list.Init();
