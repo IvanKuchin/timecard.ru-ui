@@ -186,7 +186,7 @@ system_calls = (function()
 		return result;
 	};
 
-	var CutLongMesssages = function(message, len)
+	var CutLongMessages = function(message, len)
 	{
 	 	if(message.length > len)
 		{
@@ -4684,7 +4684,7 @@ system_calls = (function()
 		isUserSignedin: isUserSignedin,
 		GetUserRequestNotifications: GetUserRequestNotifications,
 		isTouchBasedUA: isTouchBasedUA,
-		CutLongMesssages: CutLongMesssages,
+		CutLongMessages: CutLongMessages,
 		RemoveSpaces: RemoveSpaces,
 		isOrientationLandscape: isOrientationLandscape,
 		isOrientationPortrait: isOrientationPortrait,
@@ -5406,7 +5406,7 @@ navMenu_chat = (function()
 
 	};
 
-	var CutLongMultilineMesssages = function(message)
+	var CutLongMultilineMessages = function(message)
 	{
 		var		lineList;
 		var		cutMessage = [];
@@ -5515,7 +5515,7 @@ navMenu_chat = (function()
 
 					var hrefTemp = $("<a/>").attr("href", "/userprofile/" + userInfo.id)
 							.addClass("UnreadChatListHrefLineHeigh")
-							.append(system_calls.CutLongMesssages(userInfo.name + " " + userInfo.nameLast, 19));
+							.append(system_calls.CutLongMessages(userInfo.name + " " + userInfo.nameLast, 19));
 					userSpan.append(canvasAvatar)
 							.append(hrefTemp)
 							.append(buttonSpan);
@@ -5524,7 +5524,7 @@ navMenu_chat = (function()
 							.append(" ")
 							.append(buttonClose);
 
-					messageBody.append((item.messageType == "text" ? CutLongMultilineMesssages(item.message) : "<i>Вам прислали картинку</i>"));
+					messageBody.append((item.messageType == "text" ? CutLongMultilineMessages(item.message) : "<i>Вам прислали картинку</i>"));
 
 					DrawUserAvatar(canvasAvatar[0].getContext("2d"), userInfo.avatar, userInfo.name, userInfo.nameLast);
 
@@ -5839,7 +5839,7 @@ navMenu_userNotification = (function()
 									avatarLink = "/userprofile/" + item.notificationFriendUserID + "?rand=" + system_calls.GetUUID();
 									hrefTemp = $("<a>").attr("href", avatarLink)
 											.addClass("UnreadChatListHrefLineHeigh")
-											.append(system_calls.CutLongMesssages(item.notificationFriendUserName + " " + item.notificationFriendUserNameLast));
+											.append(system_calls.CutLongMessages(item.notificationFriendUserName + " " + item.notificationFriendUserNameLast));
 
 									if(userCache.isUserCached(item.notificationFriendUserID))
 									{
@@ -5867,7 +5867,7 @@ navMenu_userNotification = (function()
 									avatarLink = "/companyprofile/" + item.notificationFromCompany[0].id + "?rand=" + system_calls.GetUUID();
 									hrefTemp = $("<a>").attr("href", avatarLink)
 											.addClass("UnreadChatListHrefLineHeigh")
-											.append(system_calls.CutLongMesssages(item.notificationFromCompany[0].name));
+											.append(system_calls.CutLongMessages(item.notificationFromCompany[0].name));
 
 									if(item.notificationFromCompany[0].logo_folder.length && item.notificationFromCompany[0].logo_filename.length)
 									{
