@@ -7,7 +7,7 @@
   cursor: pointer;
 }
 
-.current_company {
+.current_group {
 	color: #337ab7;
 }
 
@@ -17,13 +17,6 @@
   margin: .8em 0 .2em;
   padding: .2em .4em;
 }
-
-.occupationStart {
-}
-
-.occupationFinish {
-}
-
 
 /*--- Image uploader*/
 .fileinput-button {
@@ -49,8 +42,8 @@
 }
 
 /*--- Canvar classes*/
-.canvas-big-avatar {
-  border-radius: 20%;
+.canvas-big-logo {
+  /*border-radius: 20%;*/
   border: none;
 }
 
@@ -191,88 +184,6 @@
   transition-timing-function: ease-out;
 }
 
-.removeCompanyExperience {
-}
-
-.removeCompanyExperience:hover {
-    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
-    cursor: hand;
-    cursor: pointer;
-}
-
-.removeCertificationEntry:hover {
-    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
-    cursor: hand;
-    cursor: pointer;
-}
-
-.removeCourseEntry:hover {
-    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
-    cursor: hand;
-    cursor: pointer;
-}
-
-.removeSchoolEntry:hover {
-    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
-    cursor: hand;
-    cursor: pointer;
-}
-
-.removeUniversityEntry:hover {
-    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
-    cursor: hand;
-    cursor: pointer;
-}
-
-.removeLanguageEntry:hover {
-    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
-    cursor: hand;
-    cursor: pointer;
-}
-
-.removeSkillEntry:hover {
-    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
-    cursor: hand;
-    cursor: pointer;
-}
-
-.removeBookEntry:hover {
-    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
-    cursor: hand;
-    cursor: pointer;
-}
-
-.removeGiftEntry:hover {
-    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
-    cursor: hand;
-    cursor: pointer;
-}
-
-.removeAppliedVacancyEntry:hover {
-    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
-    cursor: hand;
-    cursor: pointer;
-}
-
-.removeRecommendationEntry:hover {
-    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
-    cursor: hand;
-    cursor: pointer;
-}
-
-
-.user-account-properties-visible
-{
-  display: inline-block;
-}
-
-.user-account-properties-hidden
-{
-  display: none;
-}
-
-.user-account-wid60px
-{
-  width: 60px;
+.removeGroupExperience {
 }
 
