@@ -12,7 +12,7 @@ var	agency_profile_edit = (function()
 	var	new_holiday_calendar_template_global = [];
 	var	new_airfare_limitation_by_direction_global;
 	var	bt_expense_templates_global = [];
-	var	airfare_limitaions_by_direction_global = [];
+	var	airfare_limitations_by_direction_global = [];
 	var	bt_expense_lines_global = [];
 	var	company_edit_obj_global;
 	var	template_agreement_files_obj_global;
@@ -97,7 +97,7 @@ var	agency_profile_edit = (function()
 
 						company_edit_obj_global.SetCountriesObj(data.countries);
 						bt_expense_templates_global					= CraftBTExpenseObjects(data.agencies[0]);
-						airfare_limitaions_by_direction_global		= CraftAirfareLimitationsByDirectionObjects(data.agencies[0]);
+						airfare_limitations_by_direction_global		= CraftAirfareLimitationsByDirectionObjects(data.agencies[0]);
 						cost_centers_global							= agency_cost_center_arr.CraftCostCenterObjects(data.agencies[0]);
 						bt_allowances_global						= agency_bt_allowance_arr.CraftBTAllowanceObjects(data.agencies[0]);
 						holiday_calendar_global						= agency_holiday_calendar_arr.CraftHolidayCalendarObjects(data.agencies[0], GetAgencyInfoFromServer);
@@ -226,7 +226,7 @@ var	agency_profile_edit = (function()
 
 		result = result.add(title_row);
 
-		airfare_limitaions_by_direction_global.forEach(function(item)
+		airfare_limitations_by_direction_global.forEach(function(item)
 		{
 			result = result.add(item.GetDOM());
 		});
@@ -1207,7 +1207,7 @@ var	agency_profile_edit = (function()
 		$.getJSON(
 			'/cgi-bin/agency.cgi',
 			{
-				action: "AJAX_getUnemployeedAgentAutocompleteList",
+				action: "AJAX_getUnemployedAgentAutocompleteList",
 				name: curr_val,
 			})
 			.done(function(data)

@@ -544,11 +544,11 @@ var	initial_wizard = (function()
 				if(json_param.agency_to_notify.length)
 				{
 					if(submit_obj_global.type == "subc")
-						json_param.action = "AJAX_notifyAgencyAboutSubcRegitration";
+						json_param.action = "AJAX_notifyAgencyAboutSubcRegistration";
 					else if(submit_obj_global.type == "approver")
-						json_param.action = "AJAX_notifyAgencyAboutApproverRegitration";
+						json_param.action = "AJAX_notifyAgencyAboutApproverRegistration";
 					else if(submit_obj_global.type == "agency_employee")
-						json_param.action = "AJAX_notifyAgencyAboutEmployeeRegitration";
+						json_param.action = "AJAX_notifyAgencyAboutEmployeeRegistration";
 					else
 						console.error("unknown notification type: " + submit_obj_global.type);
 				}

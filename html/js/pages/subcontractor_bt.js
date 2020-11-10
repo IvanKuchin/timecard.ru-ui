@@ -428,7 +428,7 @@ var	subcontractor_bt = (function()
 		}
 		else
 		{
-			console.error("unknown action. \"action_global\" have to be explicitely stated");
+			console.error("unknown action. \"action_global\" have to be explicitly stated");
 			system_calls.PopoverError("bt", "неизвестно совершаемое действие");
 		}
 	};
