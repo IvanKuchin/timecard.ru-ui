@@ -1875,7 +1875,7 @@ var	subcontractor_bt = (function()
 			}
 			else
 			{
-				console.error("wrond date format");
+				console.error("wrong date format");
 				system_calls.PopoverError(currTag, "некорректный формат даты. Необходимо: ДД/ММ/ГГГГ");
 			}
 		}

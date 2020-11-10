@@ -298,7 +298,7 @@ var	agency_invoice_cost_center_service_list = function()
 		}
 	};
 
-	var	UpdateAndHighlighServiceInvoice = function(invoice_id)
+	var	UpdateAndHighlightServiceInvoice = function(invoice_id)
 	{
 		GetServiceInvoiceListFromServer(cost_center_id_global, function(cost_center_id, service_invoices) { 
 																	RenderServiceCostCenterPane(cost_center_id, service_invoices); 
@@ -354,7 +354,7 @@ var	agency_invoice_cost_center_service_list = function()
 
 	return {
 		Init: Init,
-		UpdateAndHighlighServiceInvoice: UpdateAndHighlighServiceInvoice,
+		UpdateAndHighlightServiceInvoice: UpdateAndHighlightServiceInvoice,
 	};
 
 };

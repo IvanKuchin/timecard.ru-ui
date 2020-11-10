@@ -879,7 +879,7 @@ var GetDataFromProvidedURL = function()
 							}
 							else if((typeof(data.mediaType) != "undefined") && (data.mediaType == "youtube_video"))
 							{
-								// --- <iframe width="560" height="315" src="https://www.youtube.com/embed/WNkCqa1LfuI" frameborder="0" allowfullscreen></iframe>
+								// --- <iframe width="560" height="315" src="https://www.youtube.com/embed/_____" frameborder="0" allowfullscreen></iframe>
 								mediaPreview = $("<iframe>").addClass("max_100percents_100px")
 															.attr("src", data.imageURL)
 															.attr("frameborder", "0")

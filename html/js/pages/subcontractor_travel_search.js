@@ -1415,7 +1415,7 @@ subcontractor_travel_search = (function()
 		$("#sowSelector").prop("disabled", "disabled"); // --- this helps to avoid search with 1 SoW and purchase with another.
 
 		setTimeout(function() { ShowLoadingSplash(); }, 250); // --- hold back splash screen in case current ajax-request should be canceled
-															  // --- 1) next line will cancel current reques
+															  // --- 1) next line will cancel current request
 															  // --- 2) always-handler - will hide current splash screen
 															  // --- 3) new splash should be run after (2)
 

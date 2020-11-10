@@ -266,7 +266,7 @@ var	agency_invoice_cost_center_bt_list = function()
 		}
 	};
 
-	var	UpdateAndHighlighBTInvoice = function(invoice_id)
+	var	UpdateAndHighlightBTInvoice = function(invoice_id)
 	{
 		GetBTInvoiceListFromServer(cost_center_id_global, function(cost_center_id, bt_invoices) { 
 																	RenderBTCostCenterPane(cost_center_id, bt_invoices); 
@@ -322,7 +322,7 @@ var	agency_invoice_cost_center_bt_list = function()
 
 	return {
 		Init: Init,
-		UpdateAndHighlighBTInvoice: UpdateAndHighlighBTInvoice,
+		UpdateAndHighlightBTInvoice: UpdateAndHighlightBTInvoice,
 	};
 
 };

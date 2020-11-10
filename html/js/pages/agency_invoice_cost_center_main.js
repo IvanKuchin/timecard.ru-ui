@@ -73,7 +73,7 @@ var	agency_invoice_cost_center_main = (function()
 	{
 		if(cost_center_service_list_obj_global)
 		{
-			cost_center_service_list_obj_global.UpdateAndHighlighServiceInvoice(invoice_id);
+			cost_center_service_list_obj_global.UpdateAndHighlightServiceInvoice(invoice_id);
 		}
 	}
 
@@ -81,7 +81,7 @@ var	agency_invoice_cost_center_main = (function()
 	{
 		if(cost_center_bt_list_obj_global)
 		{
-			cost_center_bt_list_obj_global.UpdateAndHighlighBTInvoice(invoice_id);
+			cost_center_bt_list_obj_global.UpdateAndHighlightBTInvoice(invoice_id);
 		}
 	}
 

@@ -6,7 +6,7 @@ var	user_notifications = (function()
 	"use strict";
 
 	var usersNotificationArray = [];
-	var scrollLock = false; // --- controlls consecutive pagination
+	var scrollLock = false; // --- controls consecutive pagination
 	var	globalPageCounter;
 
 	var	Init = function()
