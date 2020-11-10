@@ -60,13 +60,13 @@ var	agency_profile_edit = (function()
 
 		// --- if autocomplete functionality is not initialized from the beginning
 		// --- it will not pop-up after configured threshold, it will wait one symbol more
-		// --- to overcome this fake autocomplete initializtion applied
+		// --- to overcome this fake autocomplete initialization applied
 		system_calls.CreateAutocompleteWithSelectCallback($(".new_employee_name"), [{0:"0"}], NewEmployeeName_Autocomplete_SelectHandler);
 		$(".new_employee_name").on("input", NewEmployeeName_Autocomplete_InputHandler);
 
 		// --- if autocomplete functionality is not initialized from the beginning
 		// --- it will not pop-up after configured threshold, it will wait one symbol more
-		// --- to overcome this fake autocomplete initializtion applied
+		// --- to overcome this fake autocomplete initialization applied
 		system_calls.CreateAutocompleteWithSelectCallback($(".new_employee_title"), [{0:"0"}], NewEmployeeTitle_Autocomplete_SelectHandler);
 		$(".new_employee_title").on("input", NewEmployeeTitle_Autocomplete_InputHandler);
 	};
@@ -962,19 +962,19 @@ var	agency_profile_edit = (function()
 
 		// --- if autocomplete functionality is not initialized from the beginning
 		// --- it will not pop-up after configured threshold, it will wait one symbol more
-		// --- to overcome this fake autocomplete initializtion applied
+		// --- to overcome this fake autocomplete initialization applied
 		system_calls.CreateAutocompleteWithSelectCallback(customer_input, [{0:"0"}], timecard_autocomplete.Autocomplete_Customer_SelectHandler);
 		customer_input.on("input", timecard_autocomplete.Autocomplete_Customer_InputHandler);
 
 		// --- if autocomplete functionality is not initialized from the beginning
 		// --- it will not pop-up after configured threshold, it will wait one symbol more
-		// --- to overcome this fake autocomplete initializtion applied
+		// --- to overcome this fake autocomplete initialization applied
 		system_calls.CreateAutocompleteWithSelectCallback(project_input, [{0:"0"}], timecard_autocomplete.Autocomplete_Project_SelectHandler);
 		project_input.on("input", timecard_autocomplete.Autocomplete_Project_InputHandler);
 
 		// --- if autocomplete functionality is not initialized from the beginning
 		// --- it will not pop-up after configured threshold, it will wait one symbol more
-		// --- to overcome this fake autocomplete initializtion applied
+		// --- to overcome this fake autocomplete initialization applied
 		system_calls.CreateAutocompleteWithSelectCallback(task_input, [{0:"0"}], timecard_autocomplete.Autocomplete_Task_SelectHandler);
 		task_input.on("input", timecard_autocomplete.Autocomplete_Task_InputHandler);
 	};

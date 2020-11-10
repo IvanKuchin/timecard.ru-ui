@@ -600,7 +600,7 @@ var	subcontractor_bt = (function()
 									.addClass("form-control form-group expense_item_date expense_item_date_" + expense_item_random)
 									.attr("data-random", expense_item_random)
 									.attr("placeholder", "Дата")
-									.on("forcus", function()
+									.on("focus", function()
 										{
 											$(this)
 												.datepicker({
@@ -718,7 +718,7 @@ var	subcontractor_bt = (function()
 									.append("OK")
 									.on("click", ExpenseElementSubmit_ClickHandler);
 		control_button_reset = $("<button>")
-									.attr("id", "expense_item_contol_reset_" + expense_item_random)
+									.attr("id", "expense_item_control_reset_" + expense_item_random)
 									.addClass("btn btn-default form-control form-group")
 									.attr("data-random", expense_item_random)
 									.append("Очистить")
@@ -1078,7 +1078,7 @@ var	subcontractor_bt = (function()
 					}
 					else if(!CheckExpenseItemDocsValidity(currTag, expense_item_random))
 					{
-						// --- ErrorPopover alarmed from confition function
+						// --- ErrorPopover alarmed from condition function
 					}
 					else
 					{
@@ -1969,7 +1969,7 @@ var	subcontractor_bt = (function()
 		{
 			if(currTag.attr("src").search("blob:") === 0)
 			{
-				// --- exif-js check if ".exifdata" exists and doesn't referesh it for new picture
+				// --- exif-js check if ".exifdata" exists and doesn't refresh it for new picture
 				// --- you should remove it manually
 				delete currTag[0].exifdata;
 				system_calls.Exif_RemoveClasses(currTag);
@@ -2125,7 +2125,7 @@ var	subcontractor_bt = (function()
 		// $("input.expense_item_date").datepicker( "option", "minDate", $.datepicker.parseDate( DATE_FORMAT_GLOBAL, $(this).val() ));
 
 		// --- do smth on start date change
-		UpdateAllwoanceTags();
+		UpdateAllowanceTags();
 	};
 
 	var	EndDate_ChangeHandler = function(e)
@@ -2134,7 +2134,7 @@ var	subcontractor_bt = (function()
 		// $("input.expense_item_date").datepicker( "option", "maxDate", $.datepicker.parseDate( DATE_FORMAT_GLOBAL, $(this).val() ));
 
 		// --- do smth on end date change
-		UpdateAllwoanceTags();
+		UpdateAllowanceTags();
 	};
 
 	var	GetBTDuration = function()
@@ -2156,7 +2156,7 @@ var	subcontractor_bt = (function()
 		return	duration;
 	};
 
-	var	UpdateAllwoanceTag = function(curr_tag)
+	var	UpdateAllowanceTag = function(curr_tag)
 	{
 		var	amount			= parseFloat(curr_tag.find("option:selected").attr("data-amount"));
 		var	cost_tag		= curr_tag.closest(".expense_item").find(".expense_item_price_domestic");
@@ -2165,9 +2165,9 @@ var	subcontractor_bt = (function()
 
 	};
 
-	var	UpdateAllwoanceTags = function()
+	var	UpdateAllowanceTags = function()
 	{
-		$("[data-dom_type=\"allowance\"]").each(function() { return UpdateAllwoanceTag($(this)); });
+		$("[data-dom_type=\"allowance\"]").each(function() { return UpdateAllowanceTag($(this)); });
 	};
 
 	var	DisableExpenseAmountFields = function(random)
@@ -2177,7 +2177,7 @@ var	subcontractor_bt = (function()
 
 	var	AllowanceCountry_ChangeHandler = function(e)
 	{
-		return UpdateAllwoanceTag($(this));
+		return UpdateAllowanceTag($(this));
 	};
 
 	var	BTDestination_SelectHandler = function(event, ui)

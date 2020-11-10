@@ -203,7 +203,7 @@ var	geo_zip_edit = function(suffix, spelling_title, action, callback_func)
 					else
 					{
 						// --- Some errors look weird in following cases
-						// --- 1) if browser autocomplete your adress, you'll get ERROR zip already exists
+						// --- 1) if browser autocomplete your address, you'll get ERROR zip already exists
 						// --- 2) if you create new zip , you'll get ERROR zip doesn't exists
 						// system_calls.PopoverError($("#geo_zip_" + suffix_global), "Ошибка: " + data.description);
 					}

@@ -150,7 +150,7 @@ var	bt_list = (function()
 																.append("<i class=\"fa fa-archive\" aria-hidden=\"true\"></i>")
 																.on("click", DownloadAllAttachments);
 						var		button_goto_timecard = $("<a>")
-																.addClass("btn btn-primary form-control __controll_button_" + item.id)
+																.addClass("btn btn-primary form-control __control_button_" + item.id)
 																.attr("id", "edit_bt_button_" + item.id)
 																.attr("data-loading-text", "<span class='fa fa-refresh fa-spin fa-fw animateClass'>")
 																.append("<i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>")

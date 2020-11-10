@@ -152,7 +152,7 @@ var	company_info_edit = function(suffix_init)
 		{
 			if(currTag.attr("src").search("blob:") === 0)
 			{
-				// --- exif-js check if ".exifdata" exists and doesn't referesh it for new picture
+				// --- exif-js check if ".exifdata" exists and doesn't refresh it for new picture
 				// --- you should remove it manually
 				delete currTag[0].exifdata;
 				system_calls.Exif_RemoveClasses(currTag);

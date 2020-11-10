@@ -13,7 +13,7 @@ var	agency_sow_list = (function()
 
 		// --- if autocomplete functionality is not initialized from the beginning
 		// --- it will not pop-up after configured threshold, it will wait one symbol more
-		// --- to overcome this fake autocomplete initializtion applied
+		// --- to overcome this fake autocomplete initialization applied
 		system_calls.CreateAutocompleteWithSelectCallback($("#subcontractor_companies_search"), [{0:"0"}], Subcontractor_Companies_SelectHandler);
 		$("#subcontractor_companies_search").on("input", Subcontractor_Companies_InputHandler);
 
@@ -86,7 +86,7 @@ var	agency_sow_list = (function()
 
 			sow.tasks.forEach(function(task)
 			{
-				var		task_assignment = system_calls.GetTaskAssignmentObjByTaksID(sow.id, task.id, data_global.task_assignments);
+				var		task_assignment = system_calls.GetTaskAssignmentObjByTaskID(sow.id, task.id, data_global.task_assignments);
 
 				if((typeof(task_assignment) != "undefined") && (typeof(task_assignment.period_start) != "undefined"))
 				{
@@ -117,7 +117,7 @@ var	agency_sow_list = (function()
 				}
 				else
 				{
-					console.error("failed result returned from GetTaskAssignmentObjByTaksID call");
+					console.error("failed result returned from GetTaskAssignmentObjByTaskID call");
 				}
 			});
 		}

@@ -215,7 +215,7 @@ var	agency_sow_edit = (function()
 
 			sow.tasks.forEach(function(task)
 			{
-				var		task_assignment = system_calls.GetTaskAssignmentObjByTaksID(sow.id, task.id, data_global.task_assignments);
+				var		task_assignment = system_calls.GetTaskAssignmentObjByTaskID(sow.id, task.id, data_global.task_assignments);
 
 				if((typeof(task_assignment) != "undefined") && (typeof(task_assignment.period_start) != "undefined"))
 				{
@@ -326,7 +326,7 @@ var	agency_sow_edit = (function()
 				}
 				else
 				{
-					console.error("failed result returned from GetTaskAssignmentObjByTaksID call");
+					console.error("failed result returned from GetTaskAssignmentObjByTaskID call");
 				}
 			});
 		}
@@ -355,7 +355,7 @@ var	agency_sow_edit = (function()
 			if(psow_map[curr_id]) {}
 			else 
 			{
-				// --- if psow_obj doesn't exists in DB, crteate empty object for GUI-rendering purposes only.
+				// --- if psow_obj doesn't exists in DB, create empty object for GUI-rendering purposes only.
 				psow = new agency_psow_obj();
 				psow.Init();
 				psow.SetGlobalData();
@@ -1488,7 +1488,7 @@ var	agency_sow_edit = (function()
 		return result;
 	};
 
-	var	RenderCustomFiedsCopy = function()
+	var	RenderCustomFieldsCopy = function()
 	{
 		$("#PullOutCustomFieldsModal .modal-body .info").empty().append(CustomFieldsCopy_GetDOM());
 	};
@@ -1497,12 +1497,12 @@ var	agency_sow_edit = (function()
 	{
 		var	curr_tag = $(this);
 
-		RenderCustomFiedsCopy();
+		RenderCustomFieldsCopy();
 	};
 
 	var CustomFieldsValue_ChangeHandler = function()
 	{
-		RenderCustomFiedsCopy();
+		RenderCustomFieldsCopy();
 	};
 
 	var	ResetNewTimecardAssignment = function()

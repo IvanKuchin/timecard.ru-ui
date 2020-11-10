@@ -124,12 +124,12 @@ var	Init = function()
 	});
 
 	$("#DeleteAvatarDialogBoxBS_Submit").on("click", function() {
-		console.debug("removed avatar id " + $("#DeteledAvatarID_InBSForm").val());
+		console.debug("removed avatar id " + $("#DeletedAvatarID_InBSForm").val());
 
 		$("#DeleteAvatarDialogBoxBS").modal("hide");
 
-		// --- Real avatar deletion after closing dialog to improve User Expirience
-		DeletePreviewAvatar($("#DeteledAvatarID_InBSForm").val());
+		// --- Real avatar deletion after closing dialog to improve User Experience
+		DeletePreviewAvatar($("#DeletedAvatarID_InBSForm").val());
 	});
 
 	// --- Image uploader
@@ -624,7 +624,7 @@ var	DeletePreviewAvatar = function (id)
 						// $("#DeleteAvatarDialogBox").dialog("option", "id", id);
 						// $("#DeleteAvatarDialogBox").dialog("open");
 
-						$("#DeteledAvatarID_InBSForm").val(id);
+						$("#DeletedAvatarID_InBSForm").val(id);
 						$("#DeleteAvatarDialogBoxBS").modal("show");
 
 
@@ -718,7 +718,7 @@ var	DeletePreviewAvatar = function (id)
 			});
 
 		// --- update GUI has to be inside getJSON->done->if(success).
-		// --- To improve User Expirience (react on user actions immediately)
+		// --- To improve User Experience (react on user actions immediately)
 		// ---	 I'm updating GUI immediately after click, not waiting server response
 		if((affectedAction == "AJAX_deleteAirlineBonusNumber") && affectedID)		$("#avia_bonus_list .__program_id_" + affectedID).hide(250);
 		if((affectedAction == "AJAX_deleteHotelchainBonusNumber") && affectedID)	$("#hotelchain_bonus_list .__program_id_" + affectedID).hide(250);

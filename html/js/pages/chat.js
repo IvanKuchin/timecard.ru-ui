@@ -53,7 +53,7 @@ chat = (function()
 {unicode1: 9786, unicode2:65039,  shortcut: "^_^",  shownOnMenu:"yes", image:"/images/pages/common/smiley_grinningface.png"}
 						];
 
-	// --- scrollLock used to avoid requesting to much data from server during single crolling
+	// --- scrollLock used to avoid requesting to much data from server during single scrolling
 	var		scrollLock = false; 
 
 	var escapable = /[\x00-\x1f\ud800-\udfff\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufff0-\uffff]/g;
@@ -474,7 +474,7 @@ chat = (function()
 				}
 				else
 				{
-					console.debug("WebSocket.onmessage: ERROR: RequestType and ResponsType are missed: " + obj.RequestType);
+					console.debug("WebSocket.onmessage: ERROR: RequestType and ResponseType are missed: " + obj.RequestType);
 				}
 			};
 
@@ -741,7 +741,7 @@ chat = (function()
 														.addClass('canvas-big-avatar')
 														.addClass('contact_list_avatar')
 														.appendTo(divAvatarFromFriend);
-		var		messageText = ReplaceHTMLSmileySymobolsToImg(ReplaceHTMLSpecialSymbolsToText(messageObj.message));
+		var		messageText = ReplaceHTMLSmileySymbolsToImg(ReplaceHTMLSpecialSymbolsToText(messageObj.message));
 		var		messageImg = $("<img>").addClass("message_pane_image_resize");
 		var		messageType = messageObj.messageType;
 
@@ -991,7 +991,7 @@ chat = (function()
 		return resultText;
 	};
 
-	var	ReplaceHTMLSmileySymobolsToImg = function(srcText)
+	var	ReplaceHTMLSmileySymbolsToImg = function(srcText)
 	{
 		var		resultText = srcText;
 

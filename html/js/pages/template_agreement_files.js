@@ -6,7 +6,7 @@ var	template_agreement_files = function(suffix_init)
 	var	data_global;
 	var	type_global = "company";
 	var	id_global = "";
-	var	suffix_gloabl = "suffix";
+	var	suffix_global = "suffix";
 	var	hosting_tag_global;
 	var	update_tag_parent_callback_global;
 

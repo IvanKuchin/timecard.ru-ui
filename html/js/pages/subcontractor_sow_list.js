@@ -147,7 +147,7 @@ var	subcontractor_sow_list = (function()
 			};
 
 			var		start_date, end_date;
-			var		task_assignment = system_calls.GetTaskAssignmentObjByTaksID(sow.id, sow.tasks[i].id, data_global.task_assignments);
+			var		task_assignment = system_calls.GetTaskAssignmentObjByTaskID(sow.id, sow.tasks[i].id, data_global.task_assignments);
 
 			temp = [];
 

@@ -93,7 +93,7 @@ var	initial_wizard = (function()
 		}
 		else
 		{
-			HighlighStepIndicator(tab_id);
+			HighlightStepIndicator(tab_id);
 			$(".__control_block").show();
 		}
 
@@ -244,7 +244,7 @@ var	initial_wizard = (function()
 		}
 		else
 		{
-			// --- if algorithm not difined, nothing to check
+			// --- if algorithm not defined, nothing to check
 			result = true;
 		}
 
@@ -281,7 +281,7 @@ var	initial_wizard = (function()
 		$("#step_indicators .step[data-tab_id=\"" + tab_id + "\"]").addClass("complete");
 	};
 
-	var	HighlighStepIndicator = function(tab_id)
+	var	HighlightStepIndicator = function(tab_id)
 	{
 		$("#step_indicators .step[data-tab_id=\"" + tab_id + "\"]").addClass("active");
 	};
@@ -499,7 +499,7 @@ var	initial_wizard = (function()
 									}
 								);
 
-						// --- this block allows avoid repetative calling recursive.
+						// --- this block allows avoid repetitive calling recursive.
 						// --- if it will be removed, then recursive func SubmitDataToBackend() will be called after loop
 						// --- this may trigger window.redirect before workflow finish. (synchronous flow faster than async calls) 
 						{

@@ -252,7 +252,7 @@ var	agency_invoice_cost_center_service = function()
 					if(data.result == "success")
 					{
 						$("#collapsible_select_service_for_invoicing_button").click();
-// TODO: srcoll down and highlight newly added line 
+// TODO: scroll down and highlight newly added line 
 						submit_callback_global(data.invoice_id);
 					}
 					else

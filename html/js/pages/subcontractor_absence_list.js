@@ -168,7 +168,7 @@ subcontractor_absence_list = (function()
 			var	col_title_tag			= $("<div>").addClass("col-xs-4 col-md-2");
 			var	col_start_date_tag		= $("<div>").addClass("col-xs-4 col-md-2");
 			var	col_end_date_tag		= $("<div>").addClass("col-xs-4 col-md-2");
-			var	col_coment_tag			= $("<div>").addClass("hidden-xs hidden-sm col-md-4");
+			var	col_comment_tag			= $("<div>").addClass("hidden-xs hidden-sm col-md-4");
 			var	col_remove_tag			= $("<div>").addClass("hidden-xs hidden-sm col-md-2 float_right");
 			var	remove_button			= $("<i>").addClass("fa fa-times-circle padding_close float_right cursor_pointer animate_close_onhover");
 
@@ -285,14 +285,14 @@ subcontractor_absence_list = (function()
 			col_title_tag			.append(item.absence_types[0].title);
 			col_start_date_tag		.append(input_start_date_tag)			.append($("<label>"));
 			col_end_date_tag		.append(input_end_date_tag)				.append($("<label>"));
-			col_coment_tag			.append(input_comment_tag)				.append($("<label>"));
+			col_comment_tag			.append(input_comment_tag)				.append($("<label>"));
 			col_remove_tag			.append(remove_button);
 
 			row_tag
 				.append(col_title_tag)
 				.append(col_start_date_tag)
 				.append(col_end_date_tag)
-				.append(col_coment_tag)
+				.append(col_comment_tag)
 				.append(col_remove_tag);
 
 			result = result.add(row_tag);
@@ -376,7 +376,7 @@ subcontractor_absence_list = (function()
 				if(data.result === "success")
 				{
 					// --- update GUI has to be inside getJSON->done->if(success).
-					// --- To improve User Expirience (react on user actions immediately)
+					// --- To improve User Experience (react on user actions immediately)
 					// ---	 I'm updating GUI immediately after click, not waiting server response
 					if((affectedAction == "AJAX_deleteAbsence") && affectedID)		$(".row.__absence_" + affectedID).hide(250);
 					$("#AreYouSure").modal('hide');
