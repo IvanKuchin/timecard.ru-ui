@@ -1,6 +1,6 @@
 login_page_1 = (function()
 {
-	'use strict';
+	"use strict";
 
 	var Init = function()
 	{
@@ -23,7 +23,7 @@ login_page_1 = (function()
 					curr_tag.button("loading");
 
 
-					$.getJSON('/cgi-bin/index.cgi?action=AJAX_demoRequest', {name: modal.find(".demo_name").val(), contact: modal.find(".demo_contact").val()})
+					$.getJSON("/cgi-bin/index.cgi?action=AJAX_demoRequest", {name: modal.find(".demo_name").val(), contact: modal.find(".demo_contact").val()})
 					.done(function(data)
 						{
 							if(data.result == "success")
@@ -40,7 +40,7 @@ login_page_1 = (function()
 						{
 							setTimeout(function() {
 								system_calls.PopoverError(curr_tag, "Ошибка ответа сервера");
-							}, 50)
+							}, 50);
 						})
 					.always(function()
 						{

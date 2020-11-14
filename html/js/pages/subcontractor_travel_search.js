@@ -3,7 +3,7 @@ var	subcontractor_travel_search = subcontractor_travel_search || {};
 
 subcontractor_travel_search = (function()
 {
-	'use strict';
+	"use strict";
 	var	DATE_FORMAT_GLOBAL = "dd/mm/yy";
 	var	data_global;
 	var	min_price_global = 0;
@@ -34,7 +34,7 @@ subcontractor_travel_search = (function()
 								var	curr_tag = $(this);
 								var	voucher_id = $("input.voucher_id").val();
 
-									$.getJSON('/cgi-bin/subcontractor.cgi', {action: "AJAX_getVoucher", voucher_id: voucher_id})
+									$.getJSON("/cgi-bin/subcontractor.cgi", {action: "AJAX_getVoucher", voucher_id: voucher_id})
 												.done(function(data) {
 
 													if(data.result == "success")
@@ -482,7 +482,7 @@ subcontractor_travel_search = (function()
 		var		currTag = $("#bt_body");
 
 		$.getJSON(
-			'/cgi-bin/subcontractor.cgi',
+			"/cgi-bin/subcontractor.cgi",
 			{
 				action:"AJAX_getSoWList",
 				include_tasks:"false",
@@ -1424,7 +1424,7 @@ subcontractor_travel_search = (function()
 
 
 		curr_request_global = $.getJSON(
-			'/cgi-bin/subcontractor.cgi', BuildSearchQuery())
+			"/cgi-bin/subcontractor.cgi", BuildSearchQuery())
 			.done(function(data) {
 				if(data.result == "success")
 				{
@@ -1481,7 +1481,7 @@ subcontractor_travel_search = (function()
 		curr_tag.button("loading");
 
 		curr_request_global = $.getJSON(
-			'/cgi-bin/subcontractor.cgi',
+			"/cgi-bin/subcontractor.cgi",
 			{
 				action: "AJAX_purchaseAirTicket",
 				sow_id: $("#sowSelector").val(),

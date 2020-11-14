@@ -2,7 +2,7 @@ var	agency_profile_edit = agency_profile_edit || {};
 
 var	agency_profile_edit = (function()
 {
-	'use strict';
+	"use strict";
 
 	var	DATE_FORMAT_GLOBAL = "dd/mm/yy";
 	var	data_global;
@@ -77,7 +77,7 @@ var	agency_profile_edit = (function()
 
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_getAgencyInfo",
 				include_bt: "true",
@@ -523,7 +523,7 @@ var	agency_profile_edit = (function()
 		var		curr_value = !input_tag.prop("checked");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: curr_tag.data("action"),
 				id: curr_tag.data("id"),
@@ -642,7 +642,7 @@ var	agency_profile_edit = (function()
 		curr_tag.attr("disabled", "");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_deleteExpenseTemplate",
 				id: curr_tag.attr("data-id"),
@@ -713,7 +713,7 @@ var	agency_profile_edit = (function()
 			curr_tag.attr("disabled", "");
 
 			$.getJSON(
-				'/cgi-bin/agency.cgi',
+				"/cgi-bin/agency.cgi",
 				{
 					action: action,
 					id: curr_tag.attr("data-customer_id"),
@@ -752,7 +752,7 @@ var	agency_profile_edit = (function()
 		curr_tag.attr("disabled", "");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_deleteTask",
 				id: curr_tag.attr("data-id"),
@@ -790,7 +790,7 @@ var	agency_profile_edit = (function()
 		curr_tag.attr("disabled", "");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_deleteAirfarelimitationByDirection",
 				id: curr_tag.attr("data-id"),
@@ -828,7 +828,7 @@ var	agency_profile_edit = (function()
 		curr_tag.attr("disabled", "");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_deleteEmployee",
 				id: curr_tag.attr("data-id"),
@@ -866,7 +866,7 @@ var	agency_profile_edit = (function()
 		curr_tag.attr("disabled", "");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_deleteBTAllowance",
 				id: curr_tag.attr("data-id"),
@@ -906,7 +906,7 @@ var	agency_profile_edit = (function()
 		curr_tag.attr("disabled", "");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_deleteHolidayCalendar",
 				id: curr_tag.attr("data-id"),
@@ -1143,7 +1143,7 @@ var	agency_profile_edit = (function()
 		{
 			curr_tag.button("loading");
 			$.getJSON(
-				'/cgi-bin/agency.cgi',
+				"/cgi-bin/agency.cgi",
 				{
 					action: action,
 					customer: $(".new_customer").val(),
@@ -1205,7 +1205,7 @@ var	agency_profile_edit = (function()
 		curr_tag.attr("data-user_id", "");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_getUnemployedAgentAutocompleteList",
 				name: curr_val,
@@ -1239,7 +1239,7 @@ var	agency_profile_edit = (function()
 		var	curr_val = curr_tag.val();
 
 		$.getJSON(
-			'/cgi-bin/ajax_anyrole_1.cgi',
+			"/cgi-bin/ajax_anyrole_1.cgi",
 			{
 				action: "AJAX_getPositionAutocompleteList",
 				position: curr_val,
@@ -1274,7 +1274,7 @@ var	agency_profile_edit = (function()
 		else
 		{
 			curr_tag.button("loading");
-			$.getJSON('/cgi-bin/agency.cgi',
+			$.getJSON("/cgi-bin/agency.cgi",
 				{
 					action: action,
 					user_id: $(".new_employee_name").attr("data-user_id"),

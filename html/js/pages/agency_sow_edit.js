@@ -2,7 +2,7 @@ var	agency_sow_edit = agency_sow_edit || {};
 
 var	agency_sow_edit = (function()
 {
-	'use strict';
+	"use strict";
 
     var	CONST_CHOOSE_CUSTOMER = "выберите заказчика";
     var	CONST_CHOOSE_PROJECT = "выберите проект";
@@ -147,7 +147,7 @@ var	agency_sow_edit = (function()
 
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_getSoWList",
 				include_bt: "true",
@@ -235,9 +235,9 @@ var	agency_sow_edit = (function()
 					var		temp = [];
 					var		task_start_date, task_end_date;
 
-					temp = task_assignment.period_start.split('-');
+					temp = task_assignment.period_start.split("-");
 					task_start_date = new Date(parseInt(temp[0]), parseInt(temp[1]) - 1, parseInt(temp[2]));
-					temp = task_assignment.period_end.split('-');
+					temp = task_assignment.period_end.split("-");
 					task_end_date = new Date(parseInt(temp[0]), parseInt(temp[1]) - 1, parseInt(temp[2]));
 
 					input_customer		.val(system_calls.ConvertHTMLToText(task.projects[0].customers[0].title))
@@ -564,9 +564,9 @@ var	agency_sow_edit = (function()
 
 	var	RenderCommonInfo = function(sow)
 	{
-		var	temp_sign_date = sow.sign_date.split('-');
-		var	temp_start_date = sow.start_date.split('-');
-		var	temp_end_date = sow.end_date.split('-');
+		var	temp_sign_date = sow.sign_date.split("-");
+		var	temp_start_date = sow.start_date.split("-");
+		var	temp_end_date = sow.end_date.split("-");
 
 		var	sow_sign_date = new Date();
 		var	sow_start_date = new Date();
@@ -767,7 +767,7 @@ var	agency_sow_edit = (function()
 		$(approver_root_tag_global).empty().append(system_calls.GetCostCenterTabs_DOM(sow.cost_centers, "_approvers", null));
 		agency_approvers_obj.Render();
 		agency_approvers_obj.ClickFirstTab();
-	}
+	};
 
 	var	RenderSubcontractorCreateTasks = function(sow)
 	{
@@ -781,7 +781,7 @@ var	agency_sow_edit = (function()
 		currTag.attr("disabled", "");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: currTag.data("action"),
 				id: currTag.data("id"),
@@ -838,7 +838,7 @@ var	agency_sow_edit = (function()
 		currTag.attr("disabled", "");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_deleteTaskAssignment",
 				id: currTag.attr("data-id"),
@@ -878,7 +878,7 @@ var	agency_sow_edit = (function()
 		currTag.attr("disabled", "");
 
 		$.getJSON(
-			'/cgi-bin/' + currTag.attr("data-script"),
+			"/cgi-bin/" + currTag.attr("data-script"),
 			{
 				action: currTag.attr("data-action"),
 				id: currTag.attr("data-id"),
@@ -918,7 +918,7 @@ var	agency_sow_edit = (function()
 		currTag.attr("disabled", "");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_deleteBTExpenseAssignment",
 				id: currTag.attr("data-id"),
@@ -963,7 +963,7 @@ var	agency_sow_edit = (function()
 		currTag.attr("disabled", "");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_deleteSoW",
 				sow_id: data_global.sow[0].id,
@@ -1080,7 +1080,7 @@ var	agency_sow_edit = (function()
 		{
 			currTag.button("loading");
 			$.getJSON(
-				'/cgi-bin/agency.cgi',
+				"/cgi-bin/agency.cgi",
 				{
 					action: "AJAX_addTaskAssignment",
 					sow_id: data_global.sow[0].id,
@@ -1130,7 +1130,7 @@ var	agency_sow_edit = (function()
 		{
 			$(".__loading_indicator").attr("disabled", "disabled");
 			$.getJSON(
-				'/cgi-bin/agency.cgi',
+				"/cgi-bin/agency.cgi",
 				{
 					action: "AJAX_getAgencyInfo",
 					include_bt: "true",
@@ -1171,7 +1171,7 @@ var	agency_sow_edit = (function()
 		$("#PullOutCustomFieldsModal").modal("show");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_getSoWListWithCustomFields",
 			})
@@ -1211,7 +1211,7 @@ var	agency_sow_edit = (function()
 		curr_tag.button("loading");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_copyCustomFieldsFromSoW",
 				sow_id_from: sow_id_from,
@@ -1249,7 +1249,7 @@ var	agency_sow_edit = (function()
 		var	curr_tag = $("#label_self_task_assignment");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_updateSubcontractorCreateTasks",
 				id: "0000000000", // --- fake id
@@ -1300,7 +1300,7 @@ var	agency_sow_edit = (function()
 		curr_tag.button("loading");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_generateSoWAgreementDocuments",
 				sow_id: data_global.sow[0].id,
@@ -1358,7 +1358,7 @@ var	agency_sow_edit = (function()
 		curr_tag.button("loading");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_deleteSoWAgreementDocuments",
 				sow_id: data_global.sow[0].id,

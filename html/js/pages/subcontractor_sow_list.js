@@ -3,7 +3,7 @@ var	subcontractor_sow_list = subcontractor_sow_list || {};
 
 var	subcontractor_sow_list = (function()
 {
-	'use strict';
+	"use strict";
 
 	var	data_global;
 
@@ -20,7 +20,7 @@ var	subcontractor_sow_list = (function()
 
 
 		$.getJSON(
-			'/cgi-bin/subcontractor.cgi',
+			"/cgi-bin/subcontractor.cgi",
 			{
 				action: "AJAX_getSoWList",
 				include_bt: "true",
@@ -69,7 +69,7 @@ var	subcontractor_sow_list = (function()
 			result.push("Задача " + (i + 1));
 		}
 
-		result.push('.');
+		result.push(".");
 
 		return result;
 	};
@@ -80,9 +80,9 @@ var	subcontractor_sow_list = (function()
 		var		result = [];
 		var		temp = [];
 
-		temp = sow.start_date.split('-');
+		temp = sow.start_date.split("-");
 		sow_start_date = new Date(parseInt(temp[0]), parseInt(temp[1]) - 1, parseInt(temp[2]));
-		temp = sow.end_date.split('-');
+		temp = sow.end_date.split("-");
 		sow_end_date = new Date(parseInt(temp[0]), parseInt(temp[1]) - 1, parseInt(temp[2]));
 		now = new Date();
 
@@ -97,16 +97,16 @@ var	subcontractor_sow_list = (function()
 			// --- "today" vertical line
 			result.push(
 			{
-				type: 'line',
-				label: 'Сегодня',
+				type: "line",
+				label: "Сегодня",
 				// backgroundColor: 'red',
-				data: [ {x: now, y: 'SOW'},
-						{x: now, y: '.'}
+				data: [ {x: now, y: "SOW"},
+						{x: now, y: "."}
 					  ],
 				// borderColor: 'white',
-				borderColor: 'red',
-				pointHoverBackgroundColor: 'red',
-				pointBackgroundColor: 'red',
+				borderColor: "red",
+				pointHoverBackgroundColor: "red",
+				pointBackgroundColor: "red",
 				borderWidth: 2,
 				pointRadius: 2,
 				pointHoverRadius: 10,
@@ -117,15 +117,15 @@ var	subcontractor_sow_list = (function()
 		// --- SOW horizontal line
 		result.push(
 		{
-			type: 'line',
-			label: 'SOW',
-			data: [	{x: sow_start_date, y:'SOW'},
-					{x: sow_end_date, y:'SOW'}
+			type: "line",
+			label: "SOW",
+			data: [	{x: sow_start_date, y:"SOW"},
+					{x: sow_end_date, y:"SOW"}
 				  ],
 			borderWidth: 5,
-			borderColor: 'blue',
-			pointHoverBackgroundColor: 'blue',
-			pointBackgroundColor: 'blue',
+			borderColor: "blue",
+			pointHoverBackgroundColor: "blue",
+			pointBackgroundColor: "blue",
 			showLine: true,
 			pointRadius: 5,
 			pointHoverRadius: 10
@@ -135,12 +135,12 @@ var	subcontractor_sow_list = (function()
 		{
 			var		dataset_obj =
 			{
-				type: 'line',
+				type: "line",
 				label: system_calls.ConvertHTMLToText(sow.tasks[i].projects[0].customers[0].title + " / " + sow.tasks[i].projects[0].title + " / " + sow.tasks[i].title),
 				borderWidth: 2,
-				borderColor: 'green',
-				pointHoverBackgroundColor: 'green',
-				pointBackgroundColor: 'green',
+				borderColor: "green",
+				pointHoverBackgroundColor: "green",
+				pointBackgroundColor: "green",
 				showLine: true,
 				pointRadius: 5,
 				pointHoverRadius: 10
@@ -258,9 +258,9 @@ var	subcontractor_sow_list = (function()
 						file_div.append(agreement_file);
 					}
 
-					temp = sow_item.start_date.split('-');
+					temp = sow_item.start_date.split("-");
 					sow_start_date = new Date(parseInt(temp[0]), parseInt(temp[1]) - 1, parseInt(temp[2]));
-					temp = sow_item.end_date.split('-');
+					temp = sow_item.end_date.split("-");
 					sow_end_date = new Date(parseInt(temp[0]), parseInt(temp[1]) - 1, parseInt(temp[2]));
 
 					// --- chart part
@@ -269,7 +269,7 @@ var	subcontractor_sow_list = (function()
 
 					myChart = new Chart(canvas,
 							{
-								type: 'bar',
+								type: "bar",
 								data: {
 									labels: [sow_start_date, sow_end_date],
 									yLabels: task_names_arr,
@@ -291,24 +291,24 @@ var	subcontractor_sow_list = (function()
 									},
 									scales: {
 										xAxes: [{
-											type: 'time',
+											type: "time",
 											time: {
 												// round: 'day'
 												// tooltipFormat: 'll HH:mm'
-												tooltipFormat: 'll'
+												tooltipFormat: "ll"
 											},
 											scaleLabel: {
 												display: false,
-												labelString: 'Date'
+												labelString: "Date"
 											}
 										}],
 										yAxes: [{
-											type: 'category',
-											position: 'left',
-											display: 'true',
+											type: "category",
+											position: "left",
+											display: "true",
 											scaleLabel: {
 												display: true,
-												labelString: 'Задачи'
+												labelString: "Задачи"
 											},
 											ticks: {
 												// beginAtZero:true
@@ -416,7 +416,7 @@ var	subcontractor_sow_list = (function()
 			curr_tag.button("loading"); // --- double click protection
 
 			$.getJSON(
-				'/cgi-bin/subcontractor.cgi',
+				"/cgi-bin/subcontractor.cgi",
 				{
 					action: "AJAX_agreeSoW",
 					sow_id: sow_id,

@@ -4,7 +4,7 @@ var	agency_service_cost_prediction = agency_service_cost_prediction || {};
 
 var	agency_service_cost_prediction = (function()
 {
-	'use strict';
+	"use strict";
 
 	var	data_global;
 	var	last_month_timecards_global;

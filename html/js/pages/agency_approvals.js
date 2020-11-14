@@ -3,7 +3,7 @@ var	agency_approvals = agency_approvals || {};
 
 var	agency_approvals = (function()
 {
-	'use strict';
+	"use strict";
 
 	var	data_global;
 
@@ -20,7 +20,7 @@ var	agency_approvals = (function()
 
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_getApprovalsList",
 				object: "timecard",
@@ -165,7 +165,7 @@ var	agency_approvals = (function()
 		}
 		else
 		{
-			var		timeFormat = 'MM/DD/YYYY HH:mm';
+			var		timeFormat = "MM/DD/YYYY HH:mm";
 			var		timecards_belongs_to_sow = [];
 
 			timecard_list.forEach(function(item)

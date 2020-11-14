@@ -3,7 +3,7 @@ var	agency_sow_list = agency_sow_list || {};
 
 var	agency_sow_list = (function()
 {
-	'use strict';
+	"use strict";
 
 	var	data_global;
 
@@ -29,7 +29,7 @@ var	agency_sow_list = (function()
 
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_getSoWList",
 				include_bt: "true",
@@ -100,9 +100,9 @@ var	agency_sow_list = (function()
 					var		temp = [];
 					var		task_start_date, task_end_date;
 
-					temp = task_assignment.period_start.split('-');
+					temp = task_assignment.period_start.split("-");
 					task_start_date = new Date(parseInt(temp[0]), parseInt(temp[1]) - 1, parseInt(temp[2]));
-					temp = task_assignment.period_end.split('-');
+					temp = task_assignment.period_end.split("-");
 					task_end_date = new Date(parseInt(temp[0]), parseInt(temp[1]) - 1, parseInt(temp[2]));
 
 					row
@@ -303,7 +303,7 @@ var	agency_sow_list = (function()
 		else
 		{
 			$.getJSON(
-				'/cgi-bin/agency.cgi',
+				"/cgi-bin/agency.cgi",
 				{
 					action: "AJAX_getCompanyInfoBySoWID",
 					sow_id: curr_sow_id,
@@ -368,7 +368,7 @@ var	agency_sow_list = (function()
 		var	curr_val = curr_tag.val();
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_getSubcontractorCompaniesAutocompleteList",
 				name: curr_val,
@@ -403,7 +403,7 @@ var	agency_sow_list = (function()
 		curr_tag.button("loading");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: curr_action,
 				company_id: id,

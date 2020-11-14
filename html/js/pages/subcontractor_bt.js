@@ -2,7 +2,7 @@ var	subcontractor_bt = subcontractor_bt || {};
 
 var	subcontractor_bt = (function()
 {
-    'use strict';
+    "use strict";
 
 	var	data_global;
 	var	current_sow_global = "";
@@ -111,7 +111,7 @@ var	subcontractor_bt = (function()
 		if(parseInt(bt_expense_id))
 		{
 			$.getJSON(
-				'/cgi-bin/subcontractor.cgi',
+				"/cgi-bin/subcontractor.cgi",
 				{
 					action:"AJAX_removeExpense",
 					bt_expense_id: bt_expense_id,
@@ -151,7 +151,7 @@ var	subcontractor_bt = (function()
 			currTag.button("loading");
 
 			$.getJSON(
-				'/cgi-bin/subcontractor.cgi',
+				"/cgi-bin/subcontractor.cgi",
 				{
 					action:"AJAX_removeBT",
 					bt_id: bt_id,
@@ -284,7 +284,7 @@ var	subcontractor_bt = (function()
 			$("button.__loading_indicator").button("loading");
 
 			$.getJSON(
-				'/cgi-bin/subcontractor.cgi',
+				"/cgi-bin/subcontractor.cgi",
 				{
 					action:"AJAX_getSoWList",
 					include_tasks:"true",
@@ -347,7 +347,7 @@ var	subcontractor_bt = (function()
 			$("button.__loading_indicator").button("loading");
 
 			$.getJSON(
-				'/cgi-bin/subcontractor.cgi',
+				"/cgi-bin/subcontractor.cgi",
 				{
 					action:"AJAX_getBTEntry",
 					bt_id: $.urlParam("bt_id")
@@ -1259,7 +1259,7 @@ var	subcontractor_bt = (function()
 				processData: false,
 				async: true,
 				data: formData,
-				type: 'post',
+				type: "post",
 				success: function(server_response) 
 				{
 					var		data = JSON.parse(server_response);
@@ -1806,7 +1806,7 @@ var	subcontractor_bt = (function()
 				$("#expense_item_currency_col_" + expense_item_random).empty().append("<span class='fa fa-refresh fa-spin fa-fw animateClass'></span>");
 
 				$.getJSON(
-					'/cgi-bin/subcontractor.cgi',
+					"/cgi-bin/subcontractor.cgi",
 					{
 						action:"AJAX_getCurrencyRateList",
 						date:system_calls.GetFormattedDateFromSeconds(selected_date.getTime() / 1000, "YYYY-MM-DD")
@@ -1943,7 +1943,7 @@ var	subcontractor_bt = (function()
 		// --- create new expense item doc
 		else if((orig_image.attr("data-file_type") == "pdf"))
 		{
-			window.open(orig_image.attr("data-file"), '_blank');
+			window.open(orig_image.attr("data-file"), "_blank");
 		}
 		else
 		{
@@ -2201,7 +2201,7 @@ var	subcontractor_bt = (function()
 			else
 			{
 				$.getJSON(
-					'/cgi-bin/ajax_anyrole_1.cgi',
+					"/cgi-bin/ajax_anyrole_1.cgi",
 					{
 						action:	"AJAX_submitUnknownLocality",
 						value:	curr_tag.val(),

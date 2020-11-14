@@ -1,6 +1,6 @@
 var	agency_bt_expense_template_assignment_dialog = function()
 {
-	'use strict';
+	"use strict";
 
 	var random_global;
 	var	data_global;
@@ -37,7 +37,7 @@ var	agency_bt_expense_template_assignment_dialog = function()
 		{
 			curr_tag.button("loading");
 			$.getJSON(
-				'/cgi-bin/agency.cgi',
+				"/cgi-bin/agency.cgi",
 				{
 					action: "AJAX_addBTExpenseTemplateAssignment",
 					bt_expense_templates: values.join(","),
@@ -190,7 +190,7 @@ var	agency_bt_expense_template_assignment_dialog = function()
 		var		curr_tag = $("#AgencyBTExpenseTemplateAssignmentDialog .submit");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_getBTExpenseTemplates",
 			})

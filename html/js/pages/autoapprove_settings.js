@@ -2,7 +2,7 @@ var		autoapprove_settings = autoapprove_settings || {};
 
 autoapprove_settings = (function()
 {
-	'use strict';
+	"use strict";
 
 	var		data_global;
 
@@ -35,7 +35,7 @@ autoapprove_settings = (function()
 
 	var	Init = function()
 	{
-		$.getJSON('/cgi-bin/approver.cgi?action=AJAX_getUserProfile', {param1: "_"})
+		$.getJSON("/cgi-bin/approver.cgi?action=AJAX_getUserProfile", {param1: "_"})
 			.done(function(data) {
 				if(data.status === "success")
 				{

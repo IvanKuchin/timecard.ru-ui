@@ -2,7 +2,7 @@ var	agency_invoice_cost_center_bt = agency_invoice_cost_center_bt || {};
 
 var	agency_invoice_cost_center_bt = function()
 {
-	'use strict';
+	"use strict";
 
 	var	DATE_FORMAT_GLOBAL = "dd/mm/yy";
 	var	data_global;
@@ -33,7 +33,7 @@ var	agency_invoice_cost_center_bt = function()
 		if(curr_tag.empty())
 		{
 			$.getJSON(
-				'/cgi-bin/agency.cgi',
+				"/cgi-bin/agency.cgi",
 				{
 					action: "AJAX_getApprovedBTList",
 					cost_center_id: cost_center_id,
@@ -253,7 +253,7 @@ var	agency_invoice_cost_center_bt = function()
 			curr_tag.button("loading");
 
 			$.getJSON(
-				'/cgi-bin/agency.cgi',
+				"/cgi-bin/agency.cgi",
 				{
 				 "action": "AJAX_submitBTsToInvoice",
 				 "bt_list": bt_list, 

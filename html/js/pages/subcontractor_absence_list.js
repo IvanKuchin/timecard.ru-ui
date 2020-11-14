@@ -3,7 +3,7 @@ var	subcontractor_absence_list = subcontractor_absence_list || {};
 
 subcontractor_absence_list = (function()
 {
-	'use strict';
+	"use strict";
 
 	var		DATE_FORMAT_GLOBAL = "dd/mm/yy";
 
@@ -63,7 +63,7 @@ subcontractor_absence_list = (function()
 	var	GetAbsenceListFromServer = function()
 	{
 		$.getJSON(
-			'/cgi-bin/subcontractor.cgi',
+			"/cgi-bin/subcontractor.cgi",
 			{
 				action: "AJAX_getAbsenceList",
 			})
@@ -90,7 +90,7 @@ subcontractor_absence_list = (function()
 	var	GetAbsenceTypeListFromServer = function()
 	{
 		$.getJSON(
-			'/cgi-bin/ajax_anyrole_1.cgi',
+			"/cgi-bin/ajax_anyrole_1.cgi",
 			{
 				action: "AJAX_getAbsenceTypesList",
 			})
@@ -180,7 +180,7 @@ subcontractor_absence_list = (function()
 
 			if(item.start_date.length)
 			{
-				temp_date = item.start_date.split('-');
+				temp_date = item.start_date.split("-");
 				if(temp_date.length == 3)
 				{
 					temp = new Date(parseInt(temp_date[0]), parseInt(temp_date[1]) - 1, parseInt(temp_date[2]));
@@ -194,7 +194,7 @@ subcontractor_absence_list = (function()
 
 			if(item.end_date.length)
 			{
-				temp_date = item.end_date.split('-');
+				temp_date = item.end_date.split("-");
 				if(temp_date.length == 3)
 				{
 					temp = new Date(parseInt(temp_date[0]), parseInt(temp_date[1]) - 1, parseInt(temp_date[2]));
@@ -328,7 +328,7 @@ subcontractor_absence_list = (function()
 			curr_tag.button("loading");
 
 			$.getJSON(
-				'/cgi-bin/subcontractor.cgi',
+				"/cgi-bin/subcontractor.cgi",
 				{
 					action: "AJAX_submitNewAbsence",
 					type_id: $(".new_absence_type").val(),
@@ -371,7 +371,7 @@ subcontractor_absence_list = (function()
 		if(typeof(affectedScript) == "undefined") affectedScript = "";
 		if(!affectedScript.length) affectedScript = "index.cgi";
 
-		$.getJSON('/cgi-bin/' + affectedScript + '?action=' + affectedAction, {id: affectedID})
+		$.getJSON("/cgi-bin/" + affectedScript + "?action=" + affectedAction, {id: affectedID})
 			.done(function(data) {
 				if(data.result === "success")
 				{
@@ -379,7 +379,7 @@ subcontractor_absence_list = (function()
 					// --- To improve User Experience (react on user actions immediately)
 					// ---	 I'm updating GUI immediately after click, not waiting server response
 					if((affectedAction == "AJAX_deleteAbsence") && affectedID)		$(".row.__absence_" + affectedID).hide(250);
-					$("#AreYouSure").modal('hide');
+					$("#AreYouSure").modal("hide");
 				}
 				else
 				{

@@ -1,6 +1,6 @@
 var	bt_expense_template_obj = function()
 {
-	'use strict';
+	"use strict";
 
 	var random_global;
 	var	data_global;
@@ -83,7 +83,7 @@ var	bt_expense_template_obj = function()
 					json_params.value = curr_tag.val();
 
 
-				$.post('/cgi-bin/agency.cgi?rand=' + Math.floor(Math.random() * 1435267980867), json_params)
+				$.post("/cgi-bin/agency.cgi?rand=" + Math.floor(Math.random() * 1435267980867), json_params)
 					.done(function(unparsed_data)
 					{
 						var data =	(
@@ -376,7 +376,7 @@ var	bt_expense_template_obj = function()
 				for(var key in line_params)
 					json_params[key] = line_params[key];
 
-				$.post('/cgi-bin/agency.cgi?rand=' + Math.floor(Math.random() * 1435267980867), json_params)
+				$.post("/cgi-bin/agency.cgi?rand=" + Math.floor(Math.random() * 1435267980867), json_params)
 					.done(function(unparsed_data)
 					{
 						var data =	(
@@ -557,7 +557,7 @@ var	bt_expense_template_obj = function()
 
 			// curr_tag.button("loading");
 
-			$.post('/cgi-bin/agency.cgi?rand=' + Math.floor(Math.random() * 1435267980867), cgi_params)
+			$.post("/cgi-bin/agency.cgi?rand=" + Math.floor(Math.random() * 1435267980867), cgi_params)
 				.done(function(json_data)
 				{
 					var	data = JSON.parse(json_data);

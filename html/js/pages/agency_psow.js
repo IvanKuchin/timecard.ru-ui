@@ -1,6 +1,6 @@
 var	agency_psow_obj = function()
 {
-	'use strict';
+	"use strict";
 
 	var	DATE_FORMAT_GLOBAL = "dd/mm/yy";
 	var	DB_FORMAT_GLOBAL = "YYYY-MM-DD";
@@ -84,7 +84,7 @@ var	agency_psow_obj = function()
 			{
 				curr_tag.button("loading");
 				$.getJSON(
-					'/cgi-bin/agency.cgi',
+					"/cgi-bin/agency.cgi",
 					{
 						action: action,
 						title: title_tag.val(),
@@ -210,9 +210,9 @@ var	agency_psow_obj = function()
 		var	bt_markup_type_select			= $("<select>").addClass("transparent __psow_bt_markup_type");
 		var	position_input					= $("<input>").addClass("transparent __psow_day_position");
 
-		var	temp_sign_date = data_global.sign_date.split('-');
-		var	temp_start_date = data_global.start_date.split('-');
-		var	temp_end_date = data_global.end_date.split('-');
+		var	temp_sign_date = data_global.sign_date.split("-");
+		var	temp_start_date = data_global.start_date.split("-");
+		var	temp_end_date = data_global.end_date.split("-");
 
 		var	psow_sign_date = new Date();
 		var	psow_start_date = new Date();

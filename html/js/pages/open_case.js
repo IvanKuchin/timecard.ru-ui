@@ -4,7 +4,7 @@ var	open_case = open_case || {};
 
 var	open_case = (function()
 {
-	'use strict';
+	"use strict";
 
 	var	data_global;
 	var	helpdesk_ticket_obj_global;
@@ -23,7 +23,7 @@ var	open_case = (function()
 	var	Fallback_S2 = function(e)
 	{
 		$("#severity_2").click();
-	}
+	};
 
 	var	Select_S1 = function()
 	{

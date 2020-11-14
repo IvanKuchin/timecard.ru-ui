@@ -2,7 +2,7 @@ var	subcontractor_company_edit = subcontractor_company_edit || {};
 
 var	subcontractor_company_edit = (function()
 {
-	'use strict';
+	"use strict";
 
 	var	DATE_FORMAT_GLOBAL = "dd/mm/yy";
 	var	data_global;
@@ -24,7 +24,7 @@ var	subcontractor_company_edit = (function()
 
 
 		$.getJSON(
-			'/cgi-bin/subcontractor.cgi',
+			"/cgi-bin/subcontractor.cgi",
 			{
 				action: "AJAX_getCompanyInfo",
 				include_countries: "true",
@@ -71,7 +71,7 @@ var	subcontractor_company_edit = (function()
 		var		curr_value = !input_tag.prop("checked");
 
 		$.getJSON(
-			'/cgi-bin/subcontractor.cgi',
+			"/cgi-bin/subcontractor.cgi",
 			{
 				action: curr_tag.data("action"),
 				id: curr_tag.data("id"),

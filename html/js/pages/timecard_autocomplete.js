@@ -2,7 +2,7 @@ var	timecard_autocomplete = timecard_autocomplete || {};
 
 var	timecard_autocomplete = (function()
 {
-	'use strict';
+	"use strict";
 
 	var		data_global;
 	var		current_sow_global;

@@ -2,20 +2,20 @@ var		view_company_profile = view_company_profile || {};
 
 view_company_profile = (function()
 {
-	'use strict';
+	"use strict";
 
 	var		company_profile_global;
 	var		company_id_global;
 
 	var	Init = function()
 	{
-		company_id_global = new RegExp('profile\\/([0-9]+)').exec(window.location.href)[1];
+		company_id_global = new RegExp("profile\\/([0-9]+)").exec(window.location.href)[1];
 		FillinCompanyProfile();
 	};
 
 	var FillinCompanyProfile = function()
 	{
-		$.getJSON('/cgi-bin/ajax_anyrole_1.cgi?action=AJAX_getCompanyInfo', {id: company_id_global})
+		$.getJSON("/cgi-bin/ajax_anyrole_1.cgi?action=AJAX_getCompanyInfo", {id: company_id_global})
 			.done(function(data) {
 				if(data.result === "success")
 				{

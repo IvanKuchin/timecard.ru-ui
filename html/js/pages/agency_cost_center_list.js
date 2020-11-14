@@ -2,7 +2,7 @@ var	agency_cost_center_list = agency_cost_center_list || {};
 
 var	agency_cost_center_list = (function()
 {
-	'use strict';
+	"use strict";
 
 	var	DATE_FORMAT_GLOBAL = "dd/mm/yy";
 	var	data_global;
@@ -30,7 +30,7 @@ var	agency_cost_center_list = (function()
 
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_getAgencyInfo",
 				include_bt: "false",
@@ -116,7 +116,7 @@ var	agency_cost_center_list = (function()
 		curr_tag.attr("disabled", "");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_deleteCostCenter",
 				id: curr_tag.attr("data-id"),

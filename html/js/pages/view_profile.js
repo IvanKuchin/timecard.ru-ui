@@ -2,7 +2,7 @@ var		view_profile = view_profile || {};
 
 view_profile = (function()
 {
-	'use strict';
+	"use strict";
 
 	var		userProfile;
 	var		addRecommendation = {};
@@ -23,7 +23,7 @@ view_profile = (function()
 
 	var FillinUserProfile = function()
 	{
-		$.getJSON('/cgi-bin/index.cgi?action=JSON_getUserProfile', {id: $("#friendLastName").data("friendid")})
+		$.getJSON("/cgi-bin/index.cgi?action=JSON_getUserProfile", {id: $("#friendLastName").data("friendid")})
 			.done(function(data) {
 				if(data.result === "success")
 				{
@@ -37,7 +37,7 @@ view_profile = (function()
 				}
 			})
 			.fail(function() {
-				system_calls.PopoverError("friendName", "ошибка ответа сервера")
+				system_calls.PopoverError("friendName", "ошибка ответа сервера");
 				console.error("ERROR parsing JSON response");
 			});
 
@@ -49,7 +49,7 @@ view_profile = (function()
 
 		$("#canvasForAvatar").attr("width", "160")
 							.attr("height", "160")
-							.addClass('canvas-big-avatar');
+							.addClass("canvas-big-avatar");
 		canvasCtx = $("#canvasForAvatar")[0].getContext("2d");
 
 		DrawUserAvatar(canvasCtx, friendImage, friendName, friendLastName);

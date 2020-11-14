@@ -2,7 +2,7 @@ var	agency_invoice_cost_center_bt_list = agency_invoice_cost_center_bt_list || {
 
 var	agency_invoice_cost_center_bt_list = function()
 {
-	'use strict';
+	"use strict";
 
 	var	DATE_FORMAT_GLOBAL = "dd/mm/yy";
 	var	data_global;
@@ -33,7 +33,7 @@ var	agency_invoice_cost_center_bt_list = function()
 		if(curr_tag.empty())
 		{
 			$.getJSON(
-				'/cgi-bin/agency.cgi',
+				"/cgi-bin/agency.cgi",
 				{
 					action: "AJAX_getBTInvoiceList",
 					cost_center_id: cost_center_id,
@@ -78,7 +78,7 @@ var	agency_invoice_cost_center_bt_list = function()
 		}
 		else
 		{
-			var		timeFormat = 'MM/DD/YYYY HH:mm';
+			var		timeFormat = "MM/DD/YYYY HH:mm";
 
 			bt_invoices.sort(function(a, b)
 			{
@@ -183,7 +183,7 @@ var	agency_invoice_cost_center_bt_list = function()
 			else
 			{
 				$.getJSON(
-					'/cgi-bin/agency.cgi',
+					"/cgi-bin/agency.cgi",
 					{
 						action: "AJAX_getBTInvoiceDetails",
 						bt_invoice_id: bt_invoice_id,
@@ -284,7 +284,7 @@ var	agency_invoice_cost_center_bt_list = function()
 		if(parseInt(invoice_id))
 		{
 			$.getJSON(
-				'/cgi-bin/agency.cgi',
+				"/cgi-bin/agency.cgi",
 				{
 					action: "AJAX_recall" + suffix + "Invoice",
 					invoice_id: invoice_id,

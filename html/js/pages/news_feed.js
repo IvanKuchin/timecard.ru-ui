@@ -2,7 +2,7 @@ var	news_feed = news_feed || {};
 
 news_feed = (function()
 {
-'use strict';
+"use strict";
 
 var	myCompanies = [];
 var	globalPageCounter = 0;  // --- used for transfer arg to function HandlerScrollToShow
@@ -70,9 +70,9 @@ var Init = function()
 		// --- New message image uploader
 		$(function () {
 			// Change this to the location of your server-side upload handler:
-			$('#newMessageFileUpload').fileupload({
-				url: '/cgi-bin/imageuploader.cgi',
-				dataType: 'json',
+			$("#newMessageFileUpload").fileupload({
+				url: "/cgi-bin/imageuploader.cgi",
+				dataType: "json",
 				maxFileSize: 100 * 1024 * 1024,
 				// acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
 				acceptFileTypes: uploadFileRegexImageVideo,
@@ -97,7 +97,7 @@ var Init = function()
 							console.debug("newimageuploader: always handler: filename [" + item.name + "]");
 
 							--globalUploadImageCounter;
-							$("#NewsFeedMessageSubmit").text('Загрузка (' + (globalUploadImageTotal - globalUploadImageCounter) + ' из ' + globalUploadImageTotal + ') ...');
+							$("#NewsFeedMessageSubmit").text("Загрузка (" + (globalUploadImageTotal - globalUploadImageCounter) + " из " + globalUploadImageTotal + ") ...");
 
 							// TODO: 2delete: debug function to check upload functionality
 							globalUploadImage_UnloadedList = jQuery.grep(globalUploadImage_UnloadedList, function(itemList, numList) { return itemList != item.name; } );
@@ -108,13 +108,13 @@ var Init = function()
 							if(!globalUploadImageCounter)
 							{
 								// $("#NewsFeedMessageSubmit").button('reset');
-								$("#NewsFeedMessageSubmit").text('Написать');
+								$("#NewsFeedMessageSubmit").text("Написать");
 							}
 
 							// --- reset progress bar
-							$('#NewMessageProgress .progress-bar').removeClass("active")
-																  .css('width', '0%');
-							$('#NewMessageProgress .progress-string').empty();
+							$("#NewMessageProgress .progress-bar").removeClass("active")
+																  .css("width", "0%");
+							$("#NewMessageProgress .progress-string").empty();
 
 
 							if(typeof(data.result) != "undefined")
@@ -168,7 +168,7 @@ var Init = function()
 					var originalAdd = $.blueimp.fileupload.prototype.options.add;
 
 					data.process(function () {
-						return $this.fileupload('process', data);
+						return $this.fileupload("process", data);
 					});
 					originalAdd.call(this, e, data);
 
@@ -191,31 +191,31 @@ var Init = function()
 					if(globalUploadImageCounter)
 					{
 						// $("#NewsFeedMessageSubmit").button('loading');
-						$("#NewsFeedMessageSubmit").text('Загрузка (0 из ' + globalUploadImageCounter + ') ...');
+						$("#NewsFeedMessageSubmit").text("Загрузка (0 из " + globalUploadImageCounter + ") ...");
 					}
 					console.debug("newimageuploader: add handler: number of uploading images is " + globalUploadImageCounter);
 				},
 				progressall: function (e, data) {
 					var progress = parseInt(data.loaded / data.total * 100, 10);
 
-					$('#NewMessageProgress .progress-bar').css('width', progress + '%');
+					$("#NewMessageProgress .progress-bar").css("width", progress + "%");
 					if(progress > 97) 
 					{
-						$('#NewMessageProgress .progress-bar').addClass("active");
-						$('#NewMessageProgress .progress-string').empty().append("Обработка...");
+						$("#NewMessageProgress .progress-bar").addClass("active");
+						$("#NewMessageProgress .progress-string").empty().append("Обработка...");
 					}
 					else
 					{
-						$('#NewMessageProgress .progress-string').empty().append(progress + "%");
+						$("#NewMessageProgress .progress-string").empty().append(progress + "%");
 					}
 				},
 				fail: function (e, data) {
-					console.error("editimageuploader: fail handler:ERROR image uploading [" + data.textStatus + "]")
+					console.error("editimageuploader: fail handler:ERROR image uploading [" + data.textStatus + "]");
 					// alert("ошибка загрузки фаила: " + data.textStatus);
 				}
 
 				})
-				.on('fileuploadprocessalways', function (e, data) {
+				.on("fileuploadprocessalways", function (e, data) {
 					if(
 						(typeof(data.files.error) !=  "undefined") && data.files.error
 						&& 
@@ -234,18 +234,18 @@ var Init = function()
 					console.log("fileuploader:fileuploadprocessalways: submit to upload", data.files[0].name);//error message
 					return true;
 				})
-				.prop('disabled', !$.support.fileInput)
-				.parent().addClass($.support.fileInput ? undefined : 'disabled');
+				.prop("disabled", !$.support.fileInput)
+				.parent().addClass($.support.fileInput ? undefined : "disabled");
 		});
 
 
 		// --- Edit image uploader
 		$(function () {
-			'use strict';
+			"use strict";
 			// Change this to the location of your server-side upload handler:
-			$('#editFileupload').fileupload({
-				url: '/cgi-bin/imageuploader.cgi',
-				dataType: 'json',
+			$("#editFileupload").fileupload({
+				url: "/cgi-bin/imageuploader.cgi",
+				dataType: "json",
 				maxFileSize: 100 * 1024 * 1024, 
 				// acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
 				acceptFileTypes: uploadFileRegexImageVideo,
@@ -271,7 +271,7 @@ var Init = function()
 							console.debug("editimageuploader: always handler: filename [" + item.name + "]");
 		
 							--globalUploadImageCounter;
-							$("#editNewsFeedMessageSubmit").text('Загрузка (' + (globalUploadImageTotal - globalUploadImageCounter) + ' из ' + globalUploadImageTotal + ') ...');
+							$("#editNewsFeedMessageSubmit").text("Загрузка (" + (globalUploadImageTotal - globalUploadImageCounter) + " из " + globalUploadImageTotal + ") ...");
 
 							// TODO: 2delete: debug function to check upload functionality
 							globalUploadImage_UnloadedList = jQuery.grep(globalUploadImage_UnloadedList, function(itemList, numList) { return itemList != item.name; } );
@@ -281,13 +281,13 @@ var Init = function()
 							if(!globalUploadImageCounter)
 							{
 								// $("#editNewsFeedMessageSubmit").button('reset');
-								$("#editNewsFeedMessageSubmit").text('Написать');
+								$("#editNewsFeedMessageSubmit").text("Написать");
 							}
 
 							// --- reset progress bar
-							$('#EditMessageProgress .progress-bar').removeClass("active")
-																  .css('width', '0%');
-							$('#EditMessageProgress .progress-string').empty();
+							$("#EditMessageProgress .progress-bar").removeClass("active")
+																  .css("width", "0%");
+							$("#EditMessageProgress .progress-string").empty();
 
 							if(typeof(data.result) != "undefined")
 							{							
@@ -330,7 +330,7 @@ var Init = function()
 								console.debug("editimageuploader: done handler: uploading success [" + value[0].fileName + "]");
 								// DrawAllAvatars();
 							}
-						};
+						}
 
 				},
 				add: function (e, data) 
@@ -341,7 +341,7 @@ var Init = function()
 					var originalAdd = $.blueimp.fileupload.prototype.options.add;
 
 					data.process(function () {
-						return $this.fileupload('process', data);
+						return $this.fileupload("process", data);
 					});
 					originalAdd.call(this, e, data);
 
@@ -362,7 +362,7 @@ var Init = function()
 					if(globalUploadImageCounter)
 					{
 						// $("#NewsFeedMessageSubmit").button('loading');
-						$("#editNewsFeedMessageSubmit").text('Загрузка (0 из ' + globalUploadImageCounter + ') ...');
+						$("#editNewsFeedMessageSubmit").text("Загрузка (0 из " + globalUploadImageCounter + ") ...");
 					}
 
 					console.debug("editimageuploader: add handler: number of uploading images is " + globalUploadImageCounter);
@@ -370,24 +370,24 @@ var Init = function()
 				progressall: function (e, data) {
 					var progress = parseInt(data.loaded / data.total * 100, 10);
 
-					$('#EditMessageProgress .progress-bar').css('width', progress + '%');
+					$("#EditMessageProgress .progress-bar").css("width", progress + "%");
 					if(progress > 97) 
 					{
-						$('#EditMessageProgress .progress-bar').addClass("active");
-						$('#EditMessageProgress .progress-string').empty().append("Обработка...");
+						$("#EditMessageProgress .progress-bar").addClass("active");
+						$("#EditMessageProgress .progress-string").empty().append("Обработка...");
 					}
 					else
 					{
-						$('#EditMessageProgress .progress-string').empty().append(progress + "%");
+						$("#EditMessageProgress .progress-string").empty().append(progress + "%");
 					}
 				},
 				fail: function (e, data) {
-					console.error("editimageuploader: fail handler:ERROR image uploading [" + data.textStatus + "]")
+					console.error("editimageuploader: fail handler:ERROR image uploading [" + data.textStatus + "]");
 					// alert("ошибка загрузки фаила: " + data.textStatus);
 				}
 
 			})
-				.on('fileuploadprocessalways', function (e, data) {
+				.on("fileuploadprocessalways", function (e, data) {
 					if(
 						(typeof(data.files.error) !=  "undefined") && data.files.error
 						&& 
@@ -406,8 +406,8 @@ var Init = function()
 					console.log("fileuploader:fileuploadprocessalways: submit to upload", data.files[0].name);//error message
 					return true;
 				})
-				.prop('disabled', !$.support.fileInput)
-				.parent().addClass($.support.fileInput ? undefined : 'disabled');
+				.prop("disabled", !$.support.fileInput)
+				.parent().addClass($.support.fileInput ? undefined : "disabled");
 		});
 
 
@@ -480,13 +480,13 @@ var Init = function()
 		*/
 		if(isMobile.apple.device)
 		{
-			$('body').addClass('iOS-device');
+			$("body").addClass("iOS-device");
 
-			$('.modal').on('show.bs.modal', function() {
+			$(".modal").on("show.bs.modal", function() {
 					modalScrollPosition = $(window).scrollTop();
 				});
-			$('.modal').on('hidden.bs.modal', function() {
-					$('.iOS-device').css('top', 0);
+			$(".modal").on("hidden.bs.modal", function() {
+					$(".iOS-device").css("top", 0);
 					$(window).scrollTop(modalScrollPosition);    
 				});
 		}
@@ -517,11 +517,11 @@ var EditNewsFeedModalShownHandler = function()
 	globalPostMessageImageList = [];
 
 	// --- set progress bar to 0 length
-	$('div.progress .progress-bar').css('width', '0%');
+	$("div.progress .progress-bar").css("width", "0%");
 
 	// --- set var imageTempSet to random
 	imageTempSet = Math.floor(Math.random()*99999999);
-	$('#editFileupload').fileupload({formData: {imageTempSet: imageTempSet, messageID: $("#editNewsFeedMessageSubmit").data("messageID")}});
+	$("#editFileupload").fileupload({formData: {imageTempSet: imageTempSet, messageID: $("#editNewsFeedMessageSubmit").data("messageID")}});
 
 	globalNewsFeed.forEach(function(item, i, arr)
 		{
@@ -612,7 +612,7 @@ var EditNewsFeedModalShownHandler = function()
 		});
 
 	// --- zeroize tempSet for user at image_news table
-	$.getJSON('/cgi-bin/index.cgi?action=AJAX_prepareEditFeedImages', {messageID: editMessageID, imageTempSet: imageTempSet})
+	$.getJSON("/cgi-bin/index.cgi?action=AJAX_prepareEditFeedImages", {messageID: editMessageID, imageTempSet: imageTempSet})
 			.done(function(data) {
 				console.debug("EditNewsFeedModalShownHandler: $(document).getJSON(AJAX_cleanupFeedImages).done(): result = " + data.result);
 			});
@@ -626,7 +626,7 @@ var EditNewsFeedModalRemoveImage = function(e)
 
 	$("div#rowPreviewImageID" + imageID).remove();
 
-	$.getJSON('/cgi-bin/index.cgi?action=' + currAction, {imageID: imageID})
+	$.getJSON("/cgi-bin/index.cgi?action=" + currAction, {imageID: imageID})
 			.done(function(data) {
 				if(data.result == "success")
 				{
@@ -647,13 +647,13 @@ var EditNewsFeedModalHiddenHandler = function()
 	globalPostMessageImageList = [];
 
 	// --- set progress bar to 0 length
-	$('div.progress .progress-bar').css('width', '0%');
+	$("div.progress .progress-bar").css("width", "0%");
 
 	// --- clean-up error message
 	$("#newsFeedEditMessageError").empty().removeClass();
 
 	// --- cleanup picture list from the posted message
-	$.getJSON('/cgi-bin/index.cgi?action=AJAX_editCleanupFeedImages', {imageTempSet: imageTempSet})
+	$.getJSON("/cgi-bin/index.cgi?action=AJAX_editCleanupFeedImages", {imageTempSet: imageTempSet})
 			.done(function(data) {
 				console.debug("EditNewsFeedModalHiddenHandler: $(document).getJSON(AJAX_editCleanupFeedImages).done(): result = " + data.result);
 			});
@@ -661,7 +661,7 @@ var EditNewsFeedModalHiddenHandler = function()
 
 	// --- set var imageSet to NULL
 	imageTempSet = "";
-	$('#editFileupload').fileupload({formData: {imageTempSet: imageTempSet}});
+	$("#editFileupload").fileupload({formData: {imageTempSet: imageTempSet}});
 
 };
 
@@ -697,12 +697,12 @@ var	EditNewsFeedPostMessage = function ()
 		$("#NewsFeedMessageSubmit").button("loading");
 
 		$.ajax({
-				url: '/cgi-bin/index.cgi', 
-				type: 'POST',
-				dataType: 'json',
+				url: "/cgi-bin/index.cgi", 
+				type: "POST",
+				dataType: "json",
 				data: 
 				{
-					action: 'AJAX_updateNewsFeedMessage',
+					action: "AJAX_updateNewsFeedMessage",
 					newsFeedMessageID:	 $("#editNewsFeedMessageSubmit").data("messageID"),
 					newsFeedMessageTitle:  $("#editNewsFeedMessageTitle").val(),
 					newsFeedMessageLink:   $("#editNewsFeedMessageLink").val(),
@@ -741,7 +741,7 @@ var DeleteMessage = function(messageID)
 	// --- improve user experience by removing message immediately
 	// --- on a slow speed links users can continue seeing it some time
 	$("div#message" + messageID).parent().empty();
-	$.getJSON('/cgi-bin/index.cgi?action=AJAX_deleteNewsFeedMessage', {messageID: messageID})
+	$.getJSON("/cgi-bin/index.cgi?action=AJAX_deleteNewsFeedMessage", {messageID: messageID})
 	 		.done(function(data) 
 	 		{
 				if(data.result == "success")
@@ -750,14 +750,14 @@ var DeleteMessage = function(messageID)
 				}
 				else
 				{
-					console.error("DeleteMessage: getJSON(AJAX_deleteNewsFeedMessage).done():ERROR [" + data.description + "]")
+					console.error("DeleteMessage: getJSON(AJAX_deleteNewsFeedMessage).done():ERROR [" + data.description + "]");
 				}
 			});
 };
 
 var DeleteMessageComment = function(commentID) 
 {
-	$.getJSON('/cgi-bin/index.cgi?action=AJAX_deleteNewsFeedComment', {commentID: commentID})
+	$.getJSON("/cgi-bin/index.cgi?action=AJAX_deleteNewsFeedComment", {commentID: commentID})
 	 		.done(function(data) 
 	 		{
 				if(data.result == "success")
@@ -773,7 +773,7 @@ var DeleteMessageComment = function(commentID)
 				}
 				else
 				{
-					console.error("DeleteMessageComment: getJSON(AJAX_deleteNewsFeedComment).done():ERROR [" + data.description + "]")
+					console.error("DeleteMessageComment: getJSON(AJAX_deleteNewsFeedComment).done():ERROR [" + data.description + "]");
 				}
 			});
 };
@@ -801,8 +801,8 @@ var NewMessageModalFreezeAllFields = function()
 	$("#newsFeedMessageLink").attr("disabled", "");
 	$("#newsFeedMessageText").attr("disabled", "");
 
-	$("#newsFeed_NewMessageLink_GetDataButton").button('loading');
-	$("#NewsFeedMessageSubmit").button('loading');
+	$("#newsFeed_NewMessageLink_GetDataButton").button("loading");
+	$("#NewsFeedMessageSubmit").button("loading");
 };
 
 var NewMessageModalResetLayout = function()
@@ -811,8 +811,8 @@ var NewMessageModalResetLayout = function()
 	$("#newsFeedMessageLink").removeAttr("disabled");
 	$("#newsFeedMessageText").removeAttr("disabled");
 
-	$("#newsFeed_NewMessageLink_GetDataButton").button('reset');
-	$("#NewsFeedMessageSubmit").button('reset');
+	$("#newsFeed_NewMessageLink_GetDataButton").button("reset");
+	$("#NewsFeedMessageSubmit").button("reset");
 };
 
 var GetDataFromProvidedURL = function()
@@ -823,7 +823,7 @@ var GetDataFromProvidedURL = function()
 	{
 		NewMessageModalFreezeAllFields();
 
-		$.getJSON('/cgi-bin/index.cgi?action=AJAX_getURLMetaData', {url: newMessageURL, imageTempSet: imageTempSet})
+		$.getJSON("/cgi-bin/index.cgi?action=AJAX_getURLMetaData", {url: newMessageURL, imageTempSet: imageTempSet})
 		 		.done(function(data) {
 					if(data.result == "success")
 					{
@@ -928,7 +928,7 @@ var GetDataFromProvidedURL = function()
 				$("#newsFeedMessageLink").popover("destroy");
 			}, 3000);
 	}
-}
+};
 
 var isUserAvatarExist = function()
 {
@@ -942,7 +942,7 @@ var isUserAvatarExist = function()
 		return false; // --- UserAvatar needed to update
 	}
 	return true; // --- UserAvatar don't need to update
-}
+};
 
 var isUsernameExist = function()
 {
@@ -964,18 +964,18 @@ var isUsernameExist = function()
 		return false; // --- Username needed to update
 	}
 	return true; // --- Username don't need to update
-}
+};
 
 var UsernameUpdate = function()
 {
-	var firstName = $("#UsernameCredentialsFirstName").val();;
-	var lastName = $("#UsernameCredentialsLastName").val();;
+	var firstName = $("#UsernameCredentialsFirstName").val();
+	var lastName = $("#UsernameCredentialsLastName").val();
 
 	$("#myFirstName").text(firstName);
 	$("#myLastName").text(lastName);
 
 
-	$.getJSON('/cgi-bin/index.cgi?action=AJAX_updateFirstLastName', {firstName: firstName, lastName: lastName})
+	$.getJSON("/cgi-bin/index.cgi?action=AJAX_updateFirstLastName", {firstName: firstName, lastName: lastName})
 	 		.done(function(data) {
 				console.debug("UsernameUpdateClickHandler: getJSON(AJAX_updateFirstLastName).done(): receive answer from server on 'like' click");
 
@@ -984,7 +984,7 @@ var UsernameUpdate = function()
 				}
 			});
 
-}
+};
 
 var BuildFriendBlock = function(item)
 {
@@ -998,8 +998,8 @@ var BuildFriendBlock = function(item)
 	tagCompanyLink	= $("<a>").attr("href", "/view_company?id=" + item["friendCompanyID"]);
 	tagPhotoCanvas	= $("<canvas>")	.attr("width", "40")
 									.attr("height", "40")
-									.addClass('canvas-big-avatar')
-									.addClass('canvas-width40px');
+									.addClass("canvas-big-avatar")
+									.addClass("canvas-width40px");
 	tagMainInfo		= $("<div/>")	.addClass("col-md-10 col-xs-10 container ");
 
 	tagContainer	.append(tagRowContainer);
@@ -1024,7 +1024,7 @@ var BuildFriendBlock = function(item)
 
 	result = tagContainer;
 	return result;
-}
+};
 
 var	IsMeHere = function(arr)
 {
@@ -1040,7 +1040,7 @@ var	IsMeHere = function(arr)
 		}
 	);
 	return result;
-}
+};
 
 var ButtonLikeRender = function(buttonLike)
 {
@@ -1054,7 +1054,7 @@ var ButtonLikeRender = function(buttonLike)
 				.append(spanLike)
 				.append(" " + listLikedUser.length + " ")
 				.append((IsMeHere(listLikedUser)) ? "мне нравится " : "");
-}
+};
 
 var ButtonLikeTooltipTitle = function(buttonLike)
 {
@@ -1096,7 +1096,7 @@ var ButtonLikeTooltipTitle = function(buttonLike)
 	);
 
 	return strUserList;
-}
+};
 
 var ButtonMessageLikeClickHandler = function ()
 {
@@ -1130,7 +1130,7 @@ var ButtonMessageLikeClickHandler = function ()
 
 	ButtonLikeRender(buttonLike);
 
-	$.getJSON('/cgi-bin/index.cgi?action=JSON_ClickLikeHandler', {messageId: buttonLike.data().messageId, messageLikeType: messageLikeType})
+	$.getJSON("/cgi-bin/index.cgi?action=JSON_ClickLikeHandler", {messageId: buttonLike.data().messageId, messageLikeType: messageLikeType})
 	 		.done(function(data) {
 				console.debug("ButtonMessageLikeClickHandler: getJSON(JSON_ClickLikeHandler).done(): receive answer from server on 'like' click");
 
@@ -1142,11 +1142,11 @@ var ButtonMessageLikeClickHandler = function ()
 					buttonLike.attr("title", ButtonLikeTooltipTitle(buttonLike));
 					if(ButtonLikeTooltipTitle(buttonLike) != "")
 					{
-						setTimeout(function() { buttonLike.tooltip(); }, 1000)
+						setTimeout(function() { buttonLike.tooltip(); }, 1000);
 					}
 				}
 			});
-}
+};
 
 var WriteCommentButtonHandler = function()
 {
@@ -1183,7 +1183,7 @@ var WriteCommentButtonHandler = function()
 			});
 
 
-		$.getJSON('/cgi-bin/index.cgi', {action: action, comment: replyToUserList.join('') + comment, messageID: messageID})
+		$.getJSON("/cgi-bin/index.cgi", {action: action, comment: replyToUserList.join("") + comment, messageID: messageID})
 				.done(function(data) {
 					console.debug("WriteCommentButtonHandler: done(): result = " + data.result);
 
@@ -1270,7 +1270,7 @@ var ButtonViewMessageClickHandler = function ()
 		{
 			BuildCarousel(messageObject.messageImageList, $("#divNewsFeedMessageBody"));
 			setTimeout(function() {
-				$("#divNewsFeedMessageBody div.carousel.slide[data-ride='carousel']").carousel('pause');
+				$("#divNewsFeedMessageBody div.carousel.slide[data-ride='carousel']").carousel("pause");
 			}, 1000);
 			
 		}
@@ -1281,7 +1281,7 @@ var ButtonViewMessageClickHandler = function ()
 
 		LazyImageLoad();
 	}
-}
+};
 
 var ButtonViewBookClickHandler = function ()
 {
@@ -1307,14 +1307,14 @@ var ButtonViewBookClickHandler = function ()
 												.data("usersBooksID", usersBooksID)
 												.data("action", "AJAX_commentOnBookInNewsFeed");
 
-		RenderBookMainInfo(bookObject, $("#divNewsFeedMessageBody"))
+		RenderBookMainInfo(bookObject, $("#divNewsFeedMessageBody"));
 
 	}
 	else
 	{
-		console.error("ERROR: can't find bookID[" + bookID + "]")
+		console.error("ERROR: can't find bookID[" + bookID + "]");
 	}
-}
+};
 
 var ButtonViewCertificationClickHandler = function ()
 {
@@ -1340,14 +1340,14 @@ var ButtonViewCertificationClickHandler = function ()
 												.data("usersCertificationID", usersCertificationID)
 												.data("action", "AJAX_commentOnCertificationInNewsFeed");
 
-		RenderCertificationMainInfo(certificationObject, $("#divNewsFeedMessageBody"))
+		RenderCertificationMainInfo(certificationObject, $("#divNewsFeedMessageBody"));
 
 	}
 	else
 	{
-		console.error("ERROR: can't find certificationTrackID[" + certificationTrackID + "]")
+		console.error("ERROR: can't find certificationTrackID[" + certificationTrackID + "]");
 	}
-}
+};
 
 var ButtonViewCourseClickHandler = function ()
 {
@@ -1373,14 +1373,14 @@ var ButtonViewCourseClickHandler = function ()
 												.data("usersCourseID", usersCourseID)
 												.data("action", "AJAX_commentOnCourseInNewsFeed");
 
-		RenderCourseMainInfo(courseObject, $("#divNewsFeedMessageBody"))
+		RenderCourseMainInfo(courseObject, $("#divNewsFeedMessageBody"));
 
 	}
 	else
 	{
-		console.error("ERROR: can't find courseTrackID[" + courseTrackID + "]")
+		console.error("ERROR: can't find courseTrackID[" + courseTrackID + "]");
 	}
-}
+};
 
 var ButtonViewLanguageClickHandler = function ()
 {
@@ -1406,14 +1406,14 @@ var ButtonViewLanguageClickHandler = function ()
 												.data("usersLanguageID", usersLanguageID)
 												.data("action", "AJAX_commentOnLanguageInNewsFeed");
 
-		RenderLanguageMainInfo(languageObject, $("#divNewsFeedMessageBody"))
+		RenderLanguageMainInfo(languageObject, $("#divNewsFeedMessageBody"));
 
 	}
 	else
 	{
-		console.error("ERROR: can't find languageID[" + languageID + "]")
+		console.error("ERROR: can't find languageID[" + languageID + "]");
 	}
-}
+};
 
 var ButtonViewCompanyClickHandler = function ()
 {
@@ -1439,14 +1439,14 @@ var ButtonViewCompanyClickHandler = function ()
 												.data("usersCompanyID", usersCompanyID)
 												.data("action", "AJAX_commentOnCompanyInNewsFeed");
 
-		RenderCompanyMainInfo(companyObject, $("#divNewsFeedMessageBody"))
+		RenderCompanyMainInfo(companyObject, $("#divNewsFeedMessageBody"));
 
 	}
 	else
 	{
-		console.error("ERROR: can't find companyID[" + companyID + "]")
+		console.error("ERROR: can't find companyID[" + companyID + "]");
 	}
-}
+};
 
 
 var ButtonViewScienceDegreeClickHandler = function ()
@@ -1473,14 +1473,14 @@ var ButtonViewScienceDegreeClickHandler = function ()
 												.data("scienceDegreeUniversityID", scienceDegreeUniversityID)
 												.data("action", "AJAX_commentOnScienceDegreeInNewsFeed");
 
-		RenderScienceDegreeMainInfo(scienceDegreeObject, $("#divNewsFeedMessageBody"))
+		RenderScienceDegreeMainInfo(scienceDegreeObject, $("#divNewsFeedMessageBody"));
 
 	}
 	else
 	{
-		console.error("ERROR: can't find scienceDegreeID[" + scienceDegreeID + "]")
+		console.error("ERROR: can't find scienceDegreeID[" + scienceDegreeID + "]");
 	}
-}
+};
 
 
 // --- function adds user from this tag to ReplyTo field
@@ -1541,7 +1541,7 @@ var AddCommentOwnerToReply_ClickHandler = function(event)
 		console.error("ERROR: issue with looking for commentOwnerID or commentOwnerName");
 	}
 
-}
+};
 
 // --- build comments list
 // --- commentsArray - list  of comments
@@ -1614,7 +1614,7 @@ var BuildCommentsList = function(commentsArray, DOMtag)
 		}
 	
 	});
-}
+};
 
 // --- iOS based devices only
 // --- 1) modal open
@@ -1631,7 +1631,7 @@ var	Workaround_iOS_Scroll_Bug = function(isInit)
 		else
 			$("#viewNewsFeedMessage .modal-content").css("min-height", "");
 	}
-}
+};
 
 // --- clean-up & build comments list
 // --- messageID - comments to message
@@ -1642,7 +1642,7 @@ var RefreshMessageCommentsList = function(messageID)
 	$("#divNewsFeedMessageComments").text("");
 	Workaround_iOS_Scroll_Bug(true);
 
-	$.getJSON('/cgi-bin/index.cgi?action=JSON_getCommentsOnMessage', {messageID: messageID})
+	$.getJSON("/cgi-bin/index.cgi?action=JSON_getCommentsOnMessage", {messageID: messageID})
 	.done(function(data) {
 		if(data.result == "success")
 		{
@@ -1667,13 +1667,13 @@ var RefreshMessageCommentsList = function(messageID)
 		}
 		else
 		{
-			console.error("ERROR returned from JSON_getCommentsOnMessage (" + data.description + ")")
+			console.error("ERROR returned from JSON_getCommentsOnMessage (" + data.description + ")");
 		}
 	})
 	.fail(function() {
 		console.error("ERROR: parsing JSON response from server");
 	});
-}
+};
 
 // --- clean-up & build comments list
 // --- bookID - comments to book
@@ -1682,7 +1682,7 @@ var RefreshBookCommentsList = function(bookID)
 	$("#textareaNewsFeedViewMessage").val("");
 	$("#divNewsFeedMessageReplyTo").empty("");
 	$("#divNewsFeedMessageComments").text("");
-	$.getJSON('/cgi-bin/index.cgi?action=JSON_getCommentsOnBook', {messageID: bookID})
+	$.getJSON("/cgi-bin/index.cgi?action=JSON_getCommentsOnBook", {messageID: bookID})
 	.done(function(data) {
 		if(data.result == "success")
 		{
@@ -1702,13 +1702,13 @@ var RefreshBookCommentsList = function(bookID)
 		}
 		else
 		{
-			console.error("ERROR returned from JSON_getCommentsOnMessage (" + data.description + ")")
+			console.error("ERROR returned from JSON_getCommentsOnMessage (" + data.description + ")");
 		}
 	})
 	.fail(function() {
 		console.error("ERROR: parsing JSON response from server");
 	});
-}
+};
 
 // --- clean-up & build comments list
 // --- certificationID - comments to certification
@@ -1717,7 +1717,7 @@ var RefreshCertificationCommentsList = function(certificationID)
 	$("#textareaNewsFeedViewMessage").val("");
 	$("#divNewsFeedMessageReplyTo").empty("");
 	$("#divNewsFeedMessageComments").text("");
-	$.getJSON('/cgi-bin/index.cgi?action=JSON_getCommentsOnCertification', {messageID: certificationID})
+	$.getJSON("/cgi-bin/index.cgi?action=JSON_getCommentsOnCertification", {messageID: certificationID})
 	.done(function(data) {
 		if(data.result == "success")
 		{
@@ -1739,13 +1739,13 @@ var RefreshCertificationCommentsList = function(certificationID)
 		}
 		else
 		{
-			console.error("ERROR returned from JSON_getCommentsOnMessage (" + data.description + ")")
+			console.error("ERROR returned from JSON_getCommentsOnMessage (" + data.description + ")");
 		}
 	})
 	.fail(function() {
 		console.error("ERROR: parsing JSON response from server");
 	});
-}
+};
 
 // --- clean-up & build comments list
 // --- scienceDegreeID - comments to scienceDegree
@@ -1754,7 +1754,7 @@ var RefreshScienceDegreeCommentsList = function(scienceDegreeID)
 	$("#textareaNewsFeedViewMessage").val("");
 	$("#divNewsFeedMessageReplyTo").empty("");
 	$("#divNewsFeedMessageComments").text("");
-	$.getJSON('/cgi-bin/index.cgi?action=JSON_getCommentsOnScienceDegree', {messageID: scienceDegreeID})
+	$.getJSON("/cgi-bin/index.cgi?action=JSON_getCommentsOnScienceDegree", {messageID: scienceDegreeID})
 	.done(function(data) {
 		if(data.result == "success")
 		{
@@ -1774,13 +1774,13 @@ var RefreshScienceDegreeCommentsList = function(scienceDegreeID)
 		}
 		else
 		{
-			console.error("ERROR returned from JSON_getCommentsOnMessage (" + data.description + ")")
+			console.error("ERROR returned from JSON_getCommentsOnMessage (" + data.description + ")");
 		}
 	})
 	.fail(function() {
 		console.error("ERROR: parsing JSON response from server");
 	});
-}
+};
 
 // --- clean-up & build comments list
 // --- companyID - comments to company
@@ -1789,7 +1789,7 @@ var RefreshCompanyCommentsList = function(companyID)
 	$("#textareaNewsFeedViewMessage").val("");
 	$("#divNewsFeedMessageReplyTo").empty("");
 	$("#divNewsFeedMessageComments").text("");
-	$.getJSON('/cgi-bin/index.cgi?action=JSON_getCommentsOnCompany', {messageID: companyID})
+	$.getJSON("/cgi-bin/index.cgi?action=JSON_getCommentsOnCompany", {messageID: companyID})
 	.done(function(data) {
 		if(data.result == "success")
 		{
@@ -1809,13 +1809,13 @@ var RefreshCompanyCommentsList = function(companyID)
 		}
 		else
 		{
-			console.error("ERROR returned from JSON_getCommentsOnMessage (" + data.description + ")")
+			console.error("ERROR returned from JSON_getCommentsOnMessage (" + data.description + ")");
 		}
 	})
 	.fail(function() {
 		console.error("ERROR: parsing JSON response from server");
 	});
-}
+};
 
 // --- clean-up & build comments list
 // --- languageID - comments to language
@@ -1824,7 +1824,7 @@ var RefreshLanguageCommentsList = function(languageID)
 	$("#textareaNewsFeedViewMessage").val("");
 	$("#divNewsFeedMessageReplyTo").empty("");
 	$("#divNewsFeedMessageComments").text("");
-	$.getJSON('/cgi-bin/index.cgi?action=JSON_getCommentsOnLanguage', {messageID: languageID})
+	$.getJSON("/cgi-bin/index.cgi?action=JSON_getCommentsOnLanguage", {messageID: languageID})
 	.done(function(data) {
 		if(data.result == "success")
 		{
@@ -1844,13 +1844,13 @@ var RefreshLanguageCommentsList = function(languageID)
 		}
 		else
 		{
-			console.error("ERROR returned from JSON_getCommentsOnMessage (" + data.description + ")")
+			console.error("ERROR returned from JSON_getCommentsOnMessage (" + data.description + ")");
 		}
 	})
 	.fail(function() {
 		console.error("ERROR: parsing JSON response from server");
 	});
-}
+};
 
 // --- attach video placement to DOMtag
 // --- imageList - image list
@@ -1892,7 +1892,7 @@ var BuildVideoTag = function(imageList, DOMtag)
 		tagDivContainer.append(videoTag);
 		DOMtag.append(tagDivContainer);
 	} // --- end of carousel
-}
+};
 
 // --- attach youtube video placement to DOMtag
 // --- imageList - image list
@@ -1919,7 +1919,7 @@ var BuildYoutubeEmbedTag = function(imageList, DOMtag)
 		tagDivContainer.append(videoTag);
 		DOMtag.append(tagDivContainer);
 	} // --- end of carousel
-}
+};
 
 
 // --- attach Carousel to DOMtag
@@ -2012,7 +2012,7 @@ var BuildCarousel = function(imageList, DOMtag)
 						.append(tagARightCarouselControl);
 		DOMtag.append(tagDivCarousel);
 	} // --- end of carousel
-}
+};
 
 var GetAverageRating = function(ratingArr)
 {
@@ -2034,7 +2034,7 @@ var GetAverageRating = function(ratingArr)
 	}
 
 	return result;
-}
+};
 
 var GetTotalVoters = function(ratingArr)
 {
@@ -2045,14 +2045,14 @@ var GetTotalVoters = function(ratingArr)
 	});
 
 	return ratingItemsCount;
-}
+};
 
 
 var RenderBookMainInfo = function(jsonBook, DOMtag)
 {
 	var		ratingCallback = function(rating)
 							{
-								$.getJSON('/cgi-bin/book.cgi?action=AJAX_setBookRating', {bookID: bookID, rating: rating, rand: Math.round(Math.random() * 100000000)})
+								$.getJSON("/cgi-bin/book.cgi?action=AJAX_setBookRating", {bookID: bookID, rating: rating, rand: Math.round(Math.random() * 100000000)})
 								.done(function(data) {
 									if(data.result == "success")
 									{
@@ -2072,7 +2072,7 @@ var RenderBookMainInfo = function(jsonBook, DOMtag)
 									}
 									else
 									{
-									  console.error("ratingCallback:ERROR: " + data.description)
+									  console.error("ratingCallback:ERROR: " + data.description);
 									}
 								});
 
@@ -2164,7 +2164,7 @@ var RenderBookMainInfo = function(jsonBook, DOMtag)
 			.append(divMain);
 	DOMtag	.append(divRow);
 	// --- book body end
-}
+};
 
 var RenderCertificationMainInfo = function(jsonCertification, DOMtag)
 {
@@ -2197,7 +2197,7 @@ var RenderCertificationMainInfo = function(jsonCertification, DOMtag)
 			.append(divMain);
 	DOMtag	.append(divRow);
 	// --- certification body end
-}
+};
 
 var RenderGroupMainInfo = function(jsonGroup, DOMtag)
 {
@@ -2231,7 +2231,7 @@ var RenderGroupMainInfo = function(jsonGroup, DOMtag)
 			.append(divDescription);
 	DOMtag	.append(divRow);
 	// --- group body end
-}
+};
 
 var RenderCompanySubscriptionMainInfo = function(jsonCompany, DOMtag)
 {
@@ -2262,7 +2262,7 @@ var RenderCompanySubscriptionMainInfo = function(jsonCompany, DOMtag)
 			.append(divMain);
 	DOMtag	.append(divRow);
 	// --- company body end
-}
+};
 
 var RenderCourseMainInfo = function(jsonCourse, DOMtag)
 {
@@ -2275,7 +2275,7 @@ var RenderCourseMainInfo = function(jsonCourse, DOMtag)
 
 	var		ratingCallback = function(rating)
 							{
-								$.getJSON('/cgi-bin/index.cgi?action=AJAX_setCourseRating', {courseID: courseID, rating: rating, rand: Math.round(Math.random() * 100000000)})
+								$.getJSON("/cgi-bin/index.cgi?action=AJAX_setCourseRating", {courseID: courseID, rating: rating, rand: Math.round(Math.random() * 100000000)})
 								.done(function(data) {
 									if(data.result == "success")
 									{
@@ -2295,7 +2295,7 @@ var RenderCourseMainInfo = function(jsonCourse, DOMtag)
 									}
 									else
 									{
-									  console.error("ratingCallback:ERROR: " + data.description)
+									  console.error("ratingCallback:ERROR: " + data.description);
 									}
 								});
 
@@ -2340,7 +2340,7 @@ var RenderCourseMainInfo = function(jsonCourse, DOMtag)
 
 	DOMtag	.append(divRow);
 	// --- course body end
-}
+};
 
 var RenderScienceDegreeMainInfo = function(jsonScienceDegree, DOMtag)
 {
@@ -2390,7 +2390,7 @@ var RenderScienceDegreeMainInfo = function(jsonScienceDegree, DOMtag)
 			.append(divMain);
 	DOMtag	.append(divRow);
 	// --- scienceDegree body end
-}
+};
 
 var RenderLanguageMainInfo = function(jsonLanguage, DOMtag)
 {
@@ -2421,7 +2421,7 @@ var RenderLanguageMainInfo = function(jsonLanguage, DOMtag)
 			.append(divMain);
 	DOMtag	.append(divRow);
 	// --- language body end
-}
+};
 
 var RenderCompanyMainInfo = function(jsonCompany, DOMtag)
 {
@@ -2452,7 +2452,7 @@ var RenderCompanyMainInfo = function(jsonCompany, DOMtag)
 			.append(divMain);
 	DOMtag	.append(divRow);
 	// --- company body end
-}
+};
 
 
 
@@ -2464,12 +2464,12 @@ var RenderBookBody = function(jsonBook, DOMtag)
 	// --- assign bookID to be able to scroll to this book
 	DOMtag.attr("id", "book" + jsonBook.bookID);
 
-	RenderBookMainInfo(jsonBook, DOMtag)
+	RenderBookMainInfo(jsonBook, DOMtag);
 
 	{
 	// --- like, comment, delete, edit buttons
 
-		var		tagDiv6_1 = $("<div>")
+		var		tagDiv6_1 = $("<div>");
 		var		tagSpan7_1 = $("<span/>");
 		var		buttonLike = $("<button/>").attr("type", "button")
 										.addClass("btn btn-link")
@@ -2504,7 +2504,7 @@ var RenderBookBody = function(jsonBook, DOMtag)
 				.append(" " + jsonBook["bookCommentsCount"] + "");
 
 	} // --- end like, comment
-}
+};
 
 // --- build group block 
 // --- used for group and citing
@@ -2513,8 +2513,8 @@ var RenderGroupBody = function(jsonGroup, DOMtag)
 	// --- assign groupID to be able to scroll to this group
 	DOMtag.attr("id", "group" + jsonGroup.groupID);
 
-	RenderGroupMainInfo(jsonGroup, DOMtag)
-}
+	RenderGroupMainInfo(jsonGroup, DOMtag);
+};
 
 // --- build company block 
 // --- used for company and citing
@@ -2523,8 +2523,8 @@ var RenderCompanySubscriptionBody = function(jsonCompany, DOMtag)
 	// --- assign groupID to be able to scroll to this company
 	DOMtag.attr("id", "company" + jsonCompany.groupID);
 
-	RenderCompanySubscriptionMainInfo(jsonCompany, DOMtag)
-}
+	RenderCompanySubscriptionMainInfo(jsonCompany, DOMtag);
+};
 
 // --- build certification block 
 // --- used for certification and citing
@@ -2536,14 +2536,14 @@ var RenderCertificationBody = function(jsonCertification, DOMtag)
 	var			divLogo = $("<div>").addClass("col-xs-4 col-sm-2");
 	var			imgLogo;
 
-	if(jsonCertification.certificationID && jsonCertification.certificationID.length) DOMtag.attr("id", "certification" + jsonCertification.certificationID)
+	if(jsonCertification.certificationID && jsonCertification.certificationID.length) DOMtag.attr("id", "certification" + jsonCertification.certificationID);
 
 	RenderCertificationMainInfo(jsonCertification, DOMtag);
 
 	{
 	// --- like, comment, delete, edit buttons
 
-		var		tagDiv6_1 = $("<div>")
+		var		tagDiv6_1 = $("<div>");
 		var		tagSpan7_1 = $("<span/>");
 		var		buttonLike = $("<button/>").attr("type", "button")
 										.addClass("btn btn-link")
@@ -2579,7 +2579,7 @@ var RenderCertificationBody = function(jsonCertification, DOMtag)
 
 	} // --- end like, comment
 
-}
+};
 
 // --- build course block 
 // --- used for course and citing
@@ -2591,15 +2591,15 @@ var RenderCourseBody = function(jsonCourse, DOMtag)
 	var			divLogo = $("<div>").addClass("col-xs-4 col-sm-2");
 	var			imgLogo;
 
-	if(jsonCourse.usersCourseID && jsonCourse.usersCourseID.length) DOMtag.attr("id", "usercourse" + jsonCourse.usersCourseID)
-	if(jsonCourse.courseID && jsonCourse.courseID.length) DOMtag.append("<div id=\"course" + jsonCourse.courseID + "\"></div>")
+	if(jsonCourse.usersCourseID && jsonCourse.usersCourseID.length) DOMtag.attr("id", "usercourse" + jsonCourse.usersCourseID);
+	if(jsonCourse.courseID && jsonCourse.courseID.length) DOMtag.append("<div id=\"course" + jsonCourse.courseID + "\"></div>");
 
 	RenderCourseMainInfo(jsonCourse, DOMtag);
 
 	{
 	// --- like, comment, delete, edit buttons
 
-		var		tagDiv6_1 = $("<div>")
+		var		tagDiv6_1 = $("<div>");
 		var		tagSpan7_1 = $("<span/>");
 		var		buttonLike = $("<button/>").attr("type", "button")
 										.addClass("btn btn-link")
@@ -2635,7 +2635,7 @@ var RenderCourseBody = function(jsonCourse, DOMtag)
 
 	} // --- end like, comment
 
-}
+};
 
 
 // --- build scienceDegree block 
@@ -2651,15 +2651,15 @@ var RenderScienceDegreeBody = function(jsonScienceDegree, DOMtag)
 
 
 	// --- assign scienceDegreeID to be able to scroll to this scienceDegree
-	if(jsonScienceDegree.scienceDegreeID && jsonScienceDegree.scienceDegreeID.length) DOMtag.attr("id", "scienceDegree" + jsonScienceDegree.scienceDegreeID)
-	if(jsonScienceDegree.scienceDegreeUniversityID && jsonScienceDegree.scienceDegreeUniversityID.length) DOMtag.append("<div id=\"university" + jsonScienceDegree.scienceDegreeUniversityID + "\"></div>")
+	if(jsonScienceDegree.scienceDegreeID && jsonScienceDegree.scienceDegreeID.length) DOMtag.attr("id", "scienceDegree" + jsonScienceDegree.scienceDegreeID);
+	if(jsonScienceDegree.scienceDegreeUniversityID && jsonScienceDegree.scienceDegreeUniversityID.length) DOMtag.append("<div id=\"university" + jsonScienceDegree.scienceDegreeUniversityID + "\"></div>");
 
 	RenderScienceDegreeMainInfo(jsonScienceDegree, DOMtag);
 
 	{
 	// --- like, comment, delete, edit buttons
 
-		var		tagDiv6_1 = $("<div>")
+		var		tagDiv6_1 = $("<div>");
 		var		tagSpan7_1 = $("<span/>");
 		var		buttonLike = $("<button/>").attr("type", "button")
 										.addClass("btn btn-link")
@@ -2695,7 +2695,7 @@ var RenderScienceDegreeBody = function(jsonScienceDegree, DOMtag)
 
 	} // --- end like, comment
 
-}
+};
 
 // --- build language block 
 // --- used for language and citing
@@ -2715,7 +2715,7 @@ var RenderLanguageBody = function(jsonLanguage, DOMtag)
 	{
 	// --- like, comment, delete, edit buttons
 
-		var		tagDiv6_1 = $("<div>")
+		var		tagDiv6_1 = $("<div>");
 		var		tagSpan7_1 = $("<span/>");
 		var		buttonLike = $("<button/>").attr("type", "button")
 										.addClass("btn btn-link")
@@ -2751,7 +2751,7 @@ var RenderLanguageBody = function(jsonLanguage, DOMtag)
 
 	} // --- end like, comment
 
-}
+};
 
 // --- build company block 
 // --- used for company and citing
@@ -2771,7 +2771,7 @@ var RenderCompanyBody = function(jsonCompany, DOMtag)
 	{
 	// --- like, comment, delete, edit buttons
 
-		var		tagDiv6_1 = $("<div>")
+		var		tagDiv6_1 = $("<div>");
 		var		tagSpan7_1 = $("<span/>");
 		var		buttonLike = $("<button/>").attr("type", "button")
 										.addClass("btn btn-link")
@@ -2807,14 +2807,14 @@ var RenderCompanyBody = function(jsonCompany, DOMtag)
 
 	} // --- end like, comment
 
-}
+};
 
 // --- build message block 
 // --- used for message and citing
 var RenderMessageBody = function(jsonMessage, DOMtag)
 {
 	// --- assign MessageID to be able to scroll to this message
-	if(jsonMessage.messageId && jsonMessage.messageId.length) DOMtag.attr("id", "message" + jsonMessage.messageId)
+	if(jsonMessage.messageId && jsonMessage.messageId.length) DOMtag.attr("id", "message" + jsonMessage.messageId);
 	// --- Message post
 	if(jsonMessage["messageTitle"] != "")
 	{
@@ -2847,7 +2847,7 @@ var RenderMessageBody = function(jsonMessage, DOMtag)
 
 	// --- like, comment, delete, edit buttons
 	{
-		var		tagDivMain = $("<div>")
+		var		tagDivMain = $("<div>");
 		var		tagSpanLike = $("<span/>");
 		var		buttonLike = $("<button/>").attr("type", "button")
 										.addClass("btn btn-link")
@@ -2916,7 +2916,7 @@ var RenderMessageBody = function(jsonMessage, DOMtag)
 		}
 	} // --- end like, comment, edit, delete buttons
 
-}
+};
 
 var	GetHrefAttrFromSrcObj = function(jsonMessage)
 {
@@ -2927,7 +2927,7 @@ var	GetHrefAttrFromSrcObj = function(jsonMessage)
 				jsonMessage.srcObj.type == "group" ? "/group/" + jsonMessage.srcObj.link + "?rand=" + system_calls.GetUUID() : "";
 
 	return result;
-}
+};
 
 var	GetHrefAttrFromDstObj = function(jsonMessage)
 {
@@ -2938,7 +2938,7 @@ var	GetHrefAttrFromDstObj = function(jsonMessage)
 				jsonMessage.dstObj.type == "group" ? "/group/" + jsonMessage.dstObj.link + "?rand=" + system_calls.GetUUID() : "";
 
 	return result;
-}
+};
 
 var BuildNewsFeedSingleBlock = function(item, i, arr)
 {
@@ -2978,7 +2978,7 @@ var BuildNewsFeedSingleBlock = function(item, i, arr)
 	canvasCtx = canvasSrcObj[0].getContext("2d");
 	if((typeof(jsonMessage.dstObj) == "object") && (typeof(jsonMessage.dstObj.type) == "string") && (jsonMessage.dstObj.type == "group"))
 	{
-		canvasSrcObj.addClass('canvas-big-avatar-corners');
+		canvasSrcObj.addClass("canvas-big-avatar-corners");
 		DrawCompanyAvatar(canvasCtx, jsonMessage.dstObj.avatar, jsonMessage.dstObj.name, jsonMessage.dstObj.nameLast);
 
 		hrefUsername.append(jsonMessage.dstObj.name + " " + jsonMessage.dstObj.nameLast)
@@ -2987,7 +2987,7 @@ var BuildNewsFeedSingleBlock = function(item, i, arr)
 	}
 	else if(jsonMessage.srcObj.type == "company")
 	{
-		canvasSrcObj.addClass('canvas-big-avatar-corners');
+		canvasSrcObj.addClass("canvas-big-avatar-corners");
 		DrawCompanyAvatar(canvasCtx, jsonMessage.srcObj.avatar, jsonMessage.srcObj.name, jsonMessage.srcObj.nameLast);
 
 		hrefUsername.append(jsonMessage.srcObj.companyType + " " + jsonMessage.srcObj.name + " " + jsonMessage.srcObj.nameLast)
@@ -2996,7 +2996,7 @@ var BuildNewsFeedSingleBlock = function(item, i, arr)
 	}
 	else
 	{
-		canvasSrcObj.addClass('canvas-big-avatar');
+		canvasSrcObj.addClass("canvas-big-avatar");
 		DrawUserAvatar(canvasCtx, jsonMessage.srcObj.avatar, jsonMessage.srcObj.name, jsonMessage.srcObj.nameLast);
 
 		hrefUsername.append(jsonMessage.srcObj.name + " " + jsonMessage.srcObj.nameLast)
@@ -3020,7 +3020,7 @@ var BuildNewsFeedSingleBlock = function(item, i, arr)
 
 		var	tagFriendLink = $("<a>").attr("href", "/userprofile/" + jsonMessage["friendID"]);
 
-		tagFriendLink.append(jsonMessage['friendName'] + " " + jsonMessage['friendNameLast']);
+		tagFriendLink.append(jsonMessage["friendName"] + " " + jsonMessage["friendNameLast"]);
 
 		tagDivMsgInfo.empty();
 		tagDivMsgInfo.append(spanTimestamp);
@@ -3125,7 +3125,7 @@ var BuildNewsFeedSingleBlock = function(item, i, arr)
 
 	$("#news_feed").append(divContainer);
 	spanTimestamp.tooltip({ animation: "animated bounceIn"});
-}
+};
 
 var BuildNewsFeed = function(data) 
 {
@@ -3142,13 +3142,13 @@ var BuildNewsFeed = function(data)
 	}
 
 	setTimeout(LazyImageLoad, 3000);
-}
+};
 
 var	ScrollToElementID = function(elementID)
 {
 	if((elementID.length > 1) && $(elementID).length) // --- elementID is "#XXXX"
 		system_calls.ScrollWindowToElementID(elementID);
-}
+};
 
 var	GetNewsFeedFromServer = function(cleanBeforeUpdate, scrollToElementID)
 {
@@ -3196,7 +3196,7 @@ var	GetNewsFeedFromServer = function(cleanBeforeUpdate, scrollToElementID)
 
 	if(action.length && cgiScript.length)
 	{
-		$.getJSON('/cgi-bin/' + cgiScript + '?action=' + action, cgiParams)
+		$.getJSON("/cgi-bin/" + cgiScript + "?action=" + action, cgiParams)
 			.done(function(data) {
 				if(data.status == "success")
 				{
@@ -3229,7 +3229,7 @@ var	GetNewsFeedFromServer = function(cleanBeforeUpdate, scrollToElementID)
 	{
 		console.error("GetNewsFeedFromServer:ERROR: action[" + action + "] or cgiScript[" + cgiScript + "] is empty");
 	}
-}
+};
 
 var	ZeroizeThenUpdateNewsFeedThenScrollTo = function(scrollToElementID)
 {
@@ -3238,7 +3238,7 @@ var	ZeroizeThenUpdateNewsFeedThenScrollTo = function(scrollToElementID)
 
 	globalPageCounter = 0;
 	GetNewsFeedFromServer(true, scrollToElementID);
-}
+};
 
 var HandlerScrollToShow = function() 
 {
@@ -3262,9 +3262,9 @@ var HandlerScrollToShow = function()
 			var		tag = $(this);
 			// console.debug("HandlerScrollToShow: carousel id [" + tag.attr('id') + "] top position is " + tag.offset().top + " compare to " + windowPosition + " - " + (windowPosition + clientHeight));
 			if((tag.offset().top >= windowPosition) && (tag.offset().top <= windowPosition + clientHeight))
-				tag.carousel('cycle');
+				tag.carousel("cycle");
 			else
-				tag.carousel('pause');
+				tag.carousel("pause");
 		});
 
 	// console.debug("HandlerScrollToShow: defining position of each carousel");
@@ -3285,7 +3285,7 @@ var HandlerScrollToShow = function()
 			else
 				tag.get(0).pause();
 		});
-}
+};
 
 var ZeroizeNewMessageModal = function()
 {
@@ -3294,7 +3294,7 @@ var ZeroizeNewMessageModal = function()
 	$("#newsFeed_NewMessageLink_GetDataButton").attr("disabled", "");
 	$("#newsFeedMessageText").val("");
 	$("[name=newsFeedAccessRights]:eq(0)").prop("checked", true);
-}
+};
 
 var	NewsFeedPostMessage = function () 
 {
@@ -3309,7 +3309,7 @@ var	NewsFeedPostMessage = function ()
 	}
 	else if(system_calls.LongestWordSize(title) > 37) // четырёхсотпятидесятисемимиллиметровое
 	{
-		var	lenghtyWord = system_calls.LongestWord(title)
+		var	lenghtyWord = system_calls.LongestWord(title);
 
 		$("#newsFeedMessageTitle").selectRange(title.search(lenghtyWord), title.search(lenghtyWord) + lenghtyWord.length);
 
@@ -3317,7 +3317,7 @@ var	NewsFeedPostMessage = function ()
 	}
 	else if(system_calls.LongestWordSize(text) > 37) // четырёхсотпятидесятисемимиллиметровое
 	{
-		var	lenghtyWord = system_calls.LongestWord(text)
+		var	lenghtyWord = system_calls.LongestWord(text);
 
 		$("#newsFeedMessageText").selectRange(text.search(lenghtyWord), text.search(lenghtyWord) + lenghtyWord.length);
 
@@ -3330,13 +3330,13 @@ var	NewsFeedPostMessage = function ()
 		$("#NewsFeedMessageSubmit").button("loading");
 
 		$.ajax({
-				url: '/cgi-bin/index.cgi', 
-				type: 'POST',
-				dataType: 'json',
+				url: "/cgi-bin/index.cgi", 
+				type: "POST",
+				dataType: "json",
 				cache: false,
 				data: 
 				{
-					action: 'AJAX_postNewsFeedMessage',
+					action: "AJAX_postNewsFeedMessage",
 					newsFeedMessageDstType: $("#news_feed").data("dsttype"),
 					newsFeedMessageDstID: $("#news_feed").data("dstid"),
 					newsFeedMessageSrcType: $("#srcEntity option:selected").data("srcType"),
@@ -3372,7 +3372,7 @@ var	NewsFeedPostMessage = function ()
 					$("#NewsFeedMessageSubmit").button("reset");
 				});
 	}
-}
+};
 
 var	GetCompanyName = function(companyID, companies)
 {
@@ -3386,7 +3386,7 @@ var	GetCompanyName = function(companyID, companies)
 	}
 
 	return result;
-}
+};
 
 // --- clean-up picture uploads environment
 var NewMessageNewsFeedModalShownHandler = function()
@@ -3400,21 +3400,21 @@ var NewMessageNewsFeedModalShownHandler = function()
 	Update_PostMessage_ListUnloaded(globalUploadImage_UnloadedList);
 
 	// $("#NewsFeedMessageSubmit").button('reset');
-	$("#NewsFeedMessageSubmit").text('Написать');
+	$("#NewsFeedMessageSubmit").text("Написать");
 
 	// --- clean-up preview pictures in PostMessage modal window 
 	$("#PostMessage_PreviewImage").empty();
 	globalPostMessageImageList = [];
 
 	// --- set progress bar to 0 length
-	$('#progress .progress-bar').css('width', '0%');
+	$("#progress .progress-bar").css("width", "0%");
 
 	// --- set var imageTempSet to random
 	imageTempSet = Math.floor(Math.random()*99999999);
-	$('#newMessageFileUpload').fileupload({formData: {imageTempSet: imageTempSet}});
+	$("#newMessageFileUpload").fileupload({formData: {imageTempSet: imageTempSet}});
 
 	// --- zeroize tempSet for user at image_news table
-	$.getJSON('/cgi-bin/index.cgi?action=AJAX_prepareFeedImages', {param1: ''})
+	$.getJSON("/cgi-bin/index.cgi?action=AJAX_prepareFeedImages", {param1: ""})
 			.done(function(data) {
 				if(data.result == "success")
 				{
@@ -3458,7 +3458,7 @@ var NewMessageNewsFeedModalShownHandler = function()
 
 	// --- enable all field for safety reason, just in case they were disabled earlier
 	NewMessageModalResetLayout();
-}
+};
 
 var	RenderSelectBoxWithUserAndCompanies = function(user, companies)
 {
@@ -3471,7 +3471,7 @@ var	RenderSelectBoxWithUserAndCompanies = function(user, companies)
 	});
 
 	return resultTag;
-}
+};
 
 // --- clean-up picture uploads environment
 var NewMessageNewsFeedModalHiddenHandler = function()
@@ -3481,13 +3481,13 @@ var NewMessageNewsFeedModalHiddenHandler = function()
 	globalPostMessageImageList = [];
 
 	// --- set progress bar to 0 length
-	$('#progress .progress-bar').css('width', '0%');
+	$("#progress .progress-bar").css("width", "0%");
 
 	// --- clean-up error message div
 	$("#newsFeedNewMessageError").empty().removeClass();
 
 	// --- cleanup picture list from the posted message
-	$.getJSON('/cgi-bin/index.cgi?action=AJAX_cleanupFeedImages', {imageTempSet: imageTempSet})
+	$.getJSON("/cgi-bin/index.cgi?action=AJAX_cleanupFeedImages", {imageTempSet: imageTempSet})
 			.done(function(data) {
 				console.debug("NewMessageNewsFeedModalHiddenHandler: $(document).getJSON(AJAX_cleanupFeedImages).done(): result = " + data.result);
 			});
@@ -3495,14 +3495,14 @@ var NewMessageNewsFeedModalHiddenHandler = function()
 
 	// --- set var imageSet to NULL
 	imageTempSet = "";
-	$('#newMessageFileUpload').fileupload({formData: {imageTempSet: imageTempSet}});
-}
+	$("#newMessageFileUpload").fileupload({formData: {imageTempSet: imageTempSet}});
+};
 
 // TODO: 2delete: debug function to check upload functionality
 var Update_PostMessage_ListUnloaded = function(arr2show)
 {
 	$(".PostMessage_ListUnloaded").text( arr2show.join(" , "));
-}
+};
 
 return {
 	Init:Init

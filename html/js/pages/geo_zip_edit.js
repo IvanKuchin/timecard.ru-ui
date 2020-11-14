@@ -1,6 +1,6 @@
 var	geo_zip_edit = function(suffix, spelling_title, action, callback_func)
 {
-	'use strict';
+	"use strict";
 
 	var	callback_global = (typeof(callback_func) == "function" ? callback_func : undefined);
 	var	suffix_global = suffix;
@@ -184,7 +184,7 @@ var	geo_zip_edit = function(suffix, spelling_title, action, callback_func)
 		if(country.length && region.length && locality.length && zip.length)
 		{
 			$.getJSON(
-				'/cgi-bin/ajax_anyrole_1.cgi',
+				"/cgi-bin/ajax_anyrole_1.cgi",
 				{
 					action: "AJAX_submitNewGeoZip",
 					country: country,
@@ -224,7 +224,7 @@ var	geo_zip_edit = function(suffix, spelling_title, action, callback_func)
 		if(zip.length && country.length)
 		{
 			$.getJSON(
-				'/cgi-bin/ajax_anyrole_1.cgi',
+				"/cgi-bin/ajax_anyrole_1.cgi",
 				{
 					action: "AJAX_getGeoRegionAndLocalityNames",
 					country: country,
@@ -257,7 +257,7 @@ var	geo_zip_edit = function(suffix, spelling_title, action, callback_func)
 		var	country = $("#geo_country_" + suffix_global).val();
 
 		$.getJSON(
-			'/cgi-bin/ajax_anyrole_1.cgi',
+			"/cgi-bin/ajax_anyrole_1.cgi",
 			{
 				action: "AJAX_getRegionAutocompleteList",
 				region: currentValue,
@@ -288,7 +288,7 @@ var	geo_zip_edit = function(suffix, spelling_title, action, callback_func)
 		var	region = $("#geo_region_" + suffix_global).val();
 
 		$.getJSON(
-			'/cgi-bin/ajax_anyrole_1.cgi',
+			"/cgi-bin/ajax_anyrole_1.cgi",
 			{
 				action: "AJAX_getLocalityAutocompleteList",
 				locality: currentValue,

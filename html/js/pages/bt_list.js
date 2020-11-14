@@ -2,7 +2,7 @@ var	bt_list = bt_list || {};
 
 var	bt_list = (function()
 {
-	'use strict';
+	"use strict";
 
 	var	user_type_global = "";
 	var	data_global;
@@ -64,7 +64,7 @@ var	bt_list = (function()
 		}
 		else
 		{
-			var		timeFormat = 'MM/DD/YYYY HH:mm';
+			var		timeFormat = "MM/DD/YYYY HH:mm";
 			var		bt_belongs_to_sow = [];
 			var		sow_id = sow.id;
 			var		customer_map 				= new Map();

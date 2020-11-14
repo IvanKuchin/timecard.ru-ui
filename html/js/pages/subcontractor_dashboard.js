@@ -3,7 +3,7 @@ var	subcontractor_dashboard = subcontractor_dashboard || {};
 
 var	subcontractor_dashboard = (function()
 {
-	'use strict';
+	"use strict";
 
 	var	data_global;
 
@@ -27,7 +27,7 @@ var	subcontractor_dashboard = (function()
 
 
 		$.getJSON(
-			'/cgi-bin/subcontractor.cgi',
+			"/cgi-bin/subcontractor.cgi",
 			{
 				"action":"AJAX_getDashboardData",
 			})
@@ -52,7 +52,7 @@ var	subcontractor_dashboard = (function()
 			});
 
 		$.getJSON(
-			'/cgi-bin/subcontractor.cgi',
+			"/cgi-bin/subcontractor.cgi",
 			{
 				"action":"AJAX_getDashboardPendingPayment",
 			})
@@ -77,7 +77,7 @@ var	subcontractor_dashboard = (function()
 			});
 
 		$.getJSON(
-			'/cgi-bin/subcontractor.cgi',
+			"/cgi-bin/subcontractor.cgi",
 			{
 				"action":"AJAX_getSoWList",
 				"include_tasks":"false",

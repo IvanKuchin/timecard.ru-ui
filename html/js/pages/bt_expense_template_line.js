@@ -1,6 +1,6 @@
 var	bt_expense_template_line_obj = function()
 {
-	'use strict';
+	"use strict";
 
 	var	data_global;
 	var	isRemovable = true;
@@ -416,7 +416,7 @@ var	bt_expense_template_line_obj = function()
 		curr_tag.attr("disabled", "");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: remove_button.data("action"),
 				id: remove_button.attr("data-id"),
