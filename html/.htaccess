@@ -38,6 +38,11 @@ RewriteRule ^helpdesk_dashboard$ /cgi-bin/helpdesk.cgi?action=helpdesk_dashboard
 RewriteRule ^initial_wizard$ /cgi-bin/index.cgi?action=initial_wizard [QSA]
 
 #
+# Helpdesk actions
+#
+RewriteRule ^helpdesk_edit_profile$ /cgi-bin/agency.cgi?action=edit_profile_template [QSA]
+
+#
 # profile by id (number)
 #
 RewriteRule ^userprofile/(.*)$ /cgi-bin/index.cgi?action=view_profile&userid=$1
