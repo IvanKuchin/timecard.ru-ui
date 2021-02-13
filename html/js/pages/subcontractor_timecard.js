@@ -665,6 +665,9 @@ var	subcontractor_timecard = (function()
 		var		i;
 		var		total_hours = 0;
 
+		var		current_sow_obj = common_timecard.GetSoWFromListBySoWID(data_global.sow, current_sow_global);
+		var		working_hours_per_day = parseFloat(current_sow_obj.working_hours_per_day);
+
 		row.append("<td></td>");
 		row.append("<td></td>");
 		row.append("<td>Сумма:</td>");
@@ -684,8 +687,8 @@ var	subcontractor_timecard = (function()
 				.append($("<td>")
 				.addClass("text_align_center")
 				.addClass(system_calls.GetDayClass(tempDate, data_global.holiday_calendar))
-				.addClass((day_hours == 8) ? "even_report" :
-						  (day_hours  > 8) ? "over_report" : "")
+				.addClass((day_hours == working_hours_per_day) ? "even_report" :
+						  (day_hours  > working_hours_per_day) ? "over_report" : "")
 				.append(day_hours || ""));
 		}
 

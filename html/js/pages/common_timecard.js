@@ -262,6 +262,26 @@ common_timecard = (function()
 		return (sow.status == "signed") && (start_date <= active_date) && (active_date <= end_date);
 	};
 
+	var	GetWorkingHoursPerDay_DOM = function(sow)
+	{
+		return $().add($("<span>").append("Рабочих часов в день: " + sow.working_hours_per_day));
+	};
+
+	var	GetSoWFromListBySoWID = function(sow_list, sow_id)
+	{
+		var	result;
+
+		for (var i = 0; i < sow_list.length; i++) {
+			if(sow_list[i].id == sow_id)
+			{
+				result = sow_list[i];
+				break;
+			}
+		}
+
+		return result;
+	};
+
 	return {
 		RenderDashboardPendingPayment: RenderDashboardPendingPayment,
 		GetSoWTitleRow: GetSoWTitleRow,
@@ -269,6 +289,8 @@ common_timecard = (function()
 		ToggleInputsWithIndex: ToggleInputsWithIndex,
 		GetEditableCustomFields_DOM: GetEditableCustomFields_DOM,
 		isSowActiveOnDate: isSowActiveOnDate,
+		GetWorkingHoursPerDay_DOM: GetWorkingHoursPerDay_DOM,
+		GetSoWFromListBySoWID: GetSoWFromListBySoWID,
 	};
 
 })();

@@ -224,6 +224,9 @@ var	subcontractor_sow_list = (function()
 
 					var		bt_expenses_div = $("<div>").addClass("form-group");
 
+					var		working_hours_per_day_row = $("<div>").addClass("row");
+					var		working_hours_per_day_col = $("<div>").addClass("col-xs-12");
+
 					var		sow_agreement_row = $("<div>").addClass("row __sow_agree_" + sow_item.id);
 					var		sow_agreement_col = $("<div>").addClass("col-xs-12");
 
@@ -329,6 +332,8 @@ var	subcontractor_sow_list = (function()
 						.append(system_calls.GetTimecardApprovers_DOM(sow_item));
 					bt_approvers_col
 						.append(system_calls.GetBTApprovers_DOM(sow_item));
+					working_hours_per_day_col
+						.append(common_timecard.GetWorkingHoursPerDay_DOM(sow_item));
 
 					bt_expenses_div.append(system_calls.GetBTExpenseTemplates_DOM(sow_item));
 
@@ -349,6 +354,7 @@ var	subcontractor_sow_list = (function()
 
 					collapsible_div
 						.append(top_shadow_div)
+						.append(working_hours_per_day_row.append(working_hours_per_day_col))
 						.append(timecard_approvers_row.append(timecard_approvers_col))
 						.append(canvas_row)
 						.append(bt_approvers_row.append(bt_approvers_col))

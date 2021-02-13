@@ -131,7 +131,7 @@ var	agency_approvals = (function()
 
 			for(var i = 0; i < data_global.sow.length; ++i)
 			{
-				var		timecard_list = GetTimecardListDOM(data_global.timecards, data_global.sow[i].id, filter, data_global.holiday_calendar);
+				var		timecard_list = GetTimecardListDOM(data_global.timecards, data_global.sow[i], filter, data_global.holiday_calendar);
 
 				if(timecard_list.length)
 				{
@@ -155,9 +155,11 @@ var	agency_approvals = (function()
 		return common_timecard.TimecardCollapsible_ClickHandler(e, data_global.holiday_calendar);
 	};
 
-	var	GetTimecardListDOM = function(timecard_list, sow_id, filter)
+	var	GetTimecardListDOM = function(timecard_list, sow, filter)
 	{
 		var		result = $();
+		var		sow_id = sow.id;
+		var		working_hours_per_day = parseFloat(sow.working_hours_per_day);
 
 		if((typeof(timecard_list) == "undefined"))
 		{
@@ -272,7 +274,7 @@ var	agency_approvals = (function()
 							var		task_names_arr = [];
 							var		status_icon = $("<i>").addClass("fa");
 							var		actual_work_hours = system_calls.GetSumHoursFromTimecard(timecard_item);
-							var		actual_work_days = system_calls.RoundedTwoDigitDiv(actual_work_hours, 8);
+							var		actual_work_days = system_calls.RoundedTwoDigitDiv(actual_work_hours, working_hours_per_day);
 
 							if(timecard_item.status == "approved")
 							{
@@ -330,7 +332,7 @@ var	agency_approvals = (function()
 								.append(system_calls.GetPayedDate_DOM(timecard_item));
 
 							collapsible_nested_col_timecard
-								.append(system_calls.GetTextedTimecard_DOM(timecard_item, data_global.holiday_calendar));
+								.append(system_calls.GetTextedTimecard_DOM(timecard_item, data_global.holiday_calendar, sow));
 
 							visible_row
 								.append(status_div.append(status_icon))

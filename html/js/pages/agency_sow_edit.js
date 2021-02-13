@@ -659,6 +659,9 @@ var	agency_sow_edit = (function()
 		$("#day_rate_subcontractor")
 			.attr("data-db_value", sow.day_rate)
 			.val(sow.day_rate);
+		$("#sow_working_hours_per_day")
+			.attr("data-db_value", sow.working_hours_per_day)
+			.val(sow.working_hours_per_day);
 		$("#company_position")
 			.attr("data-db_value", sow.company_positions[0].title)
 			.val(sow.company_positions[0].title);
@@ -676,6 +679,7 @@ var	agency_sow_edit = (function()
 		$("#payment_period_service")	.attr("data-script", "agency.cgi");
 		$("#payment_period_bt")			.attr("data-script", "agency.cgi");
 		$("#day_rate_subcontractor")	.attr("data-script", "agency.cgi");
+		$("#sow_working_hours_per_day")	.attr("data-script", "agency.cgi");
 		$("#company_position")			.attr("data-script", "agency.cgi");
 
 		$(".sow_sign_date")				.attr("data-id", "000");
@@ -685,6 +689,7 @@ var	agency_sow_edit = (function()
 		$("#payment_period_service")	.attr("data-id", "000");
 		$("#payment_period_bt")			.attr("data-id", "000");
 		$("#day_rate_subcontractor")	.attr("data-id", "000");
+		$("#sow_working_hours_per_day")	.attr("data-id", "000");
 		$("#company_position")			.attr("data-id", "000");
 
 
@@ -695,6 +700,7 @@ var	agency_sow_edit = (function()
 		$("#payment_period_service")	.attr("data-sow_id", sow.id);
 		$("#payment_period_bt")			.attr("data-sow_id", sow.id);
 		$("#day_rate_subcontractor")	.attr("data-sow_id", sow.id);
+		$("#sow_working_hours_per_day")	.attr("data-sow_id", sow.id);
 		$("#company_position")			.attr("data-sow_id", sow.id);
 
 		$(".sow_sign_date")				.attr("data-action", "AJAX_updateSoWSignDate");
@@ -704,6 +710,7 @@ var	agency_sow_edit = (function()
 		$("#payment_period_service")	.attr("data-action", "AJAX_updateSoWPaymentPeriodService");
 		$("#payment_period_bt")			.attr("data-action", "AJAX_updateSoWPaymentPeriodBT");
 		$("#day_rate_subcontractor")	.attr("data-action", "AJAX_updateSoWDayRate");
+		$("#sow_working_hours_per_day")	.attr("data-action", "AJAX_updateSoWWorkingHoursPerDay");
 		$("#company_position")			.attr("data-action", "AJAX_updateSoWPosition");
 
 		$(".sow_sign_date")				.on("change", system_calls.UpdateInputFieldOnServer);
@@ -713,8 +720,9 @@ var	agency_sow_edit = (function()
 		$("#payment_period_service")	.on("change", system_calls.UpdateInputFieldOnServer);
 		$("#payment_period_bt")			.on("change", system_calls.UpdateInputFieldOnServer);
 		$("#company_position")			.on("change", system_calls.UpdateInputFieldOnServer)
-										.on("input", system_calls.Position_InputHandler);
+										.on("input",  system_calls.Position_InputHandler);
 		$("#day_rate_subcontractor")	.on("change", UpdateDayRate);
+		$("#sow_working_hours_per_day")	.on("change", system_calls.UpdateInputFieldOnServer);
 
 	};
 
