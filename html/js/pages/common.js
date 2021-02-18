@@ -1,6 +1,7 @@
-/*jslint devel: true, indent: 4, maxerr: 50*/
-/*global EXIF, module, define*/
-/*exported CustomersProjectsTasks_Select*/
+/* jslint devel: true, indent: 4, maxerr: 50 */
+/* global EXIF, module, define */
+/* exported CustomersProjectsTasks_Select */
+
 
 // --- change it in (chat.js, common.js, localy.h)
 var FREQUENCY_ECHO_REQUEST = 60;
@@ -4706,6 +4707,7 @@ system_calls = (function()
 		GetEditableSoWCustomField_DOM: GetEditableSoWCustomField_DOM,
 		GetEditablePSoWCustomField_DOM: GetEditablePSoWCustomField_DOM,
 		GetEditableCostCenterCustomField_DOM: GetEditableCostCenterCustomField_DOM,
+		amIonTheApproverList: amIonTheApproverList,
 		shouldIActOnObject: shouldIActOnObject,
 		GetSumRublesFromBT: GetSumRublesFromBT,
 		GetBTDurationInDays: GetBTDurationInDays,
@@ -5153,11 +5155,11 @@ var DrawUserAvatar = function(canvas, avatarPath, userName, userNameLast)
 };
 
 // --- difference from user:
-// --- user avatar - fit into quad with shortest side (crop other dimension)
-// --- company log - fit into quad with longest side (no crop)
+// --- user avatar - fit into square with shortest side (crop other dimension)
+// --- company log - fit into square with longest side (no crop)
 // --- INPUT:
 //            usually userNameLast = ""
-var DrawCompanyAvatar = function(canvas, avatarPath, company_name, userNameLast)
+var DrawCompanyAvatar = function(canvas, avatarPath, company_name/*, userNameLast*/)
 {
 	"use strict";
 
