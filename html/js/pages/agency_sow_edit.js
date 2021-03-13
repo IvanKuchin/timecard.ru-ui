@@ -2,7 +2,7 @@ var	agency_sow_edit = agency_sow_edit || {};
 
 var	agency_sow_edit = (function()
 {
-	'use strict';
+	"use strict";
 
     var	CONST_CHOOSE_CUSTOMER = "выберите заказчика";
     var	CONST_CHOOSE_PROJECT = "выберите проект";
@@ -147,7 +147,7 @@ var	agency_sow_edit = (function()
 
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_getSoWList",
 				include_bt: "true",
@@ -215,7 +215,7 @@ var	agency_sow_edit = (function()
 
 			sow.tasks.forEach(function(task)
 			{
-				var		task_assignment = system_calls.GetTaskAssignmentObjByTaksID(sow.id, task.id, data_global.task_assignments);
+				var		task_assignment = system_calls.GetTaskAssignmentObjByTaskID(sow.id, task.id, data_global.task_assignments);
 
 				if((typeof(task_assignment) != "undefined") && (typeof(task_assignment.period_start) != "undefined"))
 				{
@@ -235,9 +235,9 @@ var	agency_sow_edit = (function()
 					var		temp = [];
 					var		task_start_date, task_end_date;
 
-					temp = task_assignment.period_start.split('-');
+					temp = task_assignment.period_start.split("-");
 					task_start_date = new Date(parseInt(temp[0]), parseInt(temp[1]) - 1, parseInt(temp[2]));
-					temp = task_assignment.period_end.split('-');
+					temp = task_assignment.period_end.split("-");
 					task_end_date = new Date(parseInt(temp[0]), parseInt(temp[1]) - 1, parseInt(temp[2]));
 
 					input_customer		.val(system_calls.ConvertHTMLToText(task.projects[0].customers[0].title))
@@ -326,7 +326,7 @@ var	agency_sow_edit = (function()
 				}
 				else
 				{
-					console.error("failed result returned from GetTaskAssignmentObjByTaksID call");
+					console.error("failed result returned from GetTaskAssignmentObjByTaskID call");
 				}
 			});
 		}
@@ -355,7 +355,7 @@ var	agency_sow_edit = (function()
 			if(psow_map[curr_id]) {}
 			else 
 			{
-				// --- if psow_obj doesn't exists in DB, crteate empty object for GUI-rendering purposes only.
+				// --- if psow_obj doesn't exists in DB, create empty object for GUI-rendering purposes only.
 				psow = new agency_psow_obj();
 				psow.Init();
 				psow.SetGlobalData();
@@ -564,9 +564,9 @@ var	agency_sow_edit = (function()
 
 	var	RenderCommonInfo = function(sow)
 	{
-		var	temp_sign_date = sow.sign_date.split('-');
-		var	temp_start_date = sow.start_date.split('-');
-		var	temp_end_date = sow.end_date.split('-');
+		var	temp_sign_date = sow.sign_date.split("-");
+		var	temp_start_date = sow.start_date.split("-");
+		var	temp_end_date = sow.end_date.split("-");
 
 		var	sow_sign_date = new Date();
 		var	sow_start_date = new Date();
@@ -659,6 +659,9 @@ var	agency_sow_edit = (function()
 		$("#day_rate_subcontractor")
 			.attr("data-db_value", sow.day_rate)
 			.val(sow.day_rate);
+		$("#sow_working_hours_per_day")
+			.attr("data-db_value", sow.working_hours_per_day)
+			.val(sow.working_hours_per_day);
 		$("#company_position")
 			.attr("data-db_value", sow.company_positions[0].title)
 			.val(sow.company_positions[0].title);
@@ -676,6 +679,7 @@ var	agency_sow_edit = (function()
 		$("#payment_period_service")	.attr("data-script", "agency.cgi");
 		$("#payment_period_bt")			.attr("data-script", "agency.cgi");
 		$("#day_rate_subcontractor")	.attr("data-script", "agency.cgi");
+		$("#sow_working_hours_per_day")	.attr("data-script", "agency.cgi");
 		$("#company_position")			.attr("data-script", "agency.cgi");
 
 		$(".sow_sign_date")				.attr("data-id", "000");
@@ -685,6 +689,7 @@ var	agency_sow_edit = (function()
 		$("#payment_period_service")	.attr("data-id", "000");
 		$("#payment_period_bt")			.attr("data-id", "000");
 		$("#day_rate_subcontractor")	.attr("data-id", "000");
+		$("#sow_working_hours_per_day")	.attr("data-id", "000");
 		$("#company_position")			.attr("data-id", "000");
 
 
@@ -695,6 +700,7 @@ var	agency_sow_edit = (function()
 		$("#payment_period_service")	.attr("data-sow_id", sow.id);
 		$("#payment_period_bt")			.attr("data-sow_id", sow.id);
 		$("#day_rate_subcontractor")	.attr("data-sow_id", sow.id);
+		$("#sow_working_hours_per_day")	.attr("data-sow_id", sow.id);
 		$("#company_position")			.attr("data-sow_id", sow.id);
 
 		$(".sow_sign_date")				.attr("data-action", "AJAX_updateSoWSignDate");
@@ -704,6 +710,7 @@ var	agency_sow_edit = (function()
 		$("#payment_period_service")	.attr("data-action", "AJAX_updateSoWPaymentPeriodService");
 		$("#payment_period_bt")			.attr("data-action", "AJAX_updateSoWPaymentPeriodBT");
 		$("#day_rate_subcontractor")	.attr("data-action", "AJAX_updateSoWDayRate");
+		$("#sow_working_hours_per_day")	.attr("data-action", "AJAX_updateSoWWorkingHoursPerDay");
 		$("#company_position")			.attr("data-action", "AJAX_updateSoWPosition");
 
 		$(".sow_sign_date")				.on("change", system_calls.UpdateInputFieldOnServer);
@@ -713,8 +720,9 @@ var	agency_sow_edit = (function()
 		$("#payment_period_service")	.on("change", system_calls.UpdateInputFieldOnServer);
 		$("#payment_period_bt")			.on("change", system_calls.UpdateInputFieldOnServer);
 		$("#company_position")			.on("change", system_calls.UpdateInputFieldOnServer)
-										.on("input", system_calls.Position_InputHandler);
+										.on("input",  system_calls.Position_InputHandler);
 		$("#day_rate_subcontractor")	.on("change", UpdateDayRate);
+		$("#sow_working_hours_per_day")	.on("change", system_calls.UpdateInputFieldOnServer);
 
 	};
 
@@ -767,7 +775,7 @@ var	agency_sow_edit = (function()
 		$(approver_root_tag_global).empty().append(system_calls.GetCostCenterTabs_DOM(sow.cost_centers, "_approvers", null));
 		agency_approvers_obj.Render();
 		agency_approvers_obj.ClickFirstTab();
-	}
+	};
 
 	var	RenderSubcontractorCreateTasks = function(sow)
 	{
@@ -781,7 +789,7 @@ var	agency_sow_edit = (function()
 		currTag.attr("disabled", "");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: currTag.data("action"),
 				id: currTag.data("id"),
@@ -838,7 +846,7 @@ var	agency_sow_edit = (function()
 		currTag.attr("disabled", "");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_deleteTaskAssignment",
 				id: currTag.attr("data-id"),
@@ -878,7 +886,7 @@ var	agency_sow_edit = (function()
 		currTag.attr("disabled", "");
 
 		$.getJSON(
-			'/cgi-bin/' + currTag.attr("data-script"),
+			"/cgi-bin/" + currTag.attr("data-script"),
 			{
 				action: currTag.attr("data-action"),
 				id: currTag.attr("data-id"),
@@ -918,7 +926,7 @@ var	agency_sow_edit = (function()
 		currTag.attr("disabled", "");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_deleteBTExpenseAssignment",
 				id: currTag.attr("data-id"),
@@ -963,7 +971,7 @@ var	agency_sow_edit = (function()
 		currTag.attr("disabled", "");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_deleteSoW",
 				sow_id: data_global.sow[0].id,
@@ -1080,7 +1088,7 @@ var	agency_sow_edit = (function()
 		{
 			currTag.button("loading");
 			$.getJSON(
-				'/cgi-bin/agency.cgi',
+				"/cgi-bin/agency.cgi",
 				{
 					action: "AJAX_addTaskAssignment",
 					sow_id: data_global.sow[0].id,
@@ -1130,7 +1138,7 @@ var	agency_sow_edit = (function()
 		{
 			$(".__loading_indicator").attr("disabled", "disabled");
 			$.getJSON(
-				'/cgi-bin/agency.cgi',
+				"/cgi-bin/agency.cgi",
 				{
 					action: "AJAX_getAgencyInfo",
 					include_bt: "true",
@@ -1171,7 +1179,7 @@ var	agency_sow_edit = (function()
 		$("#PullOutCustomFieldsModal").modal("show");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_getSoWListWithCustomFields",
 			})
@@ -1211,7 +1219,7 @@ var	agency_sow_edit = (function()
 		curr_tag.button("loading");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_copyCustomFieldsFromSoW",
 				sow_id_from: sow_id_from,
@@ -1249,7 +1257,7 @@ var	agency_sow_edit = (function()
 		var	curr_tag = $("#label_self_task_assignment");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_updateSubcontractorCreateTasks",
 				id: "0000000000", // --- fake id
@@ -1300,7 +1308,7 @@ var	agency_sow_edit = (function()
 		curr_tag.button("loading");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_generateSoWAgreementDocuments",
 				sow_id: data_global.sow[0].id,
@@ -1358,7 +1366,7 @@ var	agency_sow_edit = (function()
 		curr_tag.button("loading");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_deleteSoWAgreementDocuments",
 				sow_id: data_global.sow[0].id,
@@ -1488,7 +1496,7 @@ var	agency_sow_edit = (function()
 		return result;
 	};
 
-	var	RenderCustomFiedsCopy = function()
+	var	RenderCustomFieldsCopy = function()
 	{
 		$("#PullOutCustomFieldsModal .modal-body .info").empty().append(CustomFieldsCopy_GetDOM());
 	};
@@ -1497,12 +1505,12 @@ var	agency_sow_edit = (function()
 	{
 		var	curr_tag = $(this);
 
-		RenderCustomFiedsCopy();
+		RenderCustomFieldsCopy();
 	};
 
 	var CustomFieldsValue_ChangeHandler = function()
 	{
-		RenderCustomFiedsCopy();
+		RenderCustomFieldsCopy();
 	};
 
 	var	ResetNewTimecardAssignment = function()

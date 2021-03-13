@@ -2,7 +2,7 @@ var	agency_invoice_cost_center_main = agency_invoice_cost_center_main || {};
 
 var	agency_invoice_cost_center_main = (function()
 {
-	'use strict';
+	"use strict";
 
 	var	DATE_FORMAT_GLOBAL = "dd/mm/yy";
 	var	data_global;
@@ -23,7 +23,7 @@ var	agency_invoice_cost_center_main = (function()
 		if(curr_tag.empty())
 		{
 			$.getJSON(
-				'/cgi-bin/agency.cgi',
+				"/cgi-bin/agency.cgi",
 				{
 					action: "AJAX_getCostCenterList",
 				})
@@ -73,17 +73,17 @@ var	agency_invoice_cost_center_main = (function()
 	{
 		if(cost_center_service_list_obj_global)
 		{
-			cost_center_service_list_obj_global.UpdateAndHighlighServiceInvoice(invoice_id);
+			cost_center_service_list_obj_global.UpdateAndHighlightServiceInvoice(invoice_id);
 		}
-	}
+	};
 
 	var	BTInvoiceSubmit_Callback = function(invoice_id)
 	{
 		if(cost_center_bt_list_obj_global)
 		{
-			cost_center_bt_list_obj_global.UpdateAndHighlighBTInvoice(invoice_id);
+			cost_center_bt_list_obj_global.UpdateAndHighlightBTInvoice(invoice_id);
 		}
-	}
+	};
 
 	return {
 		Init: Init,

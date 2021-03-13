@@ -2,7 +2,7 @@ var	agency_invoice_cost_center_service = agency_invoice_cost_center_service || {
 
 var	agency_invoice_cost_center_service = function()
 {
-	'use strict';
+	"use strict";
 
 	var	DATE_FORMAT_GLOBAL = "dd/mm/yy";
 	var	data_global;
@@ -24,7 +24,7 @@ var	agency_invoice_cost_center_service = function()
 	var	SetSubmit_Callback = function(param)
 	{
 		submit_callback_global = param;
-	}
+	};
 
 	var	GetApprovedTimecardListFromServer = function(cost_center_id)
 	{
@@ -33,7 +33,7 @@ var	agency_invoice_cost_center_service = function()
 		if(curr_tag.empty())
 		{
 			$.getJSON(
-				'/cgi-bin/agency.cgi',
+				"/cgi-bin/agency.cgi",
 				{
 					action: "AJAX_getApprovedTimecardList",
 					cost_center_id: cost_center_id,
@@ -241,7 +241,7 @@ var	agency_invoice_cost_center_service = function()
 			curr_tag.button("loading");
 
 			$.getJSON(
-				'/cgi-bin/agency.cgi',
+				"/cgi-bin/agency.cgi",
 				{
 				 "action": "AJAX_submitTimecardsToInvoice",
 				 "timecard_list": timecard_list, 
@@ -252,7 +252,7 @@ var	agency_invoice_cost_center_service = function()
 					if(data.result == "success")
 					{
 						$("#collapsible_select_service_for_invoicing_button").click();
-// TODO: srcoll down and highlight newly added line 
+// TODO: scroll down and highlight newly added line 
 						submit_callback_global(data.invoice_id);
 					}
 					else

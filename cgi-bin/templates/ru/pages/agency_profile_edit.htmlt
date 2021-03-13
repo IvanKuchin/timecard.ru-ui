@@ -29,9 +29,6 @@
     <script src="/js/pages/agency_profile_edit.js"></script>
     <link href="/css/pages/agency_profile_edit.css" rel="stylesheet">
 
-    <script src="/js/pages/tooltip.js"></script>
-    <link href="/css/pages/animate.min.css" rel="stylesheet">
-
     <link href="/css/pages/switcher.css" rel="stylesheet">
 
     <script>

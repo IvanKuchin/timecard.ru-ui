@@ -1,6 +1,6 @@
 var	bt_expense_template_line_obj = function()
 {
-	'use strict';
+	"use strict";
 
 	var	data_global;
 	var	isRemovable = true;
@@ -15,7 +15,7 @@ var	bt_expense_template_line_obj = function()
 	var	remove_click_callback;
 	var	isPaymentCashEnabled_global = true;
 	var	isPaymentCardEnabled_global = true;
-	var	isRequredEnabled_global = true;
+	var	isRequiredEnabled_global = true;
 
 	var	Init = function()
 	{
@@ -47,7 +47,7 @@ var	bt_expense_template_line_obj = function()
 
 	var	Disable_RequiredOption = function()
 	{
-		isRequredEnabled_global = false;
+		isRequiredEnabled_global = false;
 	};
 
 	var	SetGlobalData = function(data_init)
@@ -272,7 +272,7 @@ var	bt_expense_template_line_obj = function()
 		input_description = input_description.add($("<label>"));
 		input_tooltip = input_tooltip.add($("<label>"));
 
-		if(isRequredEnabled_global) 	{} else {switch_required_input		.attr("disabled", ""); }
+		if(isRequiredEnabled_global) 	{} else {switch_required_input		.attr("disabled", ""); }
 		if(isPaymentCardEnabled_global)	{} else {switch_payment_card_input	.attr("disabled", ""); }
 		if(isPaymentCashEnabled_global)	{} else {switch_payment_cash_input	.attr("disabled", ""); }
 
@@ -416,7 +416,7 @@ var	bt_expense_template_line_obj = function()
 		curr_tag.attr("disabled", "");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: remove_button.data("action"),
 				id: remove_button.attr("data-id"),

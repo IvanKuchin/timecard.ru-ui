@@ -3,7 +3,7 @@ var	agency_approvals = agency_approvals || {};
 
 var	agency_approvals = (function()
 {
-	'use strict';
+	"use strict";
 
 	var	data_global;
 
@@ -20,7 +20,7 @@ var	agency_approvals = (function()
 
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_getApprovalsList",
 				object: "timecard",
@@ -131,7 +131,7 @@ var	agency_approvals = (function()
 
 			for(var i = 0; i < data_global.sow.length; ++i)
 			{
-				var		timecard_list = GetTimecardListDOM(data_global.timecards, data_global.sow[i].id, filter, data_global.holiday_calendar);
+				var		timecard_list = GetTimecardListDOM(data_global.timecards, data_global.sow[i], filter, data_global.holiday_calendar);
 
 				if(timecard_list.length)
 				{
@@ -155,9 +155,11 @@ var	agency_approvals = (function()
 		return common_timecard.TimecardCollapsible_ClickHandler(e, data_global.holiday_calendar);
 	};
 
-	var	GetTimecardListDOM = function(timecard_list, sow_id, filter)
+	var	GetTimecardListDOM = function(timecard_list, sow, filter)
 	{
 		var		result = $();
+		var		sow_id = sow.id;
+		var		working_hours_per_day = parseFloat(sow.working_hours_per_day);
 
 		if((typeof(timecard_list) == "undefined"))
 		{
@@ -165,7 +167,7 @@ var	agency_approvals = (function()
 		}
 		else
 		{
-			var		timeFormat = 'MM/DD/YYYY HH:mm';
+			var		timeFormat = "MM/DD/YYYY HH:mm";
 			var		timecards_belongs_to_sow = [];
 
 			timecard_list.forEach(function(item)
@@ -244,7 +246,7 @@ var	agency_approvals = (function()
 																	.attr("data-loading-text", "<span class='fa fa-refresh fa-spin fa-fw animateClass'></span>")
 																	.attr("data-action", "approve")
 																	.attr("data-timecard_id", timecard_item.id)
-																	.addClass("btn btn-success form-control __controll_button_" + timecard_item.id)
+																	.addClass("btn btn-success form-control __control_button_" + timecard_item.id)
 																	.append("OK")
 																	.on("click", function(e)
 																		{
@@ -255,7 +257,7 @@ var	agency_approvals = (function()
 																	.attr("data-loading-text", "<span class='fa fa-refresh fa-spin fa-fw animateClass'></span>")
 																	.attr("data-action", "reject")
 																	.attr("data-timecard_id", timecard_item.id)
-																	.addClass("btn btn-danger form-control __controll_button_" + timecard_item.id)
+																	.addClass("btn btn-danger form-control __control_button_" + timecard_item.id)
 																	.append("отклонить")
 																	.on("click", function(e)
 																		{
@@ -272,7 +274,7 @@ var	agency_approvals = (function()
 							var		task_names_arr = [];
 							var		status_icon = $("<i>").addClass("fa");
 							var		actual_work_hours = system_calls.GetSumHoursFromTimecard(timecard_item);
-							var		actual_work_days = system_calls.RoundedTwoDigitDiv(actual_work_hours, 8);
+							var		actual_work_days = system_calls.RoundedTwoDigitDiv(actual_work_hours, working_hours_per_day);
 
 							if(timecard_item.status == "approved")
 							{
@@ -330,7 +332,7 @@ var	agency_approvals = (function()
 								.append(system_calls.GetPayedDate_DOM(timecard_item));
 
 							collapsible_nested_col_timecard
-								.append(system_calls.GetTextedTimecard_DOM(timecard_item, data_global.holiday_calendar));
+								.append(system_calls.GetTextedTimecard_DOM(timecard_item, data_global.holiday_calendar, sow));
 
 							visible_row
 								.append(status_div.append(status_icon))

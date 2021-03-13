@@ -1,6 +1,6 @@
 var	agency_cost_center_obj = function()
 {
-	'use strict';
+	"use strict";
 
 	var	DATE_FORMAT_GLOBAL = "dd/mm/yy";
 	var	DB_FORMAT_GLOBAL = "YYYY-MM-DD";
@@ -128,7 +128,7 @@ var	agency_cost_center_obj = function()
 							if(parseInt(company_id))
 							{
 								$.getJSON(
-									'/cgi-bin/agency.cgi',
+									"/cgi-bin/agency.cgi",
 									{
 										action: action,
 										company_id: company_id,
@@ -251,9 +251,9 @@ var	agency_cost_center_obj = function()
 		var	agreement_dates_input_start		= $("<input>").addClass("transparent __psow_start_date");
 		var	agreement_dates_input_end		= $("<input>").addClass("transparent __psow_end_date");
 
-		var	temp_sign_date = data_global.sign_date.split('-');
-		var	temp_start_date = data_global.start_date.split('-');
-		var	temp_end_date = data_global.end_date.split('-');
+		var	temp_sign_date = data_global.sign_date.split("-");
+		var	temp_start_date = data_global.start_date.split("-");
+		var	temp_end_date = data_global.end_date.split("-");
 
 		var	psow_sign_date = new Date();
 		var	psow_start_date = new Date();

@@ -2,7 +2,7 @@ var	agency_invoice_cost_center_service_list = agency_invoice_cost_center_service
 
 var	agency_invoice_cost_center_service_list = function()
 {
-	'use strict';
+	"use strict";
 
 	var	DATE_FORMAT_GLOBAL = "dd/mm/yy";
 	var	data_global;
@@ -36,7 +36,7 @@ var	agency_invoice_cost_center_service_list = function()
 		if(curr_tag.empty())
 		{
 			$.getJSON(
-				'/cgi-bin/agency.cgi',
+				"/cgi-bin/agency.cgi",
 				{
 					action: "AJAX_getServiceInvoiceList",
 					cost_center_id: cost_center_id,
@@ -76,7 +76,7 @@ var	agency_invoice_cost_center_service_list = function()
 		var	curr_tag = $("#invoices_container");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_getHolidayCalendar",
 			})
@@ -110,7 +110,7 @@ var	agency_invoice_cost_center_service_list = function()
 		}
 		else
 		{
-			var		timeFormat = 'MM/DD/YYYY HH:mm';
+			var		timeFormat = "MM/DD/YYYY HH:mm";
 
 			service_invoices.sort(function(a, b)
 			{
@@ -215,7 +215,7 @@ var	agency_invoice_cost_center_service_list = function()
 			else
 			{
 				$.getJSON(
-					'/cgi-bin/agency.cgi',
+					"/cgi-bin/agency.cgi",
 					{
 						action: "AJAX_getServiceInvoiceDetails",
 						service_invoice_id: service_invoice_id,
@@ -298,7 +298,7 @@ var	agency_invoice_cost_center_service_list = function()
 		}
 	};
 
-	var	UpdateAndHighlighServiceInvoice = function(invoice_id)
+	var	UpdateAndHighlightServiceInvoice = function(invoice_id)
 	{
 		GetServiceInvoiceListFromServer(cost_center_id_global, function(cost_center_id, service_invoices) { 
 																	RenderServiceCostCenterPane(cost_center_id, service_invoices); 
@@ -316,7 +316,7 @@ var	agency_invoice_cost_center_service_list = function()
 		if(parseInt(invoice_id))
 		{
 			$.getJSON(
-				'/cgi-bin/agency.cgi',
+				"/cgi-bin/agency.cgi",
 				{
 					action: "AJAX_recall" + suffix + "Invoice",
 					invoice_id: invoice_id,
@@ -354,7 +354,7 @@ var	agency_invoice_cost_center_service_list = function()
 
 	return {
 		Init: Init,
-		UpdateAndHighlighServiceInvoice: UpdateAndHighlighServiceInvoice,
+		UpdateAndHighlightServiceInvoice: UpdateAndHighlightServiceInvoice,
 	};
 
 };

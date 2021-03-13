@@ -2,7 +2,7 @@ var	bt_list = bt_list || {};
 
 var	bt_list = (function()
 {
-	'use strict';
+	"use strict";
 
 	var	user_type_global = "";
 	var	data_global;
@@ -64,7 +64,7 @@ var	bt_list = (function()
 		}
 		else
 		{
-			var		timeFormat = 'MM/DD/YYYY HH:mm';
+			var		timeFormat = "MM/DD/YYYY HH:mm";
 			var		bt_belongs_to_sow = [];
 			var		sow_id = sow.id;
 			var		customer_map 				= new Map();
@@ -150,7 +150,7 @@ var	bt_list = (function()
 																.append("<i class=\"fa fa-archive\" aria-hidden=\"true\"></i>")
 																.on("click", DownloadAllAttachments);
 						var		button_goto_timecard = $("<a>")
-																.addClass("btn btn-primary form-control __controll_button_" + item.id)
+																.addClass("btn btn-primary form-control __control_button_" + item.id)
 																.attr("id", "edit_bt_button_" + item.id)
 																.attr("data-loading-text", "<span class='fa fa-refresh fa-spin fa-fw animateClass'>")
 																.append("<i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>")

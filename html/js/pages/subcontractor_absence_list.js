@@ -3,7 +3,7 @@ var	subcontractor_absence_list = subcontractor_absence_list || {};
 
 subcontractor_absence_list = (function()
 {
-	'use strict';
+	"use strict";
 
 	var		DATE_FORMAT_GLOBAL = "dd/mm/yy";
 
@@ -63,7 +63,7 @@ subcontractor_absence_list = (function()
 	var	GetAbsenceListFromServer = function()
 	{
 		$.getJSON(
-			'/cgi-bin/subcontractor.cgi',
+			"/cgi-bin/subcontractor.cgi",
 			{
 				action: "AJAX_getAbsenceList",
 			})
@@ -90,7 +90,7 @@ subcontractor_absence_list = (function()
 	var	GetAbsenceTypeListFromServer = function()
 	{
 		$.getJSON(
-			'/cgi-bin/ajax_anyrole_1.cgi',
+			"/cgi-bin/ajax_anyrole_1.cgi",
 			{
 				action: "AJAX_getAbsenceTypesList",
 			})
@@ -168,7 +168,7 @@ subcontractor_absence_list = (function()
 			var	col_title_tag			= $("<div>").addClass("col-xs-4 col-md-2");
 			var	col_start_date_tag		= $("<div>").addClass("col-xs-4 col-md-2");
 			var	col_end_date_tag		= $("<div>").addClass("col-xs-4 col-md-2");
-			var	col_coment_tag			= $("<div>").addClass("hidden-xs hidden-sm col-md-4");
+			var	col_comment_tag			= $("<div>").addClass("hidden-xs hidden-sm col-md-4");
 			var	col_remove_tag			= $("<div>").addClass("hidden-xs hidden-sm col-md-2 float_right");
 			var	remove_button			= $("<i>").addClass("fa fa-times-circle padding_close float_right cursor_pointer animate_close_onhover");
 
@@ -180,7 +180,7 @@ subcontractor_absence_list = (function()
 
 			if(item.start_date.length)
 			{
-				temp_date = item.start_date.split('-');
+				temp_date = item.start_date.split("-");
 				if(temp_date.length == 3)
 				{
 					temp = new Date(parseInt(temp_date[0]), parseInt(temp_date[1]) - 1, parseInt(temp_date[2]));
@@ -194,7 +194,7 @@ subcontractor_absence_list = (function()
 
 			if(item.end_date.length)
 			{
-				temp_date = item.end_date.split('-');
+				temp_date = item.end_date.split("-");
 				if(temp_date.length == 3)
 				{
 					temp = new Date(parseInt(temp_date[0]), parseInt(temp_date[1]) - 1, parseInt(temp_date[2]));
@@ -285,14 +285,14 @@ subcontractor_absence_list = (function()
 			col_title_tag			.append(item.absence_types[0].title);
 			col_start_date_tag		.append(input_start_date_tag)			.append($("<label>"));
 			col_end_date_tag		.append(input_end_date_tag)				.append($("<label>"));
-			col_coment_tag			.append(input_comment_tag)				.append($("<label>"));
+			col_comment_tag			.append(input_comment_tag)				.append($("<label>"));
 			col_remove_tag			.append(remove_button);
 
 			row_tag
 				.append(col_title_tag)
 				.append(col_start_date_tag)
 				.append(col_end_date_tag)
-				.append(col_coment_tag)
+				.append(col_comment_tag)
 				.append(col_remove_tag);
 
 			result = result.add(row_tag);
@@ -328,7 +328,7 @@ subcontractor_absence_list = (function()
 			curr_tag.button("loading");
 
 			$.getJSON(
-				'/cgi-bin/subcontractor.cgi',
+				"/cgi-bin/subcontractor.cgi",
 				{
 					action: "AJAX_submitNewAbsence",
 					type_id: $(".new_absence_type").val(),
@@ -371,15 +371,15 @@ subcontractor_absence_list = (function()
 		if(typeof(affectedScript) == "undefined") affectedScript = "";
 		if(!affectedScript.length) affectedScript = "index.cgi";
 
-		$.getJSON('/cgi-bin/' + affectedScript + '?action=' + affectedAction, {id: affectedID})
+		$.getJSON("/cgi-bin/" + affectedScript + "?action=" + affectedAction, {id: affectedID})
 			.done(function(data) {
 				if(data.result === "success")
 				{
 					// --- update GUI has to be inside getJSON->done->if(success).
-					// --- To improve User Expirience (react on user actions immediately)
+					// --- To improve User Experience (react on user actions immediately)
 					// ---	 I'm updating GUI immediately after click, not waiting server response
 					if((affectedAction == "AJAX_deleteAbsence") && affectedID)		$(".row.__absence_" + affectedID).hide(250);
-					$("#AreYouSure").modal('hide');
+					$("#AreYouSure").modal("hide");
 				}
 				else
 				{

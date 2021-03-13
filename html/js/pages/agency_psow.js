@@ -1,6 +1,6 @@
 var	agency_psow_obj = function()
 {
-	'use strict';
+	"use strict";
 
 	var	DATE_FORMAT_GLOBAL = "dd/mm/yy";
 	var	DB_FORMAT_GLOBAL = "YYYY-MM-DD";
@@ -84,7 +84,7 @@ var	agency_psow_obj = function()
 			{
 				curr_tag.button("loading");
 				$.getJSON(
-					'/cgi-bin/agency.cgi',
+					"/cgi-bin/agency.cgi",
 					{
 						action: action,
 						title: title_tag.val(),
@@ -191,15 +191,18 @@ var	agency_psow_obj = function()
 		var	agreement_dates_col_to			= $("<div>").addClass("col-xs-3 col-md-1").append("до");
 		var	agreement_dates_col_input_to	= $("<div>").addClass("col-xs-3 col-md-2");
 		var	day_rate_row					= $("<div>").addClass("row");
-		var	day_rate_col_title				= $("<div>").addClass("col-xs-3 col-md-2").append("Dayrate");
+		var	day_rate_col_title				= $("<div>").addClass("col-xs-6 col-md-2").append("Dayrate");
 		var	day_rate_col_input				= $("<div>").addClass("col-xs-3 col-md-2");
+		var	working_hours_per_day_row		= $("<div>").addClass("row");
+		var	working_hours_per_day_col_title	= $("<div>").addClass("col-xs-6 col-md-2").append("Рабочих часов в день");
+		var	working_hours_per_day_col_input	= $("<div>").addClass("col-xs-3 col-md-2");
 		var	bt_markup_row					= $("<div>").addClass("row");
-		var	bt_markup_col_title				= $("<div>").addClass("col-xs-3 col-md-2").append($("<small>").append("Командировочная наценка"));
+		var	bt_markup_col_title				= $("<div>").addClass("col-xs-6 col-md-2").append($("<small>").append("Командировочная наценка"));
 		var	bt_markup_col_input				= $("<div>").addClass("col-xs-3 col-md-2");
 		var	bt_markup_type_col_input		= $("<div>").addClass("col-xs-3 col-md-2");
 		var	position_row					= $("<div>").addClass("row");
-		var	position_col_title				= $("<div>").addClass("col-xs-3 col-md-2").append("Должность");
-		var	position_col_input				= $("<div>").addClass("col-xs-3 col-md-2");
+		var	position_col_title				= $("<div>").addClass("col-xs-6 col-md-2").append("Должность");
+		var	position_col_input				= $("<div>").addClass("col-xs-6 col-md-2");
 
 		var	agreement_number_input_num		= $("<input>").addClass("transparent __psow_number");
 		var	agreement_number_input_date		= $("<input>").addClass("transparent __psow_sign_date");
@@ -209,10 +212,11 @@ var	agency_psow_obj = function()
 		var	bt_markup_input					= $("<input>").addClass("transparent __psow_bt_markup").attr("type", "number");
 		var	bt_markup_type_select			= $("<select>").addClass("transparent __psow_bt_markup_type");
 		var	position_input					= $("<input>").addClass("transparent __psow_day_position");
+		var	working_hours_per_day_input		= $("<input>").addClass("transparent __psow_working_hours_per_day").attr("type", "number");
 
-		var	temp_sign_date = data_global.sign_date.split('-');
-		var	temp_start_date = data_global.start_date.split('-');
-		var	temp_end_date = data_global.end_date.split('-');
+		var	temp_sign_date = data_global.sign_date.split("-");
+		var	temp_start_date = data_global.start_date.split("-");
+		var	temp_end_date = data_global.end_date.split("-");
 
 		var	psow_sign_date = new Date();
 		var	psow_start_date = new Date();
@@ -247,6 +251,9 @@ var	agency_psow_obj = function()
 			.append($("<label>"));
 		position_col_input
 			.append(position_input)
+			.append($("<label>"));
+		working_hours_per_day_col_input
+			.append(working_hours_per_day_input)
 			.append($("<label>"));
 
 		if(temp_sign_date.length == 3)
@@ -346,6 +353,9 @@ var	agency_psow_obj = function()
 		position_input
 			.attr("data-db_value", data_global.company_positions[0].title)
 			.val(data_global.company_positions[0].title);
+		working_hours_per_day_input
+			.attr("data-db_value", data_global.working_hours_per_day)
+			.val(data_global.working_hours_per_day);
 
 		agreement_number_input_date		.attr("data-script", "agency.cgi");
 		agreement_dates_input_start		.attr("data-script", "agency.cgi");
@@ -355,6 +365,7 @@ var	agency_psow_obj = function()
 		bt_markup_input					.attr("data-script", "agency.cgi");
 		bt_markup_type_select			.attr("data-script", "agency.cgi");
 		position_input					.attr("data-script", "agency.cgi");
+		working_hours_per_day_input		.attr("data-script", "agency.cgi");
 
 		agreement_number_input_date		.attr("data-id", data_global.id);
 		agreement_dates_input_start		.attr("data-id", data_global.id);
@@ -364,6 +375,7 @@ var	agency_psow_obj = function()
 		bt_markup_input					.attr("data-id", data_global.id);
 		bt_markup_type_select			.attr("data-id", data_global.id);
 		position_input					.attr("data-id", data_global.id);
+		working_hours_per_day_input		.attr("data-id", data_global.id);
 
 		agreement_number_input_date		.attr("data-sow_id", data_global.id);
 		agreement_dates_input_start		.attr("data-sow_id", data_global.id);
@@ -373,6 +385,7 @@ var	agency_psow_obj = function()
 		bt_markup_input					.attr("data-sow_id", data_global.id);
 		bt_markup_type_select			.attr("data-sow_id", data_global.id);
 		position_input					.attr("data-sow_id", data_global.id);
+		working_hours_per_day_input		.attr("data-sow_id", data_global.id);
 
 		agreement_number_input_date		.attr("data-action", "AJAX_updatePSoWSignDate");
 		agreement_dates_input_start		.attr("data-action", "AJAX_updatePSoWStartDate");
@@ -382,12 +395,14 @@ var	agency_psow_obj = function()
 		bt_markup_input					.attr("data-action", "AJAX_updatePSoWBTMarkup");
 		bt_markup_type_select			.attr("data-action", "AJAX_updatePSoWBTMarkupType");
 		position_input					.attr("data-action", "AJAX_updatePSoWPosition");
+		working_hours_per_day_input		.attr("data-action", "AJAX_updatePSoWWorkingHoursPerDay");
 
 		agreement_number_input_date		.on("change", system_calls.UpdateInputFieldOnServer);
 		agreement_dates_input_start		.on("change", system_calls.UpdateInputFieldOnServer);
 		agreement_dates_input_end		.on("change", system_calls.UpdateInputFieldOnServer);
 		agreement_number_input_num		.on("change", system_calls.UpdateInputFieldOnServer);
 		day_rate_input					.on("change", system_calls.UpdateInputFieldOnServer);
+		working_hours_per_day_input		.on("change", system_calls.UpdateInputFieldOnServer);
 		bt_markup_input					.on("change", system_calls.UpdateInputFieldOnServer);
 		bt_markup_type_select			.on("change", system_calls.UpdateInputFieldOnServer);
 		position_input					.on("change", system_calls.UpdateInputFieldOnServer)
@@ -413,12 +428,16 @@ var	agency_psow_obj = function()
 		position_row
 			.append(position_col_title)
 			.append(position_col_input);
+		working_hours_per_day_row
+			.append(working_hours_per_day_col_title)
+			.append(working_hours_per_day_col_input);
 
 		result = result.add(agreement_number_row);
 		result = result.add(agreement_dates_row);
 		result = result.add(day_rate_row);
 		result = result.add(bt_markup_row);
 		result = result.add(position_row);
+		result = result.add(working_hours_per_day_row);
 
 		return result;
 	};

@@ -4,7 +4,7 @@ var	agency_service_cost_prediction = agency_service_cost_prediction || {};
 
 var	agency_service_cost_prediction = (function()
 {
-	'use strict';
+	"use strict";
 
 	var	data_global;
 	var	last_month_timecards_global;
@@ -42,6 +42,7 @@ var	agency_service_cost_prediction = (function()
 			{
 				// var		actual_work_hours 		= system_calls.GetSumHoursFromTimecard(timecard);
 				var		day_rate				= parseFloat(timecard.contract_sow[0].day_rate);
+				var		working_hours_per_day	= parseFloat(timecard.contract_sow[0].working_hours_per_day);
 
 				var		hours_statistics_obj	= system_calls.GetHoursStatistics(timecard, holiday_calendar_global);
 				var		total_work_hours		= hours_statistics_obj.total_work_hours;
@@ -52,6 +53,7 @@ var	agency_service_cost_prediction = (function()
 				result.push({
 								sow_id:					timecard.contract_sow[0].id,
 								day_rate:				day_rate,
+								working_hours_per_day:	working_hours_per_day,
 								actual_work_hours:		actual_work_hours,
 								total_work_hours:		total_work_hours,
 							});
@@ -69,7 +71,7 @@ var	agency_service_cost_prediction = (function()
 
 		payments.forEach(function(payment)
 		{
-			var	hour_rate		= system_calls.RoundedTwoDigitDiv(payment.day_rate, 8);
+			var	hour_rate		= system_calls.RoundedTwoDigitDiv(payment.day_rate, payment.working_hours_per_day);
 			var	period_payment	= system_calls.RoundedTwoDigitMul(payment.actual_work_hours, hour_rate);
 
 			result += period_payment;
@@ -105,12 +107,12 @@ var	agency_service_cost_prediction = (function()
 		{
 			var	sow_start_ts		= system_calls.ConvertDateSQLToSec(sow.start_date) * 1000;
 			var	sow_end_ts			= system_calls.ConvertDateSQLToSec(sow.end_date) * 1000;
-			var	total_work_hours	= system_calls.GetTotalNumberOfWorkingHours(Math.max(first_month_date.getTime(), sow_start_ts), Math.min(last_month_date.getTime(), sow_end_ts), holiday_calendar_global);
+			var	total_work_hours	= system_calls.GetTotalNumberOfWorkingHours(Math.max(first_month_date.getTime(), sow_start_ts), Math.min(last_month_date.getTime(), sow_end_ts), holiday_calendar_global, sow);
 
 			var	last_month_payment	= GetPaymentBySowID(sow.id, last_month_payments);
 			var	min_percentage		= last_month_payment ? Math.min(last_month_payment.actual_work_hours / last_month_payment.total_work_hours, 1) : 1;
 			var	max_percentage		= last_month_payment ? Math.max(last_month_payment.actual_work_hours / last_month_payment.total_work_hours, 1) : 1;
-			var	hour_rate			= system_calls.RoundedTwoDigitDiv(sow.day_rate, 8);
+			var	hour_rate			= system_calls.RoundedTwoDigitDiv(sow.day_rate, sow.working_hours_per_day);
 
 			result.min += hour_rate * min_percentage * total_work_hours;
 			result.max += hour_rate * max_percentage * total_work_hours;

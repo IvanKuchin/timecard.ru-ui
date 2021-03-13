@@ -3,7 +3,7 @@ var	agency_sow_list = agency_sow_list || {};
 
 var	agency_sow_list = (function()
 {
-	'use strict';
+	"use strict";
 
 	var	data_global;
 
@@ -13,7 +13,7 @@ var	agency_sow_list = (function()
 
 		// --- if autocomplete functionality is not initialized from the beginning
 		// --- it will not pop-up after configured threshold, it will wait one symbol more
-		// --- to overcome this fake autocomplete initializtion applied
+		// --- to overcome this fake autocomplete initialization applied
 		system_calls.CreateAutocompleteWithSelectCallback($("#subcontractor_companies_search"), [{0:"0"}], Subcontractor_Companies_SelectHandler);
 		$("#subcontractor_companies_search").on("input", Subcontractor_Companies_InputHandler);
 
@@ -29,7 +29,7 @@ var	agency_sow_list = (function()
 
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_getSoWList",
 				include_bt: "true",
@@ -86,7 +86,7 @@ var	agency_sow_list = (function()
 
 			sow.tasks.forEach(function(task)
 			{
-				var		task_assignment = system_calls.GetTaskAssignmentObjByTaksID(sow.id, task.id, data_global.task_assignments);
+				var		task_assignment = system_calls.GetTaskAssignmentObjByTaskID(sow.id, task.id, data_global.task_assignments);
 
 				if((typeof(task_assignment) != "undefined") && (typeof(task_assignment.period_start) != "undefined"))
 				{
@@ -100,9 +100,9 @@ var	agency_sow_list = (function()
 					var		temp = [];
 					var		task_start_date, task_end_date;
 
-					temp = task_assignment.period_start.split('-');
+					temp = task_assignment.period_start.split("-");
 					task_start_date = new Date(parseInt(temp[0]), parseInt(temp[1]) - 1, parseInt(temp[2]));
-					temp = task_assignment.period_end.split('-');
+					temp = task_assignment.period_end.split("-");
 					task_end_date = new Date(parseInt(temp[0]), parseInt(temp[1]) - 1, parseInt(temp[2]));
 
 					row
@@ -117,7 +117,7 @@ var	agency_sow_list = (function()
 				}
 				else
 				{
-					console.error("failed result returned from GetTaskAssignmentObjByTaksID call");
+					console.error("failed result returned from GetTaskAssignmentObjByTaskID call");
 				}
 			});
 		}
@@ -303,7 +303,7 @@ var	agency_sow_list = (function()
 		else
 		{
 			$.getJSON(
-				'/cgi-bin/agency.cgi',
+				"/cgi-bin/agency.cgi",
 				{
 					action: "AJAX_getCompanyInfoBySoWID",
 					sow_id: curr_sow_id,
@@ -368,7 +368,7 @@ var	agency_sow_list = (function()
 		var	curr_val = curr_tag.val();
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_getSubcontractorCompaniesAutocompleteList",
 				name: curr_val,
@@ -403,7 +403,7 @@ var	agency_sow_list = (function()
 		curr_tag.button("loading");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: curr_action,
 				company_id: id,

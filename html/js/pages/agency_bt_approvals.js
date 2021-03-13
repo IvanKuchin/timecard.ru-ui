@@ -2,7 +2,7 @@ var	agency_bt_approvals = agency_bt_approvals || {};
 
 var	agency_bt_approvals = (function()
 {
-	'use strict';
+	"use strict";
 
 	var	data_global;
 
@@ -19,7 +19,7 @@ var	agency_bt_approvals = (function()
 
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_getApprovalsList",
 				object: "bt",
@@ -62,7 +62,7 @@ var	agency_bt_approvals = (function()
 		}
 		else
 		{
-			var		timeFormat = 'MM/DD/YYYY HH:mm';
+			var		timeFormat = "MM/DD/YYYY HH:mm";
 			var		bt_belongs_to_sow = [];
 			var		sow_id = sow.id;
 			var		customer_map = new Map();
@@ -150,7 +150,7 @@ var	agency_bt_approvals = (function()
 																	.attr("data-loading-text", "<span class='fa fa-refresh fa-spin fa-fw animateClass'></span>")
 																	.attr("data-action", "approve")
 																	.attr("data-bt_id", bt_item.id)
-																	.addClass("btn btn-success form-control __controll_button_" + bt_item.id)
+																	.addClass("btn btn-success form-control __control_button_" + bt_item.id)
 																	.append("OK")
 																	.on("click", function(e)
 																		{
@@ -161,7 +161,7 @@ var	agency_bt_approvals = (function()
 																	.attr("data-loading-text", "<span class='fa fa-refresh fa-spin fa-fw animateClass'></span>")
 																	.attr("data-action", "reject")
 																	.attr("data-bt_id", bt_item.id)
-																	.addClass("btn btn-danger form-control __controll_button_" + bt_item.id)
+																	.addClass("btn btn-danger form-control __control_button_" + bt_item.id)
 																	.append("отклонить")
 																	.on("click", function(e)
 																		{

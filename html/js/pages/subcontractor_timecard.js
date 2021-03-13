@@ -215,7 +215,7 @@ var	subcontractor_timecard = (function()
 		{
 			// --- save allowed only for "new", "saved" or "rejected" timecard statuses
 
-			if(isAllCustomerPrjoectTaskFieldsEntered())
+			if(isAllCustomerProjectTaskFieldsEntered())
 			{
 				var	timecard_title_tag = $("#timecard_title");
 				var	currTag = tag || $(this);
@@ -476,21 +476,21 @@ var	subcontractor_timecard = (function()
 
 				// --- if autocomplete functionality is not initialized from the beginning
 				// --- it will not pop-up after configured threshold, it will wait one symbol more
-				// --- to overcome this fake autocomplete initializtion applied
+				// --- to overcome this fake autocomplete initialization applied
 				system_calls.CreateAutocompleteWithSelectCallback(customer_input, [{0:"0"}], timecard_autocomplete.Autocomplete_Customer_SelectHandler);
 				customer_input.on("input", timecard_autocomplete.Autocomplete_Customer_InputHandler)
 							.on("input", HoursResetInput_InputHandler);
 
 				// --- if autocomplete functionality is not initialized from the beginning
 				// --- it will not pop-up after configured threshold, it will wait one symbol more
-				// --- to overcome this fake autocomplete initializtion applied
+				// --- to overcome this fake autocomplete initialization applied
 				system_calls.CreateAutocompleteWithSelectCallback(project_input, [{0:"0"}], timecard_autocomplete.Autocomplete_Project_SelectHandler);
 				project_input.on("input", timecard_autocomplete.Autocomplete_Project_InputHandler)
 							.on("input", HoursResetInput_InputHandler);
 
 				// --- if autocomplete functionality is not initialized from the beginning
 				// --- it will not pop-up after configured threshold, it will wait one symbol more
-				// --- to overcome this fake autocomplete initializtion applied
+				// --- to overcome this fake autocomplete initialization applied
 				system_calls.CreateAutocompleteWithSelectCallback(task_input, [{0:"0"}], timecard_autocomplete.Autocomplete_Task_SelectHandler);
 				task_input.on("input", timecard_autocomplete.Autocomplete_Task_InputHandler)
 							.on("input", HoursResetInput_InputHandler);
@@ -665,6 +665,9 @@ var	subcontractor_timecard = (function()
 		var		i;
 		var		total_hours = 0;
 
+		var		current_sow_obj = common_timecard.GetSoWFromListBySoWID(data_global.sow, current_sow_global);
+		var		working_hours_per_day = parseFloat(current_sow_obj.working_hours_per_day);
+
 		row.append("<td></td>");
 		row.append("<td></td>");
 		row.append("<td>Сумма:</td>");
@@ -684,8 +687,8 @@ var	subcontractor_timecard = (function()
 				.append($("<td>")
 				.addClass("text_align_center")
 				.addClass(system_calls.GetDayClass(tempDate, data_global.holiday_calendar))
-				.addClass((day_hours == 8) ? "even_report" :
-						  (day_hours  > 8) ? "over_report" : "")
+				.addClass((day_hours == working_hours_per_day) ? "even_report" :
+						  (day_hours  > working_hours_per_day) ? "over_report" : "")
 				.append(day_hours || ""));
 		}
 
@@ -799,7 +802,7 @@ var	subcontractor_timecard = (function()
 							{
 								var		current_sow = current_sow_global;
 
-								if(current_sow.length && !isSOWVaild(current_sow, data.sow))
+								if(current_sow.length && !isSOWValid(current_sow, data.sow))
 								{
 									current_sow = "";
 									system_calls.PopoverInfo("sowSelector", "SoW поменялся ввиду неактивности");
@@ -808,7 +811,7 @@ var	subcontractor_timecard = (function()
 								// --- define timecard to display filled or empty
 								if(current_sow === "")
 								{
-									if(data.timecards.length && isSOWVaild(data.timecards[0].contract_sow_id, data.sow)) current_sow = data.timecards[0].contract_sow_id;
+									if(data.timecards.length && isSOWValid(data.timecards[0].contract_sow_id, data.sow)) current_sow = data.timecards[0].contract_sow_id;
 									else
 									{
 										var	candidate_sow_idx = FindActiveSoW(data.sow);
@@ -1240,7 +1243,7 @@ var	subcontractor_timecard = (function()
 				}
 				else
 				{
-					console.error("date parsong error (" + task_assignment.period_start + "), date must be in format YYYY-MM-DD");
+					console.error("date parsing error (" + task_assignment.period_start + "), date must be in format YYYY-MM-DD");
 				}
 			}
 		});
@@ -1266,7 +1269,7 @@ var	subcontractor_timecard = (function()
 				}
 				else
 				{
-					console.error("date parsong error (" + task_assignment.period_end + "), date must be in format YYYY-MM-DD");
+					console.error("date parsing error (" + task_assignment.period_end + "), date must be in format YYYY-MM-DD");
 				}
 			}
 		});
@@ -1285,7 +1288,7 @@ var	subcontractor_timecard = (function()
 		UpdateTimecardFromSOW(current_period_start_global);
 	};
 
-	var	isSOWVaild = function(current_sow, sow_array)
+	var	isSOWValid = function(current_sow, sow_array)
 	{
 		var		result = false;
 
@@ -1322,7 +1325,7 @@ var	subcontractor_timecard = (function()
 		{
 			for (var i = sow_array.length - 1; i >= 0; i--)
 			{
-				if(isSOWVaild(sow_array[i].id, sow_array))
+				if(isSOWValid(sow_array[i].id, sow_array))
 				{
 					sow_idx = i;
 					break;
@@ -1364,7 +1367,7 @@ var	subcontractor_timecard = (function()
 		return result;
 	};
 
-	var	isAllCustomerPrjoectTaskFieldsEntered = function()
+	var	isAllCustomerProjectTaskFieldsEntered = function()
 	{
 		var	result = true;
 

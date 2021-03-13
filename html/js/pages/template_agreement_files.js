@@ -1,20 +1,20 @@
 var	template_agreement_files = function(suffix_init)
 {
-	'use strict';
+	"use strict";
 
 	var	DATE_FORMAT_GLOBAL = "dd/mm/yy";
 	var	data_global;
 	var	type_global = "company";
 	var	id_global = "";
-	var	suffix_gloabl = "suffix";
+	var	suffix_global = "suffix";
 	var	hosting_tag_global;
 	var	update_tag_parent_callback_global;
 
 	var	Init = function(param)
 	{
 		update_tag_parent_callback_global = param;
-		$("#new_template_agreement_submit").on("click", AddNewTemplate_ClickHandler)
-		$("#AreYouSureRemoveTemplateAgreement .submit").on("click", Remove_AreYouSure_Submit_ClickHandler)
+		$("#new_template_agreement_submit").on("click", AddNewTemplate_ClickHandler);
+		$("#AreYouSureRemoveTemplateAgreement .submit").on("click", Remove_AreYouSure_Submit_ClickHandler);
 	};
 
 	var	GetType			= function()		{ return type_global; };
@@ -55,7 +55,7 @@ var	template_agreement_files = function(suffix_init)
 					.attr("data-id", template_agreement_file.id)
 					.attr("data-db_value", template_agreement_file.filename)
 					.attr("data-item_type", "template_agreement_" + GetType())
-					.on("change", system_calls.SoWFileUploader_ChangeHandler)
+					.on("change", system_calls.SoWFileUploader_ChangeHandler);
 				curr_value.attr("href", "/template_agreement_" + GetType() + "/" + template_agreement_file.filename);
 				if(template_agreement_file.filename.length)
 					curr_value.append("Текущий фаил");
@@ -106,7 +106,7 @@ var	template_agreement_files = function(suffix_init)
 					{
 
 						$.getJSON(
-							'/cgi-bin/agency.cgi',
+							"/cgi-bin/agency.cgi",
 							{
 								action: 	"AJAX_getTemplateAgreementFiles",
 								type:		GetType(),
@@ -149,7 +149,7 @@ var	template_agreement_files = function(suffix_init)
 		else error_message = "Заполните название документа";
 
 		return error_message;
-	}
+	};
 
 	var	AddNewTemplate_ClickHandler = function()
 	{
@@ -202,7 +202,7 @@ var	template_agreement_files = function(suffix_init)
 				var		dom_model = $("body");
 
 				$.getJSON(
-					'/cgi-bin/agency.cgi',
+					"/cgi-bin/agency.cgi",
 					{
 						action: 	"AJAX_addTemplateAgreementFile",
 						id:			GetID(),
@@ -233,7 +233,7 @@ var	template_agreement_files = function(suffix_init)
 		var	elem_id = $("#AreYouSureRemoveTemplateAgreement .submit").attr("data-id");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: 	"AJAX_deleteTemplateAgreement_" + GetType(),
 				id:			elem_id,

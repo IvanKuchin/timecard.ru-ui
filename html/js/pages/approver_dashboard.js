@@ -2,7 +2,7 @@ var	approver_dashboard = approver_dashboard || {};
 
 var	approver_dashboard = (function()
 {
-	'use strict';
+	"use strict";
 
 	var	data_global;
 
@@ -26,7 +26,7 @@ var	approver_dashboard = (function()
 
 
 		$.getJSON(
-			'/cgi-bin/approver.cgi',
+			"/cgi-bin/approver.cgi",
 			{
 				"action":"AJAX_getDashboardData",
 			})
@@ -97,7 +97,7 @@ var	approver_dashboard = (function()
 					.add(bt_counter_dom);
 
 		currTag.empty().append(new_dom);
-	}
+	};
 
 	return {
 		Init: Init

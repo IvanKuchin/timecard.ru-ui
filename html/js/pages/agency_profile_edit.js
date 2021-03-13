@@ -2,7 +2,7 @@ var	agency_profile_edit = agency_profile_edit || {};
 
 var	agency_profile_edit = (function()
 {
-	'use strict';
+	"use strict";
 
 	var	DATE_FORMAT_GLOBAL = "dd/mm/yy";
 	var	data_global;
@@ -12,7 +12,7 @@ var	agency_profile_edit = (function()
 	var	new_holiday_calendar_template_global = [];
 	var	new_airfare_limitation_by_direction_global;
 	var	bt_expense_templates_global = [];
-	var	airfare_limitaions_by_direction_global = [];
+	var	airfare_limitations_by_direction_global = [];
 	var	bt_expense_lines_global = [];
 	var	company_edit_obj_global;
 	var	template_agreement_files_obj_global;
@@ -60,13 +60,13 @@ var	agency_profile_edit = (function()
 
 		// --- if autocomplete functionality is not initialized from the beginning
 		// --- it will not pop-up after configured threshold, it will wait one symbol more
-		// --- to overcome this fake autocomplete initializtion applied
+		// --- to overcome this fake autocomplete initialization applied
 		system_calls.CreateAutocompleteWithSelectCallback($(".new_employee_name"), [{0:"0"}], NewEmployeeName_Autocomplete_SelectHandler);
 		$(".new_employee_name").on("input", NewEmployeeName_Autocomplete_InputHandler);
 
 		// --- if autocomplete functionality is not initialized from the beginning
 		// --- it will not pop-up after configured threshold, it will wait one symbol more
-		// --- to overcome this fake autocomplete initializtion applied
+		// --- to overcome this fake autocomplete initialization applied
 		system_calls.CreateAutocompleteWithSelectCallback($(".new_employee_title"), [{0:"0"}], NewEmployeeTitle_Autocomplete_SelectHandler);
 		$(".new_employee_title").on("input", NewEmployeeTitle_Autocomplete_InputHandler);
 	};
@@ -77,7 +77,7 @@ var	agency_profile_edit = (function()
 
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_getAgencyInfo",
 				include_bt: "true",
@@ -97,7 +97,7 @@ var	agency_profile_edit = (function()
 
 						company_edit_obj_global.SetCountriesObj(data.countries);
 						bt_expense_templates_global					= CraftBTExpenseObjects(data.agencies[0]);
-						airfare_limitaions_by_direction_global		= CraftAirfareLimitationsByDirectionObjects(data.agencies[0]);
+						airfare_limitations_by_direction_global		= CraftAirfareLimitationsByDirectionObjects(data.agencies[0]);
 						cost_centers_global							= agency_cost_center_arr.CraftCostCenterObjects(data.agencies[0]);
 						bt_allowances_global						= agency_bt_allowance_arr.CraftBTAllowanceObjects(data.agencies[0]);
 						holiday_calendar_global						= agency_holiday_calendar_arr.CraftHolidayCalendarObjects(data.agencies[0], GetAgencyInfoFromServer);
@@ -226,7 +226,7 @@ var	agency_profile_edit = (function()
 
 		result = result.add(title_row);
 
-		airfare_limitaions_by_direction_global.forEach(function(item)
+		airfare_limitations_by_direction_global.forEach(function(item)
 		{
 			result = result.add(item.GetDOM());
 		});
@@ -523,7 +523,7 @@ var	agency_profile_edit = (function()
 		var		curr_value = !input_tag.prop("checked");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: curr_tag.data("action"),
 				id: curr_tag.data("id"),
@@ -642,7 +642,7 @@ var	agency_profile_edit = (function()
 		curr_tag.attr("disabled", "");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_deleteExpenseTemplate",
 				id: curr_tag.attr("data-id"),
@@ -713,7 +713,7 @@ var	agency_profile_edit = (function()
 			curr_tag.attr("disabled", "");
 
 			$.getJSON(
-				'/cgi-bin/agency.cgi',
+				"/cgi-bin/agency.cgi",
 				{
 					action: action,
 					id: curr_tag.attr("data-customer_id"),
@@ -752,7 +752,7 @@ var	agency_profile_edit = (function()
 		curr_tag.attr("disabled", "");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_deleteTask",
 				id: curr_tag.attr("data-id"),
@@ -790,7 +790,7 @@ var	agency_profile_edit = (function()
 		curr_tag.attr("disabled", "");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_deleteAirfarelimitationByDirection",
 				id: curr_tag.attr("data-id"),
@@ -828,7 +828,7 @@ var	agency_profile_edit = (function()
 		curr_tag.attr("disabled", "");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_deleteEmployee",
 				id: curr_tag.attr("data-id"),
@@ -866,7 +866,7 @@ var	agency_profile_edit = (function()
 		curr_tag.attr("disabled", "");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_deleteBTAllowance",
 				id: curr_tag.attr("data-id"),
@@ -906,7 +906,7 @@ var	agency_profile_edit = (function()
 		curr_tag.attr("disabled", "");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_deleteHolidayCalendar",
 				id: curr_tag.attr("data-id"),
@@ -962,19 +962,19 @@ var	agency_profile_edit = (function()
 
 		// --- if autocomplete functionality is not initialized from the beginning
 		// --- it will not pop-up after configured threshold, it will wait one symbol more
-		// --- to overcome this fake autocomplete initializtion applied
+		// --- to overcome this fake autocomplete initialization applied
 		system_calls.CreateAutocompleteWithSelectCallback(customer_input, [{0:"0"}], timecard_autocomplete.Autocomplete_Customer_SelectHandler);
 		customer_input.on("input", timecard_autocomplete.Autocomplete_Customer_InputHandler);
 
 		// --- if autocomplete functionality is not initialized from the beginning
 		// --- it will not pop-up after configured threshold, it will wait one symbol more
-		// --- to overcome this fake autocomplete initializtion applied
+		// --- to overcome this fake autocomplete initialization applied
 		system_calls.CreateAutocompleteWithSelectCallback(project_input, [{0:"0"}], timecard_autocomplete.Autocomplete_Project_SelectHandler);
 		project_input.on("input", timecard_autocomplete.Autocomplete_Project_InputHandler);
 
 		// --- if autocomplete functionality is not initialized from the beginning
 		// --- it will not pop-up after configured threshold, it will wait one symbol more
-		// --- to overcome this fake autocomplete initializtion applied
+		// --- to overcome this fake autocomplete initialization applied
 		system_calls.CreateAutocompleteWithSelectCallback(task_input, [{0:"0"}], timecard_autocomplete.Autocomplete_Task_SelectHandler);
 		task_input.on("input", timecard_autocomplete.Autocomplete_Task_InputHandler);
 	};
@@ -1143,7 +1143,7 @@ var	agency_profile_edit = (function()
 		{
 			curr_tag.button("loading");
 			$.getJSON(
-				'/cgi-bin/agency.cgi',
+				"/cgi-bin/agency.cgi",
 				{
 					action: action,
 					customer: $(".new_customer").val(),
@@ -1205,9 +1205,9 @@ var	agency_profile_edit = (function()
 		curr_tag.attr("data-user_id", "");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
-				action: "AJAX_getUnemployeedAgentAutocompleteList",
+				action: "AJAX_getUnemployedAgentAutocompleteList",
 				name: curr_val,
 			})
 			.done(function(data)
@@ -1239,7 +1239,7 @@ var	agency_profile_edit = (function()
 		var	curr_val = curr_tag.val();
 
 		$.getJSON(
-			'/cgi-bin/ajax_anyrole_1.cgi',
+			"/cgi-bin/ajax_anyrole_1.cgi",
 			{
 				action: "AJAX_getPositionAutocompleteList",
 				position: curr_val,
@@ -1274,7 +1274,7 @@ var	agency_profile_edit = (function()
 		else
 		{
 			curr_tag.button("loading");
-			$.getJSON('/cgi-bin/agency.cgi',
+			$.getJSON("/cgi-bin/agency.cgi",
 				{
 					action: action,
 					user_id: $(".new_employee_name").attr("data-user_id"),

@@ -1,6 +1,6 @@
 var	company_info_edit = function(suffix_init)
 {
-	'use strict';
+	"use strict";
 
 	var	DATE_FORMAT_GLOBAL = "dd/mm/yy";
 	var	data_global;
@@ -74,7 +74,7 @@ var	company_info_edit = function(suffix_init)
 				processData: false,
 				async: true,
 				data: formData,
-				type: 'post',
+				type: "post",
 				success: function(raw_data) {
 					var		jsonObj = (
 								function(raw)
@@ -152,7 +152,7 @@ var	company_info_edit = function(suffix_init)
 		{
 			if(currTag.attr("src").search("blob:") === 0)
 			{
-				// --- exif-js check if ".exifdata" exists and doesn't referesh it for new picture
+				// --- exif-js check if ".exifdata" exists and doesn't refresh it for new picture
 				// --- you should remove it manually
 				delete currTag[0].exifdata;
 				system_calls.Exif_RemoveClasses(currTag);
@@ -426,7 +426,7 @@ var	company_info_edit = function(suffix_init)
 		button_tin					.append("Получить данные компании");
 		col_custom_field_title		.append($("<center>").append($("<h4>").append("Дополнительная информация")));
 		span_vat_calculation_type_text
-									.append("Суммарный расчет НДС варьируется в зависимости от способа вычисления, по причине округления (см. пример). <span class='color_red'>Если не уверены - оставьте значение по умолчанию.</span><br><br> <img src='/images/pages/edit_company/vat_calculation_modes.PNG' class='width_100percent'>")
+									.append("Суммарный расчет НДС варьируется в зависимости от способа вычисления, по причине округления (см. пример). <span class='color_red'>Если не уверены - оставьте значение по умолчанию.</span><br><br> <img src='/images/pages/edit_company/vat_calculation_modes.PNG' class='width_100percent'>");
 
 
 		company_logo				.attr("src", "/images/pages/common/empty_2.png");
@@ -619,7 +619,7 @@ var	company_info_edit = function(suffix_init)
 		{
 
 			$.getJSON(
-				'/cgi-bin/ajax_anyrole_1.cgi',
+				"/cgi-bin/ajax_anyrole_1.cgi",
 				{
 					action: "AJAX_getCompanyInfo",
 					tin: new_company_tin,
@@ -743,7 +743,7 @@ var	company_info_edit = function(suffix_init)
 				{
 
 					$.getJSON(
-						'/cgi-bin/ajax_anyrole_1.cgi',
+						"/cgi-bin/ajax_anyrole_1.cgi",
 						{
 							action: 						"AJAX_addNewCompany",
 							type:		 					GetType(),

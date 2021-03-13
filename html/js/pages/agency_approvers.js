@@ -1,6 +1,6 @@
 var	agency_approver_obj = function()
 {
-	'use strict';
+	"use strict";
 
 	var	DATE_FORMAT_GLOBAL = "dd/mm/yy";
 	var	DB_FORMAT_GLOBAL = "YYYY-MM-DD";
@@ -67,7 +67,7 @@ var	agency_approver_obj = function()
 
 var	agency_approvers_obj = (function()
 {
-	'use strict';
+	"use strict";
 
 	var	sow_global;
 	var	root_target_global;
@@ -97,7 +97,7 @@ var	agency_approvers_obj = (function()
 		curr_tag.button("loading");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: curr_action,
 				new_value: id,
@@ -179,7 +179,7 @@ var	agency_approvers_obj = (function()
 		currTag.attr("disabled", "");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_deleteTimecardApproverFromPSoW",
 				id: currTag.attr("data-id"),
@@ -227,7 +227,7 @@ var	agency_approvers_obj = (function()
 		currTag.attr("disabled", "");
 
 		$.getJSON(
-			'/cgi-bin/agency.cgi',
+			"/cgi-bin/agency.cgi",
 			{
 				action: "AJAX_deleteBTExpenseApproverFromPSoW",
 				id: currTag.attr("data-id"),
@@ -372,14 +372,14 @@ var	agency_approvers_obj = (function()
 				id_arr.push($(this).attr("data-id"));
 			});
 
-			console.debug("bt approvers sortupdate (" + id_arr.join(' ') + ")");
+			console.debug("bt approvers sortupdate (" + id_arr.join(" ") + ")");
 
 			$.getJSON(
-				'/cgi-bin/agency.cgi',
+				"/cgi-bin/agency.cgi",
 				{
 					action: action,
 					psow_id: psow_id,
-					value: id_arr.join(','),
+					value: id_arr.join(","),
 				})
 				.done(function(data)
 				{

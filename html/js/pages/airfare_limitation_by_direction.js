@@ -1,6 +1,6 @@
 var	airfare_limitation_by_direction = function()
 {
-	'use strict';
+	"use strict";
 
 	var random_global;
 	var	data_global;
@@ -119,7 +119,7 @@ var	airfare_limitation_by_direction = function()
 
 			curr_tag.button("loading");
 
-			$.getJSON('/cgi-bin/agency.cgi?rand=' + Math.floor(Math.random() * 1435267980867), cgi_params)
+			$.getJSON("/cgi-bin/agency.cgi?rand=" + Math.floor(Math.random() * 1435267980867), cgi_params)
 				.done(function(data)
 				{
 					if(data.result == "success")

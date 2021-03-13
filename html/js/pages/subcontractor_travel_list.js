@@ -3,7 +3,7 @@ var	subcontractor_travel_list = subcontractor_travel_list || {};
 
 subcontractor_travel_list = (function()
 {
-	'use strict';
+	"use strict";
 
 	var	DATE_FORMAT_GLOBAL = "dd/mm/yy";
 	var	data_global;
@@ -45,7 +45,7 @@ subcontractor_travel_list = (function()
 		var		currTag = $("#travel_list_title");
 
 		$.getJSON(
-			'/cgi-bin/subcontractor.cgi',
+			"/cgi-bin/subcontractor.cgi",
 			{
 				"action":"AJAX_getTravelList",
 			})
@@ -80,7 +80,7 @@ subcontractor_travel_list = (function()
 		else
 		{
 
-			var		timeFormat = 'MM/DD/YYYY HH:mm';
+			var		timeFormat = "MM/DD/YYYY HH:mm";
 			var		item_belongs_to_sow = [];
 			var		sow_id = sow.id;
 

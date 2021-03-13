@@ -2,7 +2,7 @@ var	approval_notifications = approval_notifications || {};
 
 approval_notifications = (function()
 {
-	'use strict';
+	"use strict";
 
 	var Init = function()
 	{
@@ -14,7 +14,7 @@ approval_notifications = (function()
 
 	var UpdateAccountInfo = function()
 	{
-		$.getJSON('/cgi-bin/index.cgi?action=JSON_getUserProfile')
+		$.getJSON("/cgi-bin/index.cgi?action=JSON_getUserProfile")
 			.done(
 				function(data) 
 				{
@@ -52,7 +52,7 @@ approval_notifications = (function()
 		var		curr_value = !input_tag.prop("checked");
 
 		$.getJSON(
-			'/cgi-bin/' + input_tag.attr("data-script"),
+			"/cgi-bin/" + input_tag.attr("data-script"),
 			{
 				action: input_tag.attr("data-action"),
 				value: (curr_value ? "Y" : "N"),

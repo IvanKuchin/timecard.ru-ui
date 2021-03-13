@@ -38,6 +38,11 @@ RewriteRule ^helpdesk_dashboard$ /cgi-bin/helpdesk.cgi?action=helpdesk_dashboard
 RewriteRule ^initial_wizard$ /cgi-bin/index.cgi?action=initial_wizard [QSA]
 
 #
+# Helpdesk actions
+#
+RewriteRule ^helpdesk_edit_profile$ /cgi-bin/agency.cgi?action=edit_profile_template [QSA]
+
+#
 # profile by id (number)
 #
 RewriteRule ^userprofile/(.*)$ /cgi-bin/index.cgi?action=view_profile&userid=$1
@@ -63,3 +68,4 @@ RewriteRule ^invoices_subc/(.*)$				https://devimages.timecard.ru/invoices_subc/
 RewriteRule ^smartway_vouchers/(.*)$			https://devimages.timecard.ru/smartway_vouchers/$1			[L,R=301,NC]
 RewriteRule ^template_(.*)$						https://devimages.timecard.ru/templates_$1					[L,R=301,NC]
 RewriteRule ^helpdesk_ticket_attaches/(.*)$		https://devimages.timecard.ru/helpdesk_ticket_attaches/$1	[L,R=301,NC]
+

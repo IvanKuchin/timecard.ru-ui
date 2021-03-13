@@ -3,7 +3,7 @@ var	subcontractor_travel_search = subcontractor_travel_search || {};
 
 subcontractor_travel_search = (function()
 {
-	'use strict';
+	"use strict";
 	var	DATE_FORMAT_GLOBAL = "dd/mm/yy";
 	var	data_global;
 	var	min_price_global = 0;
@@ -34,7 +34,7 @@ subcontractor_travel_search = (function()
 								var	curr_tag = $(this);
 								var	voucher_id = $("input.voucher_id").val();
 
-									$.getJSON('/cgi-bin/subcontractor.cgi', {action: "AJAX_getVoucher", voucher_id: voucher_id})
+									$.getJSON("/cgi-bin/subcontractor.cgi", {action: "AJAX_getVoucher", voucher_id: voucher_id})
 												.done(function(data) {
 
 													if(data.result == "success")
@@ -208,7 +208,7 @@ subcontractor_travel_search = (function()
 
 									min_price_global = ui.values[0];
 									max_price_global = ui.values[1];
-									curr_dialog.find(".label_1").empty().append(min_price_global); // --- this update required to update GUI in case of programmatical slide value change
+									curr_dialog.find(".label_1").empty().append(min_price_global); // --- this update required to update GUI in case of Programmatically slide value change
 									curr_dialog.find(".label_2").empty().append(max_price_global);
 
 									// --- filter button color
@@ -482,7 +482,7 @@ subcontractor_travel_search = (function()
 		var		currTag = $("#bt_body");
 
 		$.getJSON(
-			'/cgi-bin/subcontractor.cgi',
+			"/cgi-bin/subcontractor.cgi",
 			{
 				action:"AJAX_getSoWList",
 				include_tasks:"false",
@@ -936,7 +936,7 @@ subcontractor_travel_search = (function()
 		var	trip;
 		var	div_image;
 		var	div_time_in_flight;
-		var	div_diration;
+		var	div_duration;
 		var	div_stops;
 		var	div_price;
 		var	div_open;
@@ -950,7 +950,7 @@ subcontractor_travel_search = (function()
 
 			div_image			= $("<div>").addClass("hidden-xs hidden-sm col-md-1");
 			div_time_in_flight	= $("<div>").addClass("col-xs-8 col-md-3");
-			div_diration		= $("<div>").addClass("hidden-xs hidden-sm col-md-2");
+			div_duration		= $("<div>").addClass("hidden-xs hidden-sm col-md-2");
 			div_stops			= $("<div>").addClass("col-xs-4 col-md-2");
 			div_price			= $("<div>").addClass("col-xs-offset-4 col-xs-6 col-md-offset-0 col-md-3");
 			div_open			= $("<div>").addClass("col-xs-2 col-md-1");
@@ -969,7 +969,7 @@ subcontractor_travel_search = (function()
 
 			div_image			.append($("<img>").addClass("height_34px").attr("src", "/images/airlines/plane_icon.png"));
 			div_time_in_flight	.append(GetTimeInTheAir(trip));
-			div_diration		.append(GetTravelDuration(trip));
+			div_duration		.append(GetTravelDuration(trip));
 			div_stops			.append(GetNumberLayovers(trip));
 			div_price			.append(GetTripPrice(trip) + " руб.");
 			div_open			.append(open_tag);
@@ -988,7 +988,7 @@ subcontractor_travel_search = (function()
 															$("<div>")	.addClass("row")
 																		.append(div_image)
 																		.append(div_time_in_flight)
-																		.append(div_diration)
+																		.append(div_duration)
 																		.append(div_stops)
 																		.append(div_price)
 																		.append(div_open)
@@ -1415,7 +1415,7 @@ subcontractor_travel_search = (function()
 		$("#sowSelector").prop("disabled", "disabled"); // --- this helps to avoid search with 1 SoW and purchase with another.
 
 		setTimeout(function() { ShowLoadingSplash(); }, 250); // --- hold back splash screen in case current ajax-request should be canceled
-															  // --- 1) next line will cancel current reques
+															  // --- 1) next line will cancel current request
 															  // --- 2) always-handler - will hide current splash screen
 															  // --- 3) new splash should be run after (2)
 
@@ -1424,7 +1424,7 @@ subcontractor_travel_search = (function()
 
 
 		curr_request_global = $.getJSON(
-			'/cgi-bin/subcontractor.cgi', BuildSearchQuery())
+			"/cgi-bin/subcontractor.cgi", BuildSearchQuery())
 			.done(function(data) {
 				if(data.result == "success")
 				{
@@ -1481,7 +1481,7 @@ subcontractor_travel_search = (function()
 		curr_tag.button("loading");
 
 		curr_request_global = $.getJSON(
-			'/cgi-bin/subcontractor.cgi',
+			"/cgi-bin/subcontractor.cgi",
 			{
 				action: "AJAX_purchaseAirTicket",
 				sow_id: $("#sowSelector").val(),

@@ -1,6 +1,6 @@
 var	bank_edit = function(suffix, callback_func)
 {
-	'use strict';
+	"use strict";
 
 	var	callback_global = (typeof(callback_func) == "function" ? callback_func : undefined);
 	var	suffix_global = suffix;
@@ -161,7 +161,7 @@ var	bank_edit = function(suffix, callback_func)
 		if(name.length && account.length && bik.length)
 		{
 			$.getJSON(
-				'/cgi-bin/ajax_anyrole_1.cgi',
+				"/cgi-bin/ajax_anyrole_1.cgi",
 				{
 					action: "AJAX_submitNewBank",
 					name: name,
@@ -196,7 +196,7 @@ var	bank_edit = function(suffix, callback_func)
 		// if(bik.length)
 		{
 			$.getJSON(
-				'/cgi-bin/ajax_anyrole_1.cgi',
+				"/cgi-bin/ajax_anyrole_1.cgi",
 				{
 					action: "AJAX_getBankInfoByBIK",
 					bik: bik,

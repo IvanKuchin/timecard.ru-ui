@@ -3,7 +3,7 @@ var	edit_profile = edit_profile || {};
 
 edit_profile = (function()
 {
-'use strict';
+"use strict";
 
 var		MAX_NUMBER_PREVIEW = 3;
 var		DATE_FORMAT_GLOBAL = "dd/mm/yy";
@@ -124,20 +124,20 @@ var	Init = function()
 	});
 
 	$("#DeleteAvatarDialogBoxBS_Submit").on("click", function() {
-		console.debug("removed avatar id " + $("#DeteledAvatarID_InBSForm").val());
+		console.debug("removed avatar id " + $("#DeletedAvatarID_InBSForm").val());
 
 		$("#DeleteAvatarDialogBoxBS").modal("hide");
 
-		// --- Real avatar deletion after closing dialog to improve User Expirience
-		DeletePreviewAvatar($("#DeteledAvatarID_InBSForm").val());
+		// --- Real avatar deletion after closing dialog to improve User Experience
+		DeletePreviewAvatar($("#DeletedAvatarID_InBSForm").val());
 	});
 
 	// --- Image uploader
 	$(function () {
 		// Change this to the location of your server-side upload handler:
-		$('#fileupload').fileupload({
-			url: '/cgi-bin/avataruploader.cgi',
-			dataType: 'json',
+		$("#fileupload").fileupload({
+			url: "/cgi-bin/avataruploader.cgi",
+			dataType: "json",
 			maxFileSize: 30 * 1024 * 1024,
 			acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
 
@@ -166,17 +166,17 @@ var	Init = function()
 			},
 			progressall: function (e, data) {
 				var progress = parseInt(data.loaded / data.total * 100, 10);
-				$('#progress .progress-bar').css(
-					'width',
-					progress + '%'
+				$("#progress .progress-bar").css(
+					"width",
+					progress + "%"
 				);
 			},
 			fail: function (e, data) {
 				alert("ошибка загрузки фаила: " + data.textStatus);
 			}
 
-		}).prop('disabled', !$.support.fileInput)
-			.parent().addClass($.support.fileInput ? undefined : 'disabled');
+		}).prop("disabled", !$.support.fileInput)
+			.parent().addClass($.support.fileInput ? undefined : "disabled");
 	});
 
 	$("#canvasForAvatar").on("click", function(e) 
@@ -238,7 +238,7 @@ var	Init = function()
 
 var	GetUserProfileFromServer = function()
 {
-	$.getJSON('/cgi-bin/index.cgi?action=JSON_getUserProfile', {param1: "_"})
+	$.getJSON("/cgi-bin/index.cgi?action=JSON_getUserProfile", {param1: "_"})
 		.done(function(data) {
 			if(data.result === "success")
 			{
@@ -275,7 +275,7 @@ var	ScrollToElementID = function(elementID)
 
 var	UpdateUserSex = function(userSex)
 {
-	$.getJSON('/cgi-bin/account.cgi?action=AJAX_changeUserSex', {userSex: userSex})
+	$.getJSON("/cgi-bin/account.cgi?action=AJAX_changeUserSex", {userSex: userSex})
 		.done(function(data) {
 			if(data.result === "success")
 			{
@@ -316,7 +316,7 @@ var	RenderUserBirthday = function()
 
 	if(userProfile.birthday.length)
 	{
-		temp_date = userProfile.birthday.split('-');
+		temp_date = userProfile.birthday.split("-");
 		if(temp_date.length == 3)
 		{
 			birthday = new Date(parseInt(temp_date[0]), parseInt(temp_date[1]) - 1, parseInt(temp_date[2]));
@@ -376,7 +376,7 @@ var	RenderUserName = function()
 
 var	RenderUserPassport = function()
 {
-	var	temp_date = userProfile.passport_issue_date.split('-');
+	var	temp_date = userProfile.passport_issue_date.split("-");
 	var	passport_issue_date = new Date();
 	var	date_input_value = "";
 
@@ -438,7 +438,7 @@ var	RenderUserPassport = function()
 
 var	RenderUserForeignPassport = function()
 {
-	var	temp_date = userProfile.foreign_passport_expiration_date.split('-');
+	var	temp_date = userProfile.foreign_passport_expiration_date.split("-");
 	var	foreign_passport_expiration_date = new Date();
 	var	date_input_value = "";
 
@@ -567,7 +567,7 @@ var	DeletePreviewAvatar = function (id)
 			// --- Hide "delete" cross due to delete text avatar impossible
 			$("#canvasForAvatarPreview0_del").hide();
 
-			document.getElementById(context+"_overlay").addEventListener('click', function()
+			document.getElementById(context+"_overlay").addEventListener("click", function()
 				{
 					// --- mark all preview inactive
 					JSON_AvatarList.forEach(function(item)
@@ -600,7 +600,7 @@ var	DeletePreviewAvatar = function (id)
 				if(id > 0)
 				{
 
-					document.getElementById(context+"_overlay").addEventListener('click', function()
+					document.getElementById(context+"_overlay").addEventListener("click", function()
 					{
 						// --- mark clicked preview active
 						JSON_AvatarList.forEach(function(item)
@@ -619,12 +619,12 @@ var	DeletePreviewAvatar = function (id)
 						}).done(function() {});
 					});
 
-					document.getElementById(context+"_del").addEventListener('click', function()
+					document.getElementById(context+"_del").addEventListener("click", function()
 					{
 						// $("#DeleteAvatarDialogBox").dialog("option", "id", id);
 						// $("#DeleteAvatarDialogBox").dialog("open");
 
-						$("#DeteledAvatarID_InBSForm").val(id);
+						$("#DeletedAvatarID_InBSForm").val(id);
 						$("#DeleteAvatarDialogBoxBS").modal("show");
 
 
@@ -658,7 +658,7 @@ var	DeletePreviewAvatar = function (id)
 	var DrawAllAvatars = function()
 	{
 	// --- AJAX avatar list download
-	$.getJSON('/cgi-bin/index.cgi?action=JSON_getAvatarList', {param1: ''})
+	$.getJSON("/cgi-bin/index.cgi?action=JSON_getAvatarList", {param1: ""})
 		.done(function(data) {
 			var		i;
 
@@ -704,9 +704,9 @@ var	DeletePreviewAvatar = function (id)
 
 		if(typeof(affectedScript) == "undefined") affectedScript = "";
 		if(!affectedScript.length) affectedScript = "index.cgi";
-		$("#AreYouSure").modal('hide');
+		$("#AreYouSure").modal("hide");
 
-		$.getJSON('/cgi-bin/' + affectedScript + '?action=' + affectedAction, {id: affectedID})
+		$.getJSON("/cgi-bin/" + affectedScript + "?action=" + affectedAction, {id: affectedID})
 			.done(function(data) {
 				if(data.result === "success")
 				{
@@ -718,7 +718,7 @@ var	DeletePreviewAvatar = function (id)
 			});
 
 		// --- update GUI has to be inside getJSON->done->if(success).
-		// --- To improve User Expirience (react on user actions immediately)
+		// --- To improve User Experience (react on user actions immediately)
 		// ---	 I'm updating GUI immediately after click, not waiting server response
 		if((affectedAction == "AJAX_deleteAirlineBonusNumber") && affectedID)		$("#avia_bonus_list .__program_id_" + affectedID).hide(250);
 		if((affectedAction == "AJAX_deleteHotelchainBonusNumber") && affectedID)	$("#hotelchain_bonus_list .__program_id_" + affectedID).hide(250);
@@ -775,7 +775,7 @@ var	DeletePreviewAvatar = function (id)
 				curr_tag.button("loading");
 
 				$.getJSON(
-					'/cgi-bin/ajax_anyrole_1.cgi',
+					"/cgi-bin/ajax_anyrole_1.cgi",
 					{
 						action: action,
 						program_id: program_id,
@@ -975,7 +975,7 @@ var	DeletePreviewAvatar = function (id)
 
 		curr_tag.button("loading");
 
-		$.getJSON('/cgi-bin/subcontractor.cgi?action=AJAX_enrollSmartway')
+		$.getJSON("/cgi-bin/subcontractor.cgi?action=AJAX_enrollSmartway")
 			.done(function(data) {
 				if(data.result === "success")
 				{

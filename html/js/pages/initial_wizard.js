@@ -2,7 +2,7 @@ var	initial_wizard = initial_wizard || {};
 
 var	initial_wizard = (function()
 {
-	'use strict';
+	"use strict";
 
 	var		DATE_FORMAT_GLOBAL = "dd/mm/yy";
 
@@ -93,7 +93,7 @@ var	initial_wizard = (function()
 		}
 		else
 		{
-			HighlighStepIndicator(tab_id);
+			HighlightStepIndicator(tab_id);
 			$(".__control_block").show();
 		}
 
@@ -204,7 +204,7 @@ var	initial_wizard = (function()
 					var	regexp_result = /^\s*(\d{1,2})\/(\d{1,2})\/(\d{2,4})\s*$/.exec(passport_issue_date_tag.val());
 					if(regexp_result && (regexp_result.length == 4))
 					{
-						var temp_date = new Date(parseInt(regexp_result[3]), parseInt(regexp_result[2] - 1), parseInt(regexp_result[1]))
+						var temp_date = new Date(parseInt(regexp_result[3]), parseInt(regexp_result[2] - 1), parseInt(regexp_result[1]));
 
 						if((parseInt(regexp_result[1]) == temp_date.getDate()) && (parseInt(regexp_result[2]) == temp_date.getMonth() + 1) && (parseInt(regexp_result[3]) == temp_date.getYear() + 1900))
 						{
@@ -244,7 +244,7 @@ var	initial_wizard = (function()
 		}
 		else
 		{
-			// --- if algorithm not difined, nothing to check
+			// --- if algorithm not defined, nothing to check
 			result = true;
 		}
 
@@ -281,7 +281,7 @@ var	initial_wizard = (function()
 		$("#step_indicators .step[data-tab_id=\"" + tab_id + "\"]").addClass("complete");
 	};
 
-	var	HighlighStepIndicator = function(tab_id)
+	var	HighlightStepIndicator = function(tab_id)
 	{
 		$("#step_indicators .step[data-tab_id=\"" + tab_id + "\"]").addClass("active");
 	};
@@ -293,7 +293,7 @@ var	initial_wizard = (function()
 
 	var	RenderTabsWithCompanyInfo = function()
 	{
-		$.getJSON('/cgi-bin/noauth.cgi',
+		$.getJSON("/cgi-bin/noauth.cgi",
 			{
 				action: "AJAX_getGeoCountryList",
 			})
@@ -355,7 +355,7 @@ var	initial_wizard = (function()
 
 			if(company_tin_tag.attr("data-company_type") && company_tin_tag.attr("data-company_type").length)
 			{
-				$.getJSON('/cgi-bin/ajax_anyrole_1.cgi',
+				$.getJSON("/cgi-bin/ajax_anyrole_1.cgi",
 					{
 						action: "AJAX_isCompanyExists",
 						tin: company_tin_tag.val(),
@@ -499,7 +499,7 @@ var	initial_wizard = (function()
 									}
 								);
 
-						// --- this block allows avoid repetative calling recursive.
+						// --- this block allows avoid repetitive calling recursive.
 						// --- if it will be removed, then recursive func SubmitDataToBackend() will be called after loop
 						// --- this may trigger window.redirect before workflow finish. (synchronous flow faster than async calls) 
 						{
@@ -544,11 +544,11 @@ var	initial_wizard = (function()
 				if(json_param.agency_to_notify.length)
 				{
 					if(submit_obj_global.type == "subc")
-						json_param.action = "AJAX_notifyAgencyAboutSubcRegitration";
+						json_param.action = "AJAX_notifyAgencyAboutSubcRegistration";
 					else if(submit_obj_global.type == "approver")
-						json_param.action = "AJAX_notifyAgencyAboutApproverRegitration";
+						json_param.action = "AJAX_notifyAgencyAboutApproverRegistration";
 					else if(submit_obj_global.type == "agency_employee")
-						json_param.action = "AJAX_notifyAgencyAboutEmployeeRegitration";
+						json_param.action = "AJAX_notifyAgencyAboutEmployeeRegistration";
 					else
 						console.error("unknown notification type: " + submit_obj_global.type);
 				}
@@ -565,7 +565,7 @@ var	initial_wizard = (function()
 
 				if((typeof json_param.action != "undefined") && (json_param.action.length))
 				{
-					$.getJSON('/cgi-bin/initial_wizard.cgi', json_param)
+					$.getJSON("/cgi-bin/initial_wizard.cgi", json_param)
 						.done(function(data)
 						{
 							if(data.result == "success")

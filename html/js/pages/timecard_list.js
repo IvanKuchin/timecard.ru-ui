@@ -3,7 +3,7 @@ var	timecard_list = timecard_list || {};
 
 var	timecard_list = (function()
 {
-	'use strict';
+	"use strict";
 
 	var	user_type_global = "";
 	var	global_holiday_calendar;
@@ -41,7 +41,7 @@ var	timecard_list = (function()
 	var	isPaginationIndicatorVisible = function()
 	{
 		return $("#scrollerToShow i").is(":visible");
-	}
+	};
 
 	var	UpdateTimecardList = function(clear_or_append)
 	{
@@ -119,7 +119,7 @@ var	timecard_list = (function()
 		}
 		else
 		{
-			var		timeFormat = 'MM/DD/YYYY HH:mm';
+			var		timeFormat = "MM/DD/YYYY HH:mm";
 			var		timecards_belongs_to_sow	= [];
 			var		today						= new Date();
 			var		today_night					= today.setHours(22, 0, 0, 0);

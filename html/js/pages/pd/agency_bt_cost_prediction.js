@@ -4,7 +4,7 @@ var	agency_bt_cost_prediction = agency_bt_cost_prediction || {};
 
 var	agency_bt_cost_prediction = (function()
 {
-	'use strict';
+	"use strict";
 
 	var	data_global;
 	var	last_month_bt_global;
@@ -30,7 +30,7 @@ var	agency_bt_cost_prediction = (function()
 			bt.expenses.forEach(function(expense)
 			{
 				result += parseFloat(expense.price_domestic);
-			})
+			});
 		});
 
 		return result;
