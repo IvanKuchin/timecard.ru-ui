@@ -3615,7 +3615,7 @@ system_calls = (function()
 	{
 		var	result = $();
 
-		if(link.length)
+		if(link && link.length)
 		{
 			result = $("<a>")
 							.attr("href", "/" + upload_file_type + "/" + link + "?rand=" + Math.random() * 765432345678)

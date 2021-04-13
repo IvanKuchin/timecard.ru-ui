@@ -325,7 +325,7 @@ var	subcontractor_timecard = (function()
 		}
 		else
 		{
-			// --- not allowed to change "approved" or "submited" timecards
+			// --- not allowed to change "approved" or "submitted" timecards
 			callbackFunc();
 		}
 	};
