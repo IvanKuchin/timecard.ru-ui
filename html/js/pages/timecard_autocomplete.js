@@ -1,6 +1,6 @@
-var	timecard_autocomplete = timecard_autocomplete || {};
+var		timecard_autocomplete = timecard_autocomplete || {};
 
-var	timecard_autocomplete = (function()
+timecard_autocomplete = (function()
 {
 	"use strict";
 
@@ -82,10 +82,10 @@ var	timecard_autocomplete = (function()
 	// --- 		 srcData - array of {id:"id", label:"label"}
 	// ---       selectCallback - function(event, ui)
 
-	var	Autocomplete_Customer_SelectHandler = function(event, ui)
+	var	Autocomplete_Customer_SelectHandler = function(/*event, ui*/)
 	{
-		var		userID = ui.item.id;
-		var 	userLabel = ui.item.label;
+		// var		userID = ui.item.id;
+		// var 	userLabel = ui.item.label;
 		var		random = $(this).data("random");
 
 		$("input#project" + random).val("");
@@ -95,7 +95,7 @@ var	timecard_autocomplete = (function()
 	var	Autocomplete_Customer_InputHandler = function()
 	{
 		var	currentTag = $(this);
-		var	currentValue = currentTag.val();
+		// var	currentValue = currentTag.val();
 
 		// if(currentValue.length == 3)
 		{
@@ -104,7 +104,7 @@ var	timecard_autocomplete = (function()
 		}
 	};
 
-	var	Autocomplete_GetCustomersList = function(activeCustomerTitle, activeProjectTitle, activeTaskTitle)
+	var	Autocomplete_GetCustomersList = function(/*activeCustomerTitle, activeProjectTitle, activeTaskTitle*/)
 	{
 		var	result = [];
 
@@ -114,18 +114,20 @@ var	timecard_autocomplete = (function()
 			{
 				for (var i = 0; i < sow.tasks.length; ++i)
 				{
-					var	task = sow.tasks[i];
+					// var	task = sow.tasks[i];
 
 					for (var j = 0; j < sow.tasks[i].projects.length; ++j)
 					{
-						var	project = sow.tasks[i].projects[j];
+						// var	project = sow.tasks[i].projects[j];
 
 						for (var k = 0; k < sow.tasks[i].projects[j].customers.length; ++k)
 						{
 							var	customer = sow.tasks[i].projects[j].customers[k];
 
 							if(system_calls.isElementInList(customer.id, result))
-							{}
+							{
+								// --- pass
+							}
 							else
 							{
 								result.push({id: customer.id, label: customer.title});
@@ -143,7 +145,7 @@ var	timecard_autocomplete = (function()
 	var	Autocomplete_Project_SelectHandler = function(event, ui)
 	{
 		var		project_id = ui.item.id;
-		var 	project_label = ui.item.label;
+		// var 	project_label = ui.item.label;
 		var		random = $(this).data("random");
 
 		$("input#customer" + random).val(GetCustomerTitleByProjectID(project_id));
@@ -153,7 +155,7 @@ var	timecard_autocomplete = (function()
 	var	Autocomplete_Project_InputHandler = function()
 	{
 		var	currentTag = $(this);
-		var	currentValue = currentTag.val();
+		// var	currentValue = currentTag.val();
 
 		// if(currentValue.length == 3)
 		{
@@ -163,7 +165,7 @@ var	timecard_autocomplete = (function()
 		}
 	};
 
-	var	Autocomplete_GetProjectsList = function(activeCustomerTitle, activeProjectTitle, activeTaskTitle)
+	var	Autocomplete_GetProjectsList = function(activeCustomerTitle/*, activeProjectTitle, activeTaskTitle*/)
 	{
 		var	result = [];
 
@@ -175,7 +177,7 @@ var	timecard_autocomplete = (function()
 
 				for (var i = 0; i < sow.tasks.length; ++i)
 				{
-					var	task = sow.tasks[i];
+					// var	task = sow.tasks[i];
 
 					for (var j = 0; j < sow.tasks[i].projects.length; ++j)
 					{
@@ -192,7 +194,9 @@ var	timecard_autocomplete = (function()
 						if(isValid)
 						{
 							if(system_calls.isElementInList(project.id, result))
-							{}
+							{
+								// --- pass
+							}
 							else
 							{
 								result.push({id: project.id, label: project.title});
@@ -212,7 +216,7 @@ var	timecard_autocomplete = (function()
 	var	Autocomplete_Task_SelectHandler = function(event, ui)
 	{
 		var		task_id = ui.item.id;
-		var 	task_label = ui.item.label;
+		// var 	task_label = ui.item.label;
 		var		random = $(this).data("random");
 
 		$("input#customer" + random).val(GetCustomerTitleByTaskID(task_id));
@@ -231,7 +235,7 @@ var	timecard_autocomplete = (function()
 	var	Autocomplete_Task_InputHandler = function()
 	{
 		var	currentTag = $(this);
-		var	currentValue = currentTag.val();
+		// var	currentValue = currentTag.val();
 
 		// if(currentValue.length == 3)
 		{
@@ -241,7 +245,7 @@ var	timecard_autocomplete = (function()
 		}
 	};
 
-	var	Autocomplete_GetTasksList = function(activeCustomerTitle, activeProjectTitle, activeTaskTitle)
+	var	Autocomplete_GetTasksList = function(activeCustomerTitle, activeProjectTitle/*, activeTaskTitle*/)
 	{
 		var	result = [];
 
@@ -269,8 +273,14 @@ var	timecard_autocomplete = (function()
 
 						if(isValid)
 						{
-							if(activeProjectTitle === "") {}
-							else if(project.title == activeProjectTitle) {}
+							if(activeProjectTitle === "") 
+							{
+								// --- pass
+							}
+							else if(project.title == activeProjectTitle) 
+							{
+								// --- pass
+							}
 							else isValid = false;
 						}
 
@@ -278,7 +288,9 @@ var	timecard_autocomplete = (function()
 					if(isValid)
 					{
 						if(system_calls.isElementInList(task.id, result))
-						{}
+						{
+							// --- pass
+						}
 						else
 						{
 							result.push({id: task.id, label: task.title});

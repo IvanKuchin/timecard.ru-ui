@@ -1,16 +1,14 @@
+/* global timecard_autocomplete, common_timecard */
 
-var	subcontractor_timecard = subcontractor_timecard || {};
+var		subcontractor_timecard = subcontractor_timecard || {};
 
-var	subcontractor_timecard = (function()
+subcontractor_timecard = (function()
 {
-    'use strict';
+    "use strict";
 
     var	CONST_CHOOSE_CUSTOMER = "выберите заказчика";
     var	CONST_CHOOSE_PROJECT = "выберите проект";
     var	CONST_CHOOSE_TASK = "выберите задачу";
-
-	var	JSON_FindEventsList_Autocomplete = [];
-	var JSON_MyEventsList;
 
 	var	data_global;
 	var	current_period_start_global = {"date":0, "month":0, "year":0};
@@ -148,13 +146,13 @@ var	subcontractor_timecard = (function()
 		period_finish = new Date(current_period_finish.year, current_period_finish.month - 1, current_period_finish.date);
 
 		left_arrow = $("<i>")
-							 .addClass("fa fa-angle-left")
-							 .addClass("padding_sides_15 animateClass shadow_onhover")
-							 .on("click", OneStepEarlierClickHandler);
+							.addClass("fa fa-angle-left")
+							.addClass("padding_sides_15 animateClass shadow_onhover")
+							.on("click", OneStepEarlierClickHandler);
 		right_arrow = $("<i>")
-							 .addClass("fa fa-angle-right")
-							 .addClass("padding_sides_15 animateClass shadow_onhover")
-							 .on("click", OneStepLaterClickHandler);
+							.addClass("fa fa-angle-right")
+							.addClass("padding_sides_15 animateClass shadow_onhover")
+							.on("click", OneStepLaterClickHandler);
 
 		currTag
 				.empty()
@@ -217,7 +215,6 @@ var	subcontractor_timecard = (function()
 
 			if(isAllCustomerProjectTaskFieldsEntered())
 			{
-				var	timecard_title_tag = $("#timecard_title");
 				var	currTag = tag || $(this);
 				var	timecard_body_tag = $("#timecardBody");
 				var	current_period_start = current_period_start_global;
@@ -266,7 +263,7 @@ var	subcontractor_timecard = (function()
 						line_order += 1;
 					});
 
-				$.post('/cgi-bin/subcontractor.cgi?rand=' + Math.floor(Math.random() * 1000000000), cgiParams)
+				$.post("/cgi-bin/subcontractor.cgi?rand=" + Math.floor(Math.random() * 1000000000), cgiParams)
 					.done(function(json_data)
 					{
 						try
@@ -302,10 +299,10 @@ var	subcontractor_timecard = (function()
 						}
 						catch(e)
 						{
-
+							// --- pass
 						}
 					})
-					.fail(function(data)
+					.fail(function()
 					{
 						system_calls.PopoverError(currTag, "Ошибка ответа сервера");
 					})
@@ -325,8 +322,8 @@ var	subcontractor_timecard = (function()
 		}
 		else
 		{
-			// --- not allowed to change "approved" or "submited" timecards
-			callbackFunc();
+			// --- not allowed to change "approved" or "submitted" timecards
+			// callbackFunc();  // --- commented due to func definition not found
 		}
 	};
 
@@ -335,13 +332,10 @@ var	subcontractor_timecard = (function()
 		SaveTimecard(event, "submit", $(this));
 	};
 
-	var	OneStepEarlierClickHandler = function(e)
+	var	OneStepEarlierClickHandler = function()
 	{
-		var		currTag = $(this);
-
 		{
 			var		current_period_length = GetReportingPaceFromSOW(current_sow_global, data_global.sow);
-			var		periodDuration = -1 * GetPeriodDurationInDays(current_period_start_global, current_period_length);
 			var		newDate;
 			var		isValidPeriod = false;
 
@@ -366,10 +360,8 @@ var	subcontractor_timecard = (function()
 
 	};
 
-	var	OneStepLaterClickHandler = function(e)
+	var	OneStepLaterClickHandler = function()
 	{
-		var		currTag = $(this);
-
 		{
 			var		current_period_length = GetReportingPaceFromSOW(current_sow_global, data_global.sow);
 			var		newDate;
@@ -401,14 +393,12 @@ var	subcontractor_timecard = (function()
 		var		result = $();
 		var		row = $("<tr>").addClass("time_entry");
 		var		periodDuration = GetPeriodDurationInDays(current_period_start, current_period_length);
-		var		i;
 		var		closeButton;
 
 		var		custCell = $("<td>");
 		var		projCell = $("<td>");
 		var		taskCell = $("<td>");
 		var		timecard_reported_hours = [];
-		var		task_active_day_counter;
 		var		task_period_start, task_period_end;
 		var		timecard_period_start = new Date(current_period_start.year, current_period_start.month - 1, current_period_start.date);
 		var		timecard_period_end = new Date(current_period_start.year, current_period_start.month - 1, current_period_start.date + periodDuration - 1);
@@ -442,6 +432,7 @@ var	subcontractor_timecard = (function()
 
 			if((task_period_start <= timecard_period_end) && (timecard_period_start <= task_period_end))
 			{
+				// --- pass
 			}
 			else
 			{
@@ -505,17 +496,17 @@ var	subcontractor_timecard = (function()
 			else
 			{
 				var		custSelectBox = $("<select>").on("change", CustomerSelect_ChangeHandler)
-													 .addClass("transparent customer")
-													 .attr("id", "customer" + tempRandom)
-													 .attr("data-random", tempRandom);
+							.addClass("transparent customer")
+							.attr("id", "customer" + tempRandom)
+							.attr("data-random", tempRandom);
 				var		projSelectBox = $("<select>").on("change", ProjectSelect_ChangeHandler)
-													 .addClass("transparent project")
-													 .attr("id", "project" + tempRandom)
-													 .attr("data-random", tempRandom);
+							.addClass("transparent project")
+							.attr("id", "project" + tempRandom)
+							.attr("data-random", tempRandom);
 				var		taskSelectBox = $("<select>").on("change", TaskSelect_ChangeHandler)
-													 .addClass("transparent task")
-													 .attr("id", "task" + tempRandom)
-													 .attr("data-random", tempRandom);
+							.addClass("transparent task")
+							.attr("id", "task" + tempRandom)
+							.attr("data-random", tempRandom);
 				task_id = typeof(timecard_entry.tasks) != "undefined" ? timecard_entry.tasks[0].id : "0";
 				project_id = GetProjectIDByTaskID(task_id);
 				customer_id = GetCustomerIDByProjectID(project_id);
@@ -533,7 +524,7 @@ var	subcontractor_timecard = (function()
 			row.append(projCell);
 			row.append(taskCell);
 
-			for(i = 0, task_active_day_counter = 0; i < periodDuration; i++)
+			for(var i = 0; i < periodDuration; i++)
 			{
 				var		temp_date = new Date(current_period_start.year, current_period_start.month - 1, current_period_start.date + i);
 				var		day_hours = "";
@@ -546,7 +537,6 @@ var	subcontractor_timecard = (function()
 					{
 						day_hours = timecard_reported_hours[i];
 						if(parseFloat(day_hours) === 0) day_hours = "";
-						++task_active_day_counter;
 					}
 					else
 					{
@@ -577,7 +567,7 @@ var	subcontractor_timecard = (function()
 
 			closeButton = $("<i>")
 									.addClass("fa fa-times-circle padding_close")
-									.on("click", function(e)
+									.on("click", function()
 												{
 													var		footTag = $("#timecardBody tfoot");
 
@@ -591,12 +581,12 @@ var	subcontractor_timecard = (function()
 		return result;
 	};
 
-	var	InputHours_InputHandler = function(e)
+	var	InputHours_InputHandler = function()
 	{
 		$("#timecardBody tfoot").empty().append(GetTimecardFoot(current_period_start_global));
 	};
 
-	var	InputHours_ChangeHandler = function(e)
+	var	InputHours_ChangeHandler = function()
 	{
 		var		currTag = $(this);
 
@@ -676,7 +666,7 @@ var	subcontractor_timecard = (function()
 			var		tempDate = new Date(current_period_start.year, current_period_start.month - 1, current_period_start.date + i);
 			var		day_hours = 0;
 
-			$("input.day" + i).each(function(index)
+			$("input.day" + i).each(function()
 			{
 				day_hours = Math.round((day_hours + parseFloat($(this).val() || 0)) * 100) / 100;
 			});
@@ -688,7 +678,7 @@ var	subcontractor_timecard = (function()
 				.addClass("text_align_center")
 				.addClass(system_calls.GetDayClass(tempDate, data_global.holiday_calendar))
 				.addClass((day_hours == working_hours_per_day) ? "even_report" :
-						  (day_hours  > working_hours_per_day) ? "over_report" : "")
+							(day_hours  > working_hours_per_day) ? "over_report" : "")
 				.append(day_hours || ""));
 		}
 
@@ -762,8 +752,8 @@ var	subcontractor_timecard = (function()
 		var		bodyTag = $("#timecardBody tbody");
 		var		footTag = $("#timecardBody tfoot");
 		var		control_buttons = $("#control_buttons");
-		var		current_period_length = GetReportingPaceFromSOW(current_sow_global, data_global.sow);
-		var		periodDurationInDays = GetPeriodDurationInDays(current_period_start, current_period_length);
+		// var		current_period_length = GetReportingPaceFromSOW(current_sow_global, data_global.sow);
+		// var		periodDurationInDays = GetPeriodDurationInDays(current_period_start, current_period_length);
 		var		result;
 
 		SetTimecardID(timecard);
@@ -790,12 +780,12 @@ var	subcontractor_timecard = (function()
 			// data_global = {};
 
 			$.getJSON(
-				'/cgi-bin/subcontractor.cgi',
+				"/cgi-bin/subcontractor.cgi",
 				{
 					"action":"AJAX_getMyTimecard",
-				 	"period_start_date": current_period_start.date,
-				 	"period_start_month": current_period_start.month,
-				 	"period_start_year": current_period_start.year
+					"period_start_date": current_period_start.date,
+					"period_start_month": current_period_start.month,
+					"period_start_year": current_period_start.year
 				})
 				.done(function(data) {
 							if(data.result == "success")
@@ -842,7 +832,7 @@ var	subcontractor_timecard = (function()
 							}
 
 					})
-				.fail(function(data) {
+				.fail(function() {
 					setTimeout(function() {
 						system_calls.PopoverError(currTag, "Ошибка ответа сервера");
 					}, 500);
@@ -893,9 +883,9 @@ var	subcontractor_timecard = (function()
 		}
 	};
 
-	var	AddRow_ClickHandler = function(e)
+	var	AddRow_ClickHandler = function()
 	{
-		var		currTag = $(this);
+		// var		currTag = $(this);
 		var		bodyTag = $("#timecardBody tbody");
 
 		bodyTag.append(GetTimecardBody(current_period_start_global, {status:"add_single_line"}));
@@ -949,7 +939,9 @@ var	subcontractor_timecard = (function()
 																			.attr("data-id", customer.id);
 
 									if(system_calls.isIDInTheJQueryList(customer.id, result))
-									{}
+									{
+										// --- pass
+									}
 									else
 									{
 										if((task.id == activeTaskID) || (project.id == activeProjectID) || (customer.id == activeCustomerID))
@@ -1011,7 +1003,9 @@ var	subcontractor_timecard = (function()
 							if(isDisplayed)
 							{
 								if(system_calls.isIDInTheJQueryList(project.id, result))
-								{}
+								{
+									// --- pass
+								}
 								else
 								{
 									if((task.id == activeTaskID) || (project.id == activeProjectID)) projectOption.attr("selected", "");
@@ -1077,7 +1071,10 @@ var	subcontractor_timecard = (function()
 
 					if(isDisplayed)
 					{
-						if(system_calls.isIDInTheJQueryList(task.id, result)) {}
+						if(system_calls.isIDInTheJQueryList(task.id, result)) 
+						{
+							// --- pass
+						}
 						else
 						{
 							if(task.id == activeTaskID) taskOption.attr("selected", "");
@@ -1091,7 +1088,7 @@ var	subcontractor_timecard = (function()
 		return result;
 	};
 
-	var	CustomerSelect_ChangeHandler = function(e)
+	var	CustomerSelect_ChangeHandler = function()
 	{
 		var		row_random_id = $(this).data("random");
 		var		custSelectBox = $("select.customer[data-random=\"" + row_random_id + "\"]");
@@ -1104,7 +1101,7 @@ var	subcontractor_timecard = (function()
 		taskSelectBox.empty().append(GetTasksList(custID, "0", "0"));
 	};
 
-	var	ProjectSelect_ChangeHandler = function(e)
+	var	ProjectSelect_ChangeHandler = function()
 	{
 		var		row_random_id = $(this).data("random");
 		var		custSelectBox = $("select.customer[data-random=\"" + row_random_id + "\"]");
@@ -1118,7 +1115,7 @@ var	subcontractor_timecard = (function()
 		taskSelectBox.empty().append(GetTasksList(customerID, projectID, "0"));
 	};
 
-	var	TaskSelect_ChangeHandler = function(e)
+	var	TaskSelect_ChangeHandler = function()
 	{
 		var		row_random_id = $(this).data("random");
 		var		custSelectBox = $("select.customer[data-random=\"" + row_random_id + "\"]");
@@ -1147,10 +1144,10 @@ var	subcontractor_timecard = (function()
 			var		task_period_start = new Date(task_period_start_obj.year, task_period_start_obj.month - 1, task_period_start_obj.date);
 			var		task_period_end = new Date(task_period_end_obj.year, task_period_end_obj.month - 1, task_period_end_obj.date);
 
-			for(var i = 0, task_active_day_counter = 0; i < periodDurationInDays; i++)
+			for(var i = 0; i < periodDurationInDays; i++)
 			{
 				var		temp_date = new Date(current_period_start_global.year, current_period_start_global.month - 1, current_period_start_global.date + i);
-				var		day_hours = "";
+				// var		day_hours = "";
 				var		input_tag = $("tr[data-random=\"" + row_random_id + "\"] input.day" + i);
 				var		disable_flag = false;
 
@@ -1158,6 +1155,7 @@ var	subcontractor_timecard = (function()
 				{
 					if((task_period_start <= temp_date) && (temp_date <= task_period_end))
 					{
+						// --- pass
 					}
 					else
 					{
@@ -1277,7 +1275,7 @@ var	subcontractor_timecard = (function()
 		return result;
 	};
 
-	var	ChangeSOWSelect_ClickHandler = function(e)
+	var	ChangeSOWSelect_ClickHandler = function()
 	{
 		var		currTag = $(this);
 		var		currTagID = currTag.attr("id");
@@ -1330,7 +1328,7 @@ var	subcontractor_timecard = (function()
 					sow_idx = i;
 					break;
 				}
-			};
+			}
 		}
 
 		return sow_idx;
@@ -1390,12 +1388,15 @@ var	subcontractor_timecard = (function()
 		var		currentTag = $(this);
 		var		random_id = currentTag.data("random");
 
-		if(dontResetInputFieldsFlag) {}
+		if(dontResetInputFieldsFlag) 
+		{
+			// --- pass
+		}
 		else ResetHourFields(random_id);
 	};
 
 
-	var	CopyTimecardToClipbuffer_ClickHandler = function(e)
+	var	CopyTimecardToClipbuffer_ClickHandler = function()
 	{
 		var	curr_tag	= $(this);
 		var	table_body	= $("#timecardBody > tbody");
@@ -1417,13 +1418,13 @@ var	subcontractor_timecard = (function()
 		});
 
 		navigator.clipboard.writeText(lines.join("\n")).then(function() {
-		    system_calls.PopoverInfo(curr_tag, 'copied to clipbuffer');
-		  }, function(err) {
-		    system_calls.PopoverInfo(curr_tag, 'ERROR' + err);
-		  });
-  	};
+				system_calls.PopoverInfo(curr_tag, "copied to clipbuffer");
+			}, function(err) {
+				system_calls.PopoverInfo(curr_tag, "ERROR" + err);
+			});
+	};
 
-	var	PasteTimecardFromClipbuffer_ClickHandler = function(e)
+	var	PasteTimecardFromClipbuffer_ClickHandler = function()
 	{
 		var	curr_tag	= $(this);
 
@@ -1435,13 +1436,16 @@ var	subcontractor_timecard = (function()
 
 			var	timecard_line_tag	= curr_tag.closest("tr");
 
-			var paste				= (event.clipboardData || window.clipboardData).getData('text');
+			var paste				= (event.clipboardData || window.clipboardData).getData("text");
 			paste					= paste.replace(/\n$/, "");
 
 			var	lines				= paste.split(/\n/);
 
 			const selection = window.getSelection();
-			if (!selection.rangeCount) {}
+			if (!selection.rangeCount) 
+			{
+				// --- pass
+			}
 			else
 			{
 				selection.deleteFromDocument();

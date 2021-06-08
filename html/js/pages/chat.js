@@ -1,3 +1,5 @@
+/* global DrawUserAvatar */
+
 // --- change it in (chat.js, common.js, localy.h)
 var FREQUENCY_ECHO_REQUEST = 60;
 var WS_RECONNECT_TIMEOUT = 60 * 1000;
@@ -10,7 +12,6 @@ chat = (function()
 
 	var		IMAGE_CHAT_DIRECTORY = "/images/chat/";
 	var		CHAT_MAX_IMAGE_SIZE = 524228;
-	var		SESSION_LEN = 60;
 	var		myUserID = "";
 	var		activeUserID = "";
 	var		contactList = [];
@@ -22,6 +23,7 @@ chat = (function()
 	var		originalLoadingText; // --- used for temporarily store "data-loading-text" during reconnect event
 	var		onScreenKeyboardDisplay;
 	var		loadingModalState;
+	var		typingIndicatorState = "toolbar";
 
 	var		emojiListHTML = "";
 	var		emojiArray = [
@@ -56,6 +58,7 @@ chat = (function()
 	// --- scrollLock used to avoid requesting to much data from server during single scrolling
 	var		scrollLock = false; 
 
+/*
 	var escapable = /[\x00-\x1f\ud800-\udfff\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufff0-\uffff]/g;
 	function filterUnicode(quoted){
 
@@ -63,17 +66,17 @@ chat = (function()
 	  if( !escapable.test(quoted)) return quoted;
 
 	  return quoted.replace( escapable, function(a){
-	    return "";
+		return '';
 	  });
 	}
-
+*/
 	// --- single time actions
 	var	Init = function()
 	{
 
 		$("#loadingModal").modal("show");
 		loadingModalState = "loading";
-		$("#loadingModal").on("shown.bs.modal", function(e) { 
+		$("#loadingModal").on("shown.bs.modal", function() { 
 			if(loadingModalState === "requireToHide")
 			{
 				$("#loadingModal").modal("hide");
@@ -84,7 +87,7 @@ chat = (function()
 				loadingModalState = "shown";
 			}
 		});
-		$("#loadingModal").on("hidden.bs.modal", function(e) { 
+		$("#loadingModal").on("hidden.bs.modal", function() { 
 			loadingModalState = "hidden";
 		});
 
@@ -134,7 +137,7 @@ chat = (function()
 		if(window.File && window.FileList && window.FileReader && window.Blob && window.URL)
 		{
 			// --- image send control buttons
-			$("#ControlButtonPhoto").on("click", function(e)
+			$("#ControlButtonPhoto").on("click", function()
 				{
 					$("#FileSendButton_1").click();
 				});
@@ -201,7 +204,7 @@ chat = (function()
 			}
 			else
 			{
-			 	currentState = ($("#ChatHeightCorrecter").attr("class").indexOf("_correcter_") < 0 ? false : true);
+				currentState = ($("#ChatHeightCorrecter").attr("class").indexOf("_correcter_") < 0 ? false : true);
 			}
 
 			if(currentState ^ onScreenKeyboardDisplay)
@@ -222,16 +225,12 @@ chat = (function()
 
 	var MessageToSendFocusHandler = function()
 	{
-		var d1 = new Date();
-
 		onScreenKeyboardDisplay = true;
 		UpdateLayoutOnScreenKeyboard();
 	};
 
 	var MessageToSendBlurHandler = function()
 	{
-		var	d1 = new Date();
-
 		onScreenKeyboardDisplay = false;
 		setTimeout(function() 
 			{
@@ -243,7 +242,7 @@ chat = (function()
 	{
 		try 
 		{
-			ws = new WebSocket("ws://" + window.location.hostname + ":7681", "text-message-protocol");
+			ws = new WebSocket("wss://" + window.location.hostname + ":7681", "text-message-protocol");
 
 			ws.onopen = function() {
 				wsStatus = "connecting";
@@ -266,14 +265,14 @@ chat = (function()
 			};
 
 			ws.onmessage = function(event) {
-				var		obj = JSON.parse(filterUnicode(event.data));
+				var		obj = JSON.parse(event.data);
 
 				wsStatus = "connected";
 				$("#MessageListSendButton_1").data("loading-text", originalLoadingText);
 				$("#messageToSend").attr("placeholder", "Сообщение...");
 				$("#messageToSend").removeAttr("disabled");
 
-				if(typeof(obj.RequestType))
+				if((typeof(obj) == "object") && (typeof(obj.RequestType) == "string"))
 				{
 					if(obj.RequestType === "SendMessage")
 					{
@@ -347,8 +346,6 @@ chat = (function()
 
 						if(obj.status == "ok")
 						{
-							var	friendID = obj.friendID;
-
 							// --- add received messages to messageList
 							messageList = messageList.concat(obj.messageArray);
 
@@ -361,7 +358,7 @@ chat = (function()
 							if(activeUserID == obj.friendID)
 							{
 								// --- update GUI
-								obj.messageArray.forEach(function(item, i, arr) {
+								obj.messageArray.forEach(function(item) {
 									AddSingleMessageToMessageList($("#MessageListContainer"), item, 0 /*no animate*/, 0 /*prepend*/);
 								});
 
@@ -381,20 +378,25 @@ chat = (function()
 						{
 							if(activeUserID == obj.fromID)
 							{
-								$("#ControlButtons").addClass("opacity_0");
-								setTimeout(function() 
-									{ 
-										$("#MessageTyping").addClass("message_pane_div_typing_opacity_05");
-									}, 100);
+								if(typingIndicatorState == "toolbar")
+								{
+									typingIndicatorState = "typing";
+									$("#ControlButtons").addClass("opacity_0");
+									setTimeout(function() 
+										{
+											$("#MessageTyping").addClass("message_pane_div_typing_opacity_05");
+										}, 100);
 
-								setTimeout(function() 
-									{ 
-										$("#MessageTyping").removeClass("message_pane_div_typing_opacity_05"); 
-									}, 2000);
-								setTimeout(function() 
-									{ 
-										$("#ControlButtons").removeClass("opacity_0");
-									}, 2100);
+									setTimeout(function() 
+										{ 
+											$("#MessageTyping").removeClass("message_pane_div_typing_opacity_05"); 
+										}, 2000);
+									setTimeout(function() 
+										{ 
+											$("#ControlButtons").removeClass("opacity_0");
+											typingIndicatorState = "toolbar";
+										}, 2100);
+								}
 							}
 
 						}
@@ -430,7 +432,7 @@ chat = (function()
 					{
 						if(obj.status == "ok")
 						{
-							obj.presenceCache.forEach(function(item, i, arr)
+							obj.presenceCache.forEach(function(item)
 							{
 								var		tmpUserID = (Object.keys(item))[0];
 								var		tmpLastonlineSecondSinceY2k = item[tmpUserID];
@@ -438,8 +440,6 @@ chat = (function()
 								var 	y2kDate = 946684800 * 1000; // --- ms till Y2k UTC
 								var		nowDate = new Date();
 								var		nowSecondsSinceY2k = (nowDate.getTime() - y2kDate) / 1000;
-
-								var		userPresenceStatus = (nowSecondsSinceY2k - tmpLastonlineSecondSinceY2k);
 
 								if(tmpUserID)
 								{
@@ -461,11 +461,11 @@ chat = (function()
 						console.debug("WebSocket.onmessage: ERROR: unsupported RequestType: " + obj.RequestType);
 					}
 				}
-				else if(typeof(obj.ResponseType))
+				else if((typeof(obj) == "object") && (typeof(obj.ResponseType) == "string"))
 				{
 					if(obj.ResponseType === "")
 					{
-
+						/* good 2 go */
 					}
 					else
 					{
@@ -500,7 +500,7 @@ chat = (function()
 	{
 		var	tmpUserList = "";
 
-		contactList.forEach(function(item, i, arr)
+		contactList.forEach(function(item)
 			{
 				tmpUserList += (tmpUserList.length ? "," : "") + item.id;
 			});
@@ -547,15 +547,6 @@ chat = (function()
 
 	var	GetPresenceIndicator = function(user)
 	{
-		var		tmpUserID = user.id;
-		var		tmpLastonlineSecondSinceY2k = user.last_onlineSecondsSinceY2k;
-
-		var 	y2kDate = 946684800 * 1000; // --- ms till Y2k UTC
-		var		nowDate = new Date();
-		var		nowSecondsSinceY2k = (nowDate.getTime() - y2kDate) / 1000;
-
-		var		userPresenceStatus = (nowSecondsSinceY2k - tmpLastonlineSecondSinceY2k);
-
 		return $("<img>").attr("src", "/images/pages/common/" + (user.last_online_diff < FREQUENCY_ECHO_REQUEST ? "presence_online.png" : "presence_offline.png"));
 	};
 
@@ -583,7 +574,7 @@ chat = (function()
 	{
 		var		countOfUnreadMessages = 0;
 
-		messageList.forEach(function(item, i, arr)
+		messageList.forEach(function(item)
 			{
 				if((item.fromID === userID) && (item.messageStatus === "delivered"))
 				{
@@ -596,7 +587,7 @@ chat = (function()
 
 	var UpdateUnreadMessagesBadge = function()
 	{
-		contactList.forEach(function(item, i, arr)
+		contactList.forEach(function(item)
 			{
 				var		user = item;
 				var		currentNumberOfUnreadMessages = $("div[data-userid=" + user.id + "] span.numberOfUnreadMessages:first").text();
@@ -630,7 +621,7 @@ chat = (function()
 	{
 		var		divContainerFluid = $("<div>").addClass("container-fluid").appendTo(DOMPlacement);
 
-		contactList.forEach(function(item, i, arr)
+		contactList.forEach(function(item)
 			{
 				var		user = item;
 				var		divRow = $("<div>").addClass("row")
@@ -663,7 +654,7 @@ chat = (function()
 			});
 	};
 
-	var	MessageSendLoadingLayout = function(messageObj)
+	var	MessageSendLoadingLayout = function(/*messageObj*/)
 	{
 		$("#MessageListSendButton_1").button("loading");
 		$("#MessageListSendButton_2").button("loading");
@@ -719,9 +710,9 @@ chat = (function()
 									.addClass("message_pane_intermessage_interval")
 									.attr("data-messageID", messageObj.id)
 									.hover( function() { $(this).children("div.message_pane_timestamp").removeClass("message_pane_timestamp_white"); }, function() { $(this).children("div.message_pane_timestamp").addClass("message_pane_timestamp_white"); } );
-		var		divAvatarFromMe     	= $("<div>").addClass("col-lg-1 col-md-2 col-sm-2 col-xs-0 hidden-xs");
+		var		divAvatarFromMe	 	= $("<div>").addClass("col-lg-1 col-md-2 col-sm-2 col-xs-0 hidden-xs");
 		var		divAvatarFromFriend 	= $("<div>").addClass("col-lg-1 col-md-2 col-sm-2 col-xs-0 hidden-xs");
-		var		divTimestampFromMe    	= $("<div>").addClass("col-lg-2 col-md-2 col-sm-2 col-xs-0 hidden-xs message_pane_timestamp message_pane_timestamp_white animateClass message_pane_align_right ")
+		var		divTimestampFromMe		= $("<div>").addClass("col-lg-2 col-md-2 col-sm-2 col-xs-0 hidden-xs message_pane_timestamp message_pane_timestamp_white animateClass message_pane_align_right ")
 													.append(GetMessageTimestamp(messageObj));
 		var		divTimestampFromFriend	= $("<div>").addClass("col-lg-2 col-md-2 col-sm-2 col-xs-0 hidden-xs message_pane_timestamp message_pane_timestamp_white animateClass ")
 													.append(GetMessageTimestamp(messageObj));
@@ -741,11 +732,12 @@ chat = (function()
 														.addClass("canvas-big-avatar")
 														.addClass("contact_list_avatar")
 														.appendTo(divAvatarFromFriend);
-		var		messageText = ReplaceHTMLSmileySymbolsToImg(ReplaceHTMLSpecialSymbolsToText(messageObj.message));
+		var		messageText = system_calls.ReplaceTextLinkToURL(ReplaceHTMLSmileySymbolsToImg(messageObj.message));
 		var		messageImg = $("<img>").addClass("message_pane_image_resize");
 		var		messageType = messageObj.messageType;
 
 		var		messageBody;
+		var		currScrollTop;
 
 		if(messageType == "text")
 			messageBody = messageText;
@@ -815,7 +807,7 @@ chat = (function()
 			}
 			else
 			{
-				var		currScrollTop = $("#MessageList").scrollTop();
+				currScrollTop = $("#MessageList").scrollTop();
 
 				DOMPlacement.prepend(divRow);
 				$("#MessageList").scrollTop(currScrollTop + divRow.outerHeight(true));
@@ -866,7 +858,7 @@ chat = (function()
 			}
 			else
 			{
-				var		currScrollTop = $("#MessageList").scrollTop();
+				currScrollTop = $("#MessageList").scrollTop();
 
 				DOMPlacement.prepend(divRow);
 				$("#MessageList").scrollTop(currScrollTop + divRow.outerHeight(true));
@@ -877,7 +869,9 @@ chat = (function()
 
 	var	ScrollMessageListToMessageID = function(messageID)
 	{
-			if(activeUserMessages.length)
+		if(activeUserMessages.length)
+		{
+			if($("div[data-messageID=" + messageID + "]").length)
 			{
 				var	messageOffset 			= $("div[data-messageID=" + messageID + "]").position().top;
 				var	messageClientHeight 	= $("div[data-messageID=" + messageID + "]")[0].clientHeight;
@@ -885,22 +879,40 @@ chat = (function()
 				var	messageListClientHeight	= $("#MessageList")[0].clientHeight;
 				var	scrollTop = (messageListScrollTop + 20) + ((messageOffset + messageClientHeight) - (messageListClientHeight));
 				
-				$("#MessageList").animate({scrollTop: (messageListScrollTop + 20) + ((messageOffset + messageClientHeight) - (messageListClientHeight)) }, 300);
-				if(Math.abs(scrollTop - messageListScrollTop) > 10) setTimeout(ScrollMessageListToMessageID, 700, messageID);
+				$("#MessageList").animate({scrollTop: scrollTop }, 300);
+				if((scrollTop - messageListScrollTop) > 10)
+				{
+					setTimeout(ScrollMessageListToMessageID, 700, messageID);
+
+					console.debug("next schedule, scrolling to (" + messageID + "): " + (scrollTop - messageListScrollTop));
+				}
+				else
+				{
+					console.debug("stop, scrolling to (" + messageID + "): " + (scrollTop - messageListScrollTop));
+				}
 			}
+			else
+			{
+				// --- for information purposes only
+				// --- this branch can be taken , when same func been scheduled via timeout
+				// --- and
+				// --- browser changed chat user
+			}
+		}
 	};
 
 	var	ScrollMessageListToLastMessage = function()
 	{
 		if(activeUserMessages.length)
 		{
+			console.debug("from ScrollMessageListToLastMessage call ScrollMessageListToMessageID(" + activeUserMessages[activeUserMessages.length - 1].id + ")");
 			ScrollMessageListToMessageID(activeUserMessages[activeUserMessages.length - 1].id);
 		}
 	};
 
 	var ChangeMessageStatusInternally = function(obj, newStatus)
 	{
-		messageList.forEach(function(item, i, arr) 
+		messageList.forEach(function(item) 
 			{
 				if((item.id == obj.id) && (item.messageStatus != newStatus))
 				{
@@ -914,7 +926,7 @@ chat = (function()
 		activeUserMessages = messageList.filter(function(item) { return ((item.fromID == activeUserID) || (item.toID == activeUserID)); });
 		activeUserMessages = activeUserMessages.sort(function(item1, item2) { return ((parseFloat(item1.id) < parseFloat(item2.id)) ? -1 : 1); });
 
-		activeUserMessages.forEach(function(item, i, arr) 
+		activeUserMessages.forEach(function(item) 
 			{
 				if((item.messageStatus != "read") && (item.toID == myUserID))
 				{
@@ -929,7 +941,7 @@ chat = (function()
 	// --- all messages sent to user will change status to Delivered
 	var	UpdateMessageArrayFromSentToDelivered = function()
 	{
-		messageList.forEach(function(item, i, arr) 
+		messageList.forEach(function(item) 
 			{
 				if((typeof(item.toID) != "undefined") && (item.toID == myUserID) && (typeof(item.messageStatus) != "undefined") && (item.messageStatus == "sent"))
 				{
@@ -961,7 +973,7 @@ chat = (function()
 
 			UpdateActiveUserMessagesArray();
 
-			activeUserMessages.forEach(function(item, i, arr)
+			activeUserMessages.forEach(function(item)
 				{
 					AddSingleMessageToMessageList(DOMPlacement, item, 0 /*no animate*/, 1 /*append*/);
 				});
@@ -977,25 +989,11 @@ chat = (function()
 
 	};
 
-	var ReplaceHTMLSpecialSymbolsToText = function(srcText)
-	{
-		var 	resultText = srcText;
-
-		resultText = resultText.replace(/\&ishort\;/g, "й");
-		resultText = resultText.replace(/\&euml\;/g, "ё");
-		resultText = resultText.replace(/\&zsimple\;/g, "з");
-		resultText = resultText.replace(/\&Ishort\;/g, "Й");
-		resultText = resultText.replace(/\&Euml\;/g, "Ё");
-		resultText = resultText.replace(/\&Zsimple\;/g, "З");
-		resultText = resultText.replace(/\&Norder;\;/g, "№");
-		return resultText;
-	};
-
 	var	ReplaceHTMLSmileySymbolsToImg = function(srcText)
 	{
 		var		resultText = srcText;
 
-		emojiArray.forEach(function(item, i, arr)
+		emojiArray.forEach(function(item)
 		{
 			resultText = resultText.replaceAll(item.shortcut, "<img src=\"" + item.image + "\" class=\"height_34px\">");
 		});
@@ -1008,19 +1006,12 @@ chat = (function()
 		return "".concat(srcString.substr(0, pos) + subString, srcString.substr(pos+2));
 	};
 
-	var	PostMessageToServer = function(event)
+	var	PostMessageToServer = function(/*event*/)
 	{
-		var		btn = $(this);
 		var		clearedMessage = $("#messageToSend").val();
-		var		tempMessage;
 		var		messageRecipient = activeUserID;
 
-		// clearedMessage = clearedMessage.replace(/\<.*\>/g, "");
-		clearedMessage = clearedMessage.replace(/\\/g, "");
-		clearedMessage = clearedMessage.replace(/[\t ]+/g, " ");
-		clearedMessage = clearedMessage.replace(/\"/g, "&quot;");
-		clearedMessage = clearedMessage.replace(/\</g, "&lt;");
-		clearedMessage = clearedMessage.replace(/\>/g, "&gt;");
+/*
 		clearedMessage = clearedMessage.replace(/\—/g, "-");
 		clearedMessage = clearedMessage.replace(/\№/g, "&Norder;");
 		clearedMessage = clearedMessage.replace(/й/g, "&ishort;");
@@ -1029,28 +1020,17 @@ chat = (function()
 		clearedMessage = clearedMessage.replace(/Й/g, "&Ishort;");
 		clearedMessage = clearedMessage.replace(/Ё/g, "&Euml;");
 		clearedMessage = clearedMessage.replace(/З/g, "&Zsimple;");
+*/
+		clearedMessage = clearedMessage.replace(/\\/g, "");
+		clearedMessage = clearedMessage.replace(/[\t ]+/g, " ");
+		clearedMessage = clearedMessage.replace(/"/g, "&quot;");
+		clearedMessage = clearedMessage.replace(/</g, "&lt;");
+		clearedMessage = clearedMessage.replace(/>/g, "&gt;");
 		clearedMessage = clearedMessage.replace(/^\s*/, "");
 		clearedMessage = clearedMessage.replace(/\s*$/, "");
 		clearedMessage = clearedMessage.replace(/\n/, "<br>");
 
 		// --- emoji
-/*		tempMessage = clearedMessage;
-		for (var i = tempMessage.length - 1; i >= 0; i--) {
-			emojiArray.forEach(function(item)
-			{
-				if((tempMessage.charCodeAt(i) == item.unicode1) && (tempMessage.charCodeAt(i+1) == item.unicode2))
-				{
-					clearedMessage = ReplaceTwoSymbolsToSubstring(clearedMessage, i, item.shortcut);
-					tempMessage    = ReplaceTwoSymbolsToSubstring(tempMessage, i, "  "); // --- this line 
-				}
-
-			});
-			// --- first smiley - grinning face 55357 56832
-			// --- last  smiley - passenger ship 55357 56845
-			if((tempMessage.charCodeAt(i) >= 55357) && (tempMessage.charCodeAt(i) <= 55357) &&
-			   (tempMessage.charCodeAt(i+1) >= 56832) && (tempMessage.charCodeAt(i+1) <= 56845)) clearedMessage = ReplaceTwoSymbolsToSubstring(clearedMessage, i, "");
-		}
-*/
 		for (var i = clearedMessage.length - 1; i >= 0; i--) {
 			emojiArray.forEach(function(item)
 			{
@@ -1061,7 +1041,7 @@ chat = (function()
 			// --- first smiley - grinning face 55357 56832
 			// --- last  smiley - passenger ship 55357 56845
 			if((clearedMessage.charCodeAt(i) >= 55357) && (clearedMessage.charCodeAt(i) <= 55357) &&
-			   (clearedMessage.charCodeAt(i+1) >= 56832) && (clearedMessage.charCodeAt(i+1) <= 56845)) clearedMessage = ReplaceTwoSymbolsToSubstring(clearedMessage, i, "");
+				(clearedMessage.charCodeAt(i+1) >= 56832) && (clearedMessage.charCodeAt(i+1) <= 56845)) clearedMessage = ReplaceTwoSymbolsToSubstring(clearedMessage, i, "");
 		}
 
 		if(clearedMessage.length)
@@ -1078,8 +1058,6 @@ chat = (function()
 
 	var HandlerWindowScroll = function()
 	{
-		var		windowPosition	= $(window).scrollTop();
-		var		clientHeight	= document.documentElement.clientHeight;
 		var		divPosition		= $("#MessageListContainer").position().top;
 
 		if((divPosition > -10) && (! scrollLock))
@@ -1104,22 +1082,21 @@ chat = (function()
 	var	EmojiClickHandler = function()
 	{
 		function InsertAtCursor(myField, myValue) {
-		    //IE support
-		    if (document.selection) {
-		        myField.focus();
-		        sel = document.selection.createRange();
-		        sel.text = myValue;
-		    }
-		    //MOZILLA and others
-		    else if (myField.selectionStart || myField.selectionStart == "0") {
-		        var startPos = myField.selectionStart;
-		        var endPos = myField.selectionEnd;
-		        myField.value = myField.value.substring(0, startPos)
-		            + myValue
-		            + myField.value.substring(endPos, myField.value.length);
-		    } else {
-		        myField.value += myValue;
-		    }
+			//IE support
+			if (document.selection) {
+				myField.focus();
+				document.selection.createRange().text = myValue;
+			}
+			//MOZILLA and others
+			else if (myField.selectionStart || myField.selectionStart == "0") {
+				var startPos = myField.selectionStart;
+				var endPos = myField.selectionEnd;
+				myField.value = myField.value.substring(0, startPos)
+					+ myValue
+					+ myField.value.substring(endPos, myField.value.length);
+			} else {
+				myField.value += myValue;
+			}
 		}
 
 		console.debug("shortcut: " + $(this).data("shortcut"));
@@ -1147,7 +1124,7 @@ chat = (function()
 		var		maxEmojiOnSingleLine = 6;
 		var		breakLineCounter = 0;
 
-		emojiArray.forEach(function(item, i, arr) 
+		emojiArray.forEach(function(item) 
 		{
 			if(breakLineCounter && !(breakLineCounter % maxEmojiOnSingleLine)) emojiListHTML += "<br>";
 
@@ -1164,7 +1141,7 @@ chat = (function()
 	{
 		var		messageRecipient = activeUserID;
 		var		filesArr = Array.prototype.slice.call(input.target.files);
-		filesArr.forEach( function(file, i, arr)
+		filesArr.forEach( function(file, i)
 		{
 			var		img = new Image();
 			var		url = URL.createObjectURL(input.target.files[i]);
@@ -1230,7 +1207,6 @@ chat = (function()
 
 	return {
 		Init: Init,
-		filterUnicode: filterUnicode // --- expose only for testing purposes
 	};
 }
 )();
