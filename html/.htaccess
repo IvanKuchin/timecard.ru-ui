@@ -60,12 +60,20 @@ RewriteRule ^invite/(.*)$	/cgi-bin/event.cgi?action=check_initial_action&id=$1 [
 #
 # redirect devimages.videos to unencrypted site to reduce https load
 #
-RewriteRule ^images/(.*)$						https://devimages.timecard.ru/images/$1						[L,R=301,NC]
-RewriteRule ^video/(.*)$						https://devimages.timecard.ru/video/$1						[L,R=301,NC]
-RewriteRule ^agreements_sow/(.*)$				https://devimages.timecard.ru/agreements_sow/$1				[L,R=301,NC]
-RewriteRule ^invoices_cc/(.*)$					https://devimages.timecard.ru/invoices_cc/$1				[L,R=301,NC]
-RewriteRule ^invoices_subc/(.*)$				https://devimages.timecard.ru/invoices_subc/$1				[L,R=301,NC]
-RewriteRule ^smartway_vouchers/(.*)$			https://devimages.timecard.ru/smartway_vouchers/$1			[L,R=301,NC]
-RewriteRule ^template_(.*)$						https://devimages.timecard.ru/templates_$1					[L,R=301,NC]
-RewriteRule ^helpdesk_ticket_attaches/(.*)$		https://devimages.timecard.ru/helpdesk_ticket_attaches/$1	[L,R=301,NC]
+RewriteRule ^images/(.*)$				/media/images/$1						[L,R=301,NC]
+RewriteRule ^video/(.*)$				/media/video/$1						[L,R=301,NC]
+RewriteRule ^agreements_sow/(.*)$			/media/agreements_sow/$1				[L,R=301,NC]
+RewriteRule ^invoices_cc/(.*)$				/media/invoices_cc/$1				[L,R=301,NC]
+RewriteRule ^invoices_subc/(.*)$			/media/invoices_subc/$1				[L,R=301,NC]
+RewriteRule ^smartway_vouchers/(.*)$			/media/smartway_vouchers/$1			[L,R=301,NC]
+RewriteRule ^template_(.*)$				/media/templates_$1					[L,R=301,NC]
+RewriteRule ^helpdesk_ticket_attaches/(.*)$		/media/helpdesk_ticket_attaches/$1	[L,R=301,NC]
+#RewriteRule ^images/(.*)$						https://devimages.timecard.ru/images/$1						[L,R=301,NC]
+#RewriteRule ^video/(.*)$						https://devimages.timecard.ru/video/$1						[L,R=301,NC]
+#RewriteRule ^agreements_sow/(.*)$				https://devimages.timecard.ru/agreements_sow/$1				[L,R=301,NC]
+#RewriteRule ^invoices_cc/(.*)$					https://devimages.timecard.ru/invoices_cc/$1				[L,R=301,NC]
+#RewriteRule ^invoices_subc/(.*)$				https://devimages.timecard.ru/invoices_subc/$1				[L,R=301,NC]
+#RewriteRule ^smartway_vouchers/(.*)$			https://devimages.timecard.ru/smartway_vouchers/$1			[L,R=301,NC]
+#RewriteRule ^template_(.*)$						https://devimages.timecard.ru/templates_$1					[L,R=301,NC]
+#RewriteRule ^helpdesk_ticket_attaches/(.*)$		https://devimages.timecard.ru/helpdesk_ticket_attaches/$1	[L,R=301,NC]
 
