@@ -1,6 +1,5 @@
 AuthType Basic
 AuthName "By invitation only"
-AuthUserFile .htpasswd
-# AuthUserFile /home/httpd/dev.timecard.ru/cgi-bin/admin/.htpasswd
+AuthUserFile htpasswd/.htpasswd
 Require valid-user
 
