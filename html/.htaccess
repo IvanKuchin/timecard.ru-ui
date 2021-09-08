@@ -58,7 +58,7 @@ RewriteRule ^event/(.*)$	/cgi-bin/event.cgi?action=getEventWall&link=$1 [QSA]
 RewriteRule ^invite/(.*)$	/cgi-bin/event.cgi?action=check_initial_action&id=$1 [QSA]
 
 #
-# redirect devimages.videos to unencrypted site to reduce https load
+# redirect images/videos to unencrypted site to reduce https load
 #
 RewriteRule ^images/(.*)$				/media/images/$1						[L,R=301,NC]
 RewriteRule ^video/(.*)$				/media/video/$1						[L,R=301,NC]
