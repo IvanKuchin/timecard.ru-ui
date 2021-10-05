@@ -36,15 +36,15 @@
   {
     var cnxID = $(this).data("cnxID");
     
-    socket_stat = new WebSocket("ws://" + window.location.hostname + ":7681", "status-protocol");
+    socket_stat = new WebSocket(system_calls.GetWebSocketProtocol() + "//" + window.location.hostname + ":" + common_connme.GetWebSockerPort(), "status-protocol");
 
     socket_stat.onopen = function(event)
     {
       socket_stat.send("clear_cnx_" + cnxID);
       socket_stat.close();
-      setTimeout(function() { $("#chat_get_cnx_list").click(); }, 1000)
-    }
-  }
+      setTimeout(function() { $("#chat_get_cnx_list").click(); }, 1000);
+    };
+  };
 
   var render_statistics = function(statusObj)
   {
@@ -68,7 +68,7 @@
 
     });
 
-  }
+  };
 
   $("#chat_get_cnx_list").on("click", function() {
 
@@ -81,12 +81,12 @@
                                   .fadeToggle(250);
       });
 
-    socket_stat = new WebSocket("ws://" + window.location.hostname + ":7681", "status-protocol");
+    socket_stat = new WebSocket(system_calls.GetWebSocketProtocol() + "//" + window.location.hostname + ":" + common_connme.GetWebSockerPort(), "status-protocol");
 
     socket_stat.onopen = function(event)
     {
       socket_stat.send("get_cnx_list");
-    }
+    };
 
     socket_stat.onmessage = function(event)
     {
@@ -114,7 +114,7 @@
         socket_stat.close();
 
       }, 500);
-    }
+    };
 
   });
 
