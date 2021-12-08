@@ -23,6 +23,8 @@ var	agency_profile_edit = (function()
 	var	bt_allowances_global = [];
 	var	holiday_calendar_global = [];
 
+	var	psow_number_unique_global;
+
 	var	Init = function()
 	{
 		rand_global = Math.round(Math.random() * 876543234567);
@@ -98,6 +100,7 @@ var	agency_profile_edit = (function()
 						company_edit_obj_global.SetCountriesObj(data.countries);
 						bt_expense_templates_global					= CraftBTExpenseObjects(data.agencies[0]);
 						airfare_limitations_by_direction_global		= CraftAirfareLimitationsByDirectionObjects(data.agencies[0]);
+						psow_number_unique_global					= CraftPSoWNumberUniqueObjects(data.agencies[0]);
 						cost_centers_global							= agency_cost_center_arr.CraftCostCenterObjects(data.agencies[0]);
 						bt_allowances_global						= agency_bt_allowance_arr.CraftBTAllowanceObjects(data.agencies[0]);
 						holiday_calendar_global						= agency_holiday_calendar_arr.CraftHolidayCalendarObjects(data.agencies[0], GetAgencyInfoFromServer);
@@ -175,6 +178,24 @@ var	agency_profile_edit = (function()
 		}
 
 		return airfare_limitations_by_direction;
+	};
+
+	var CraftPSoWNumberUniqueObjects = function(agency)
+	{
+		var		temp_obj;
+
+		if(typeof(agency) != "undefined")
+		{
+			temp_obj = new agency_psow_number_unique();
+			temp_obj.Init();
+			temp_obj.SetGlobalData(agency);
+		}
+		else
+		{
+			system_calls.PopoverError("agency_container", "Ошибка в объекте agency");
+		}
+
+		return temp_obj;
 	};
 
 	var	GetEditableExpenseList_DOM = function()
@@ -503,6 +524,15 @@ var	agency_profile_edit = (function()
 		return result;
 	};
 
+	var GetEditablePSoWNumberUniqueControl_DOM = function()
+	{
+		var		result = $();
+
+		result = result.add(psow_number_unique_global.GetDOM());
+		
+		return result;
+	}
+
 	var	RenderAgencyPage = function(agency)
 	{
 		$("#agency_container")					.empty().append(company_edit_obj_global.GetDOM(agency.companies[0]));
@@ -512,6 +542,7 @@ var	agency_profile_edit = (function()
 		$("#employee_list")						.empty().append(GetEditableEmployeeList_DOM(agency.companies[0]));
 		$("#bt_allowance_list")					.empty().append(GetEditableBTAllowanceList_DOM(agency.companies[0]));
 		$("#holiday_calendar_list")				.empty().append(GetEditableHolidayCalendarList_DOM(agency.companies[0]));
+		$("#psow_number_unique .__control")		.empty().append(GetEditablePSoWNumberUniqueControl_DOM());
 		
 		template_agreement_files_obj_global.Render();
 	};

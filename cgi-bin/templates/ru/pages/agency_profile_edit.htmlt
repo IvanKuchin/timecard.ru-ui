@@ -14,6 +14,7 @@
     <script src="/js/pages/geo_zip_edit.js"></script>
     <script src="/js/pages/bank_edit.js"></script>
     <script src="/js/pages/company_info_edit.js"></script>
+    <script src="/js/pages/pd/agency_psow_number_unique.js"></script>
 
     <script src="/js/pages/bt_expense_template.js"></script>
     <script src="/js/pages/bt_expense_template_line.js"></script>
@@ -53,6 +54,21 @@
     </div>
 
     <div id="agency_container" class="container single_block">
+    </div>
+
+    <div class="container single_block">
+      <div class="row">
+        <div class="col-xs-12">
+          <h4> <center>Настройки агенства</center> </h4>
+        </div>
+      </div>
+      <div class="row" id="psow_number_unique">
+        <div class="col-xs-4">
+          Уникальность номеров PSoW <span class="fa fa-info-circle __info" aria-hidden="true" data-original-title="" title="" onclick="system_calls.PopoverInfo($(this), 'Повторяющиеся номера PSoW отрицательно влияют на предсказания выплат следующего месяца. Если не уверены оставьте уникальную нумерацию.');"></span>
+        </div>
+        <div class="col-xs-8 __control">
+        </div>
+      </div>
     </div>
 
     <div class="container single_block">

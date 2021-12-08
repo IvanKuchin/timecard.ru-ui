@@ -4131,6 +4131,10 @@ system_calls = (function()
 				input_tag.prop("checked", !input_tag.prop("checked"));
 
 			}
+			else if(curr_tag[0].tagName == "SELECT") 
+			{
+				curr_tag.find("option[value='" + curr_tag.attr("data-db_value") + "']").prop("selected", "true");
+			}
 			else
 			{
 				curr_tag.val(curr_tag.attr("data-db_value"));
