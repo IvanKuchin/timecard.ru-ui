@@ -4756,7 +4756,7 @@ var	ScrollerObj = (function()
 
 	var	HidePaginationLoading = function()
 	{
-		$("#scrollerToShow i").hide(200);
+		$("#scrollerToShow i").hide();
 	};
 
 	var	isPaginationIndicatorVisible = function()

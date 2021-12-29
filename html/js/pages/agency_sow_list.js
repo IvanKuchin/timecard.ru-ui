@@ -7,9 +7,12 @@ var	agency_sow_list = (function()
 
 	var	data_global;
 
+	var	globalPageCounter = 0;				// --- transfer to function HandlerScrollToShow
+	var	globalPageCounter_EmptyResult = 0;	// --- set to 1 if empty result returned
+
 	var	Init = function()
 	{
-		UpdateSOWList();
+		UpdateSOWList("clear");
 
 		// --- if autocomplete functionality is not initialized from the beginning
 		// --- it will not pop-up after configured threshold, it will wait one symbol more
@@ -21,12 +24,16 @@ var	agency_sow_list = (function()
 		// --- filters
 		$(".__list_filters").on("click", list_filters.ClickHandler);
 		$("[data-toggle=\"tooltip\"]").tooltip({ animation: "animated bounceIn"});
+
+		// --- scroll handler
+		$(window).on("scroll resize lookup", HandlerScrollToShow);
 	};
 
-	var	UpdateSOWList = function(callback_func)
+	var	UpdateSOWList = function(clear_or_append, callback_func)
 	{
 		var		currTag = $("#sow_list_title");
 
+		ScrollerObj.ShowPaginationLoading();
 
 		$.getJSON(
 			"/cgi-bin/agency.cgi",
@@ -34,6 +41,7 @@ var	agency_sow_list = (function()
 				action: "AJAX_getSoWList",
 				include_bt: "true",
 				include_tasks: "true",
+				page: globalPageCounter,
 			})
 			.done(function(data)
 			{
@@ -41,8 +49,13 @@ var	agency_sow_list = (function()
 				{
 					data_global = data;
 
-					RenderSOWList();
+					RenderSOWList(data.sow, clear_or_append);
 					list_filters.ApplyFilterFromURL();
+
+					ScrollerObj.HidePaginationLoading();
+					HandlerScrollToShow();	// --- this function is needed in case number of SoW returned 
+											// --- too short for browser window scrolling
+											// --- it will trigger loading till scroller will be below window bottom
 
 					if(typeof callback_func == "function") callback_func();
 				}
@@ -58,6 +71,26 @@ var	agency_sow_list = (function()
 					system_calls.PopoverError(currTag, "Ошибка ответа сервера");
 				}, 500);
 			});
+	};
+
+	var HandlerScrollToShow = function() 
+	{
+		if(globalPageCounter_EmptyResult == 0)
+		{
+			var		windowPosition	= $(window).scrollTop();
+			var		clientHeight	= document.documentElement.clientHeight;
+			var		divPosition		= $("#scrollerToShow").position().top;
+
+
+			if(((windowPosition + clientHeight) > divPosition) && (!ScrollerObj.isPaginationIndicatorVisible()))
+			{
+				// console.debug("HandlerScrollToShow: globalPageCounter = " + globalPageCounter);
+				// --- AJAX get news_feed from the server 
+				globalPageCounter += 1;
+
+				UpdateSOWList("append");
+			}
+		}
 	};
 
 	var	GetTasksList_DOM = function(sow)
@@ -334,11 +367,23 @@ var	agency_sow_list = (function()
 		$("div.__subcontractor_company_info[data-sow_id=\"" + sow_id + "\"]").empty().append(system_calls.GetCompanyInfo_DOM(companies));
 	};
 
-	var	RenderSOWList = function()
+	var	RenderSOWList = function(sow_list, clear_or_append)
 	{
-		if((typeof(data_global) != "undefined") && (typeof(data_global.sow) != "undefined"))
+		if((typeof(sow_list) != "undefined"))
 		{
-			$("#sow_list").empty().append(GetSOWList_DOM(data_global.sow));
+			if(sow_list.length)
+			{
+				if(clear_or_append == "clear")	$("#sow_list").empty();
+
+				$("#sow_list").append(GetSOWList_DOM(sow_list));
+			}
+			else
+			{
+				globalPageCounter_EmptyResult = 1;
+				--globalPageCounter; // --- it is optional, but keep here for proper counting
+
+				console.debug("reduce page# due to requests return empty result");
+			}
 		}
 		else
 		{
@@ -414,7 +459,7 @@ var	agency_sow_list = (function()
 				{
 					setTimeout(function() { curr_tag.val(""); }, 250);
 
-					UpdateSOWList(function(sow_id)
+					UpdateSOWList("clear", function(sow_id)
 									{
 										$("#collapsible_sow_new_item").collapse("hide");
 										system_calls.ScrollToAndHighlight("#__sow_title_span_" + data.sow_id);
