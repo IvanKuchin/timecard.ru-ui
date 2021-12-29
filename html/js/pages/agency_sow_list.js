@@ -5,7 +5,7 @@ var	agency_sow_list = (function()
 {
 	"use strict";
 
-	var	data_global;
+	var	data_global = {};
 
 	var	globalPageCounter = 0;				// --- transfer to function HandlerScrollToShow
 	var	globalPageCounter_EmptyResult = 0;	// --- set to 1 if empty result returned
@@ -47,7 +47,7 @@ var	agency_sow_list = (function()
 			{
 				if(data.result == "success")
 				{
-					data_global = data;
+					data_global = MergeTwoMaps(data_global, data);
 
 					RenderSOWList(data.sow, clear_or_append);
 					list_filters.ApplyFilterFromURL();
@@ -481,6 +481,32 @@ var	agency_sow_list = (function()
 			});
 
 	};
+
+	var	MergeTwoMaps = function(map_to, map_from)
+	{
+		Object.keys(map_from).forEach(function(key, value) {
+			if((typeof(map_from[key]) == "object") && map_from[key].length)
+			{
+				// --- object is array with some elements in it
+				if(typeof(map_to[key]) == "object")
+				{
+					// --- it is array
+					map_to[key] = map_to[key].concat(map_from[key]);
+				}
+				else
+				{
+					// --- key is not exist
+					map_to[key] = map_from[key];
+				}
+			}
+			else
+			{
+				// --- don't join any other types
+			}
+		})
+
+		return map_to;
+	}
 
 	return {
 		Init: Init
