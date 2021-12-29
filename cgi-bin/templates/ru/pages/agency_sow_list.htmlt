@@ -69,7 +69,11 @@
       </div>
     </div>
 
-    <div id="scrollerToShow"></div>
+    <!-- height_22px required to avoid permanent scroll effect, due to show/hide loading ring -->
+    <div id="scrollerToShow" class="text-center height_22px">
+      <i class="fa fa-refresh fa-spin fa-lg fa-fw"></i>
+      <span class="sr-only">Loading...</span>
+    </div>
 
     <div class="modal fade" id="ResultModal" tabindex="-1" role="dialog" aria-labelledby="ResultModal">
       <div class="modal-dialog modal-md" role="document">
