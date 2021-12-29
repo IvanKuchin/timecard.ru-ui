@@ -482,22 +482,44 @@ var	agency_sow_list = (function()
 
 	};
 
+	var	MergeTwoArraysByID = function(obj_arr_to, obj_arr_from)
+	{
+		// --- object is array with some elements in it
+		if(typeof(obj_arr_to) == "object")
+		{
+			// --- it is array
+			var	map_id_to_index = new Map();
+
+			for (var i = obj_arr_to.length - 1; i >= 0; i--) {
+				map_id_to_index[obj_arr_to[i].id] = i;
+			}
+
+			for (var i = obj_arr_from.length - 1; i >= 0; i--) {
+				if(map_id_to_index.has(obj_arr_from[i]))
+				{
+					// --- do nothing
+				}
+				else
+				{
+					obj_arr_to.push(obj_arr_from[i]);
+				}
+			}
+		}
+		else
+		{
+			// --- array is undefined
+			obj_arr_to = obj_arr_from;
+		}
+
+		return obj_arr_to;
+	}
+
 	var	MergeTwoMaps = function(map_to, map_from)
 	{
 		Object.keys(map_from).forEach(function(key, value) {
 			if((typeof(map_from[key]) == "object") && map_from[key].length)
 			{
-				// --- object is array with some elements in it
-				if(typeof(map_to[key]) == "object")
-				{
-					// --- it is array
-					map_to[key] = map_to[key].concat(map_from[key]);
-				}
-				else
-				{
-					// --- key is not exist
-					map_to[key] = map_from[key];
-				}
+				map_to[key] = MergeTwoArraysByID(map_to[key], map_from[key])
 			}
 			else
 			{
