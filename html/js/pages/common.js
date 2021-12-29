@@ -4746,6 +4746,32 @@ system_calls = (function()
 	};
 })();
 
+var	ScrollerObj = (function()
+{
+
+	var	ShowPaginationLoading = function()
+	{
+		$("#scrollerToShow i").show();
+	};
+
+	var	HidePaginationLoading = function()
+	{
+		$("#scrollerToShow i").hide(200);
+	};
+
+	var	isPaginationIndicatorVisible = function()
+	{
+		return $("#scrollerToShow i").is(":visible");
+	};
+
+
+	return {
+		ShowPaginationLoading:			ShowPaginationLoading,
+		HidePaginationLoading:			HidePaginationLoading,
+		isPaginationIndicatorVisible:	isPaginationIndicatorVisible,
+	};
+})();
+
 var	InfoObj = function() 
 {
 	var	target_tag_global;

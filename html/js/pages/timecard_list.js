@@ -28,26 +28,11 @@ var	timecard_list = (function()
 		$(window).on("scroll resize lookup", HandlerScrollToShow);
 	};
 
-	var	ShowPaginationLoading = function()
-	{
-		$("#scrollerToShow i").show();
-	};
-
-	var	HidePaginationLoading = function()
-	{
-		$("#scrollerToShow i").hide(200);
-	};
-
-	var	isPaginationIndicatorVisible = function()
-	{
-		return $("#scrollerToShow i").is(":visible");
-	};
-
 	var	UpdateTimecardList = function(clear_or_append)
 	{
 		var		currTag = $("#timecard_list_title");
 
-		ShowPaginationLoading();
+		ScrollerObj.ShowPaginationLoading();
 
 		$.getJSON(
 			"/cgi-bin/" + user_type_global + ".cgi",
@@ -71,7 +56,7 @@ var	timecard_list = (function()
 					RenderTimecardList(data.sow, data.timecards, clear_or_append);
 					list_filters.ApplyFilterFromURL();
 
-					HidePaginationLoading();
+					ScrollerObj.HidePaginationLoading();
 				}
 				else
 				{
@@ -93,7 +78,7 @@ var	timecard_list = (function()
 		var		clientHeight	= document.documentElement.clientHeight;
 		var		divPosition		= $("#scrollerToShow").position().top;
 
-		if(((windowPosition + clientHeight) > divPosition) && (!isPaginationIndicatorVisible()))
+		if(((windowPosition + clientHeight) > divPosition) && (!ScrollerObj.isPaginationIndicatorVisible()))
 		{
 			// console.debug("HandlerScrollToShow: globalPageCounter = " + globalPageCounter);
 			// --- AJAX get news_feed from the server 
