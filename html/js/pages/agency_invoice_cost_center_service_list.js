@@ -248,19 +248,22 @@ var	agency_invoice_cost_center_service_list = function()
 
 		timecards.forEach(function(timecard)
 		{
-			var		strip_br = true;
+			var		strip_br		= true;
 			var		efforts_summary = system_calls.GetHoursStatistics_DOM(timecard, strip_br, holiday_calendar_global);
-			var		subc_company = timecard.contract_sow[0].number + " от " + system_calls.ConvertDateSQLToHuman(timecard.contract_sow[0].sign_date);
+			var		subc_sow		= timecard.contract_sow[0].number + " от " + system_calls.ConvertDateSQLToHuman(timecard.contract_sow[0].sign_date);
+			var		subc_company	= timecard.contract_sow[0].subcontractor_company[0].name;
 			var		timecard_period = system_calls.ConvertDateSQLToHuman(timecard.period_start) + " - " + system_calls.ConvertDateSQLToHuman(timecard.period_end);
 
 			var		timecard_row			= $("<div>").addClass("row");
-			var		timecard_company_col	= $("<div>").addClass("col-xs-6 col-md-3");
+			var		timecard_sow_col		= $("<div>").addClass("col-xs-6 col-md-2");
+			var		timecard_company_col	= $("<div>").addClass("hidden-xs hidden-sm col-md-2");
 			var		timecard_period_col		= $("<div>").addClass("col-xs-6 col-md-3");
-			var		timecard_efforts_col	= $("<div>").addClass("hidden-xs hidden-sm col-md-6");
+			var		timecard_efforts_col	= $("<div>").addClass("hidden-xs hidden-sm col-md-5");
 
 
 
 			timecard_row
+				.append(timecard_sow_col		.append(subc_sow))
 				.append(timecard_company_col	.append(subc_company))
 				.append(timecard_period_col		.append(timecard_period))
 				.append(timecard_efforts_col	.append(efforts_summary));
