@@ -216,19 +216,22 @@ var	agency_invoice_cost_center_bt_list = function()
 
 		bt_list.forEach(function(bt)
 		{
-			var		strip_br = true;
-			var		customer = bt.customers[0].title;
-			var		subc_company = bt.sow[0].number + " от " + system_calls.ConvertDateSQLToHuman(bt.sow[0].sign_date);
-			var		bt_period = system_calls.ConvertDateSQLToHuman(bt.date_start) + " - " + system_calls.ConvertDateSQLToHuman(bt.date_end);
+			var		strip_br		= true;
+			var		customer		= bt.customers[0].title;
+			var		subc_sow		= bt.sow[0].number + " от " + system_calls.ConvertDateSQLToHuman(bt.sow[0].sign_date);
+			var		subc_company	= bt.sow[0].subcontractor_company[0].name;
+			var		bt_period		= system_calls.ConvertDateSQLToHuman(bt.date_start) + " - " + system_calls.ConvertDateSQLToHuman(bt.date_end);
 
 			var		bt_row			= $("<div>").addClass("row");
-			var		bt_company_col	= $("<div>").addClass("col-xs-6 col-md-3");
+			var		bt_sow_col		= $("<div>").addClass("col-xs-6 col-md-2");
+			var		bt_company_col	= $("<div>").addClass("hidden-xs hidden-sm col-md-2");
 			var		bt_period_col	= $("<div>").addClass("col-xs-6 col-md-3");
-			var		bt_customer_col	= $("<div>").addClass("hidden-xs hidden-sm col-md-6");
+			var		bt_customer_col	= $("<div>").addClass("hidden-xs hidden-sm col-md-5");
 
 
 
 			bt_row
+				.append(bt_sow_col		.append(subc_sow))
 				.append(bt_company_col	.append(subc_company))
 				.append(bt_period_col	.append(bt_period))
 				.append(bt_customer_col	.append(customer));
