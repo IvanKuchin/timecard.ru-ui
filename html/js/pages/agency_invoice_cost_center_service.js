@@ -108,7 +108,7 @@ var	agency_invoice_cost_center_service = function()
 			return result;
 		});
 
-		title_row.append($("<div>").addClass("col-xs-9 col-md-3").append(""));
+		title_row.append($("<div>").addClass("col-xs-9 col-md-6").append(""));
 		timecard_period_start_arr.forEach(function(start_date, i)
 		{
 			var		date_col		= $("<div>").addClass("col-xs-3 col-md-1");
@@ -137,9 +137,11 @@ var	agency_invoice_cost_center_service = function()
 			var		sow_id = sow_list[param_sow_id][0].contract_sow[0].id;
 			var		sow_row = $("<div>").addClass("row __sow __sow_" + sow_id);
 			var		sow_col = $("<div>").addClass("col-xs-9 col-md-3");
+			var		company_col = $("<div>").addClass("hidden-xs hidden-sm col-md-3");
 			var		date_col_arr = [];
 
 			sow_col.append(sow_list[sow_id][0].contract_sow[0].number + " от " + sow_list[sow_id][0].contract_sow[0].sign_date);
+			company_col.append(sow_list[sow_id][0].contract_sow[0].subcontractor_company[0].name);
 
 			// --- pre-create empty array w/ div cols per date
 			timecard_period_start_arr.forEach(function(start_date, i)
@@ -183,7 +185,7 @@ var	agency_invoice_cost_center_service = function()
 				}
 			});
 
-			sow_row.append(sow_col);
+			sow_row.append(sow_col).append(company_col);
 
 			for(var i = 0; i < date_col_arr.length; ++i)
 			{
