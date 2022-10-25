@@ -368,3 +368,5 @@ xsmall
 YYY
 WFrom
 WWorking
+captcha
+getnew
