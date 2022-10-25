@@ -69,3 +69,8 @@ RewriteRule ^smartway_vouchers/(.*)$			/media/smartway_vouchers/$1			[QSA,L,R=30
 RewriteRule ^template_(.*)$				/media/templates_$1					[QSA,L,R=301,NC]
 RewriteRule ^helpdesk_ticket_attaches/(.*)$		/media/helpdesk_ticket_attaches/$1	[QSA,L,R=301,NC]
 
+
+###
+# Captcha rule required only in dev-env, prod uses ingress instead
+###
+RewriteRule ^captcha/(.*)$              http://localhost:8666/captcha/$1 [P]
